@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 var favoriteSchema = new mongoose.Schema({
-  challengeId: mongoose.Schema.Type.ObjectId,
-  userId: mongoose.Schema.Type.ObjectId
+  challengeId: mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Favorite', favoriteSchema);
