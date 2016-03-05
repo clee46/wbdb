@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require(__dirname + '/../models/user');
 const jsonParser = require('body-parser').json();
-const handleDBError = require(__dirname + '/../lib/handleDBError');
+const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const basicHTTP = require(__dirname + '/../lib/basic_http');
 const saveUserDB = require(__dirname + '/../lib/save_new_user');
 const emailValidation = require(__dirname + '/../lib/email_validation.js');
