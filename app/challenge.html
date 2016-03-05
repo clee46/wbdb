@@ -69,6 +69,11 @@
     footer p{
       text-align: center;
     }
+
+    .dash{
+      height: 400px; width: 400px;
+      background: #fff;
+    }
   </style>
 
 </head>
@@ -79,30 +84,23 @@
   <div class="container">
     <header>
       <h1 style="display:inline-block;"><span>WB</span>U</h1>
-      <h2 style="float:right; display:inline-block;margin-top:-40px;"><a href="home.html"><input class="button-primary" value="Learn More" type="submit"></a><button type="button" name="button">login</button>
+      <h2 style="float:right; display:inline-block;margin-top:-40px;"><button type="button" name="button">dashboard</button><a href="home.html"><input class="button-primary" value="Learn More" type="submit"></a><button type="button" name="button">login/logout</button>
   </h2>
         </header>
-    <section class="rw-wrapper">
-      <h2 class="rw-sentence">
-
-        <span>Are you ready to whiteboard </span>
-        <div class="rw-words rw-words-1">
-          <span>arrays?</span>
-          <span>strings?</span>
-          <span>linked list?</span>
-          <span>trees?</span>
-          <span>saalmons?</span>
-          <span>bears?</span>
-        </div>
-      </h2>
-      <label for="search" alt="search" class="inline"><span class="icon-search"></span></label><input role="search" type="text" name="name" value="search" class="search" placeholder="Search">
+    <section class="rw-wrapper dash">
+      <h1>Question</h1>
     </section>
-    <section class="searchChal">
-      <!--add toggle show hide-->
-      <h2>Challenge Title</h2>
-      <p>BLLLLL.............................</p>
-      <button type="button" name="button">View</button>
-      <p>Categories/Tags</p>
+    <button>Hint</button>
+    <button>Solution</button>
+    <button>Diff</button>
+    <button>Add Fav</button>
+
+    <section class="rw-wrapper dash">
+      <h1>Hint</h1>
+    </section>
+
+    <section class="rw-wrapper dash">
+      <h1>Solution</h1>
     </section>
     <footer><p>Copyright &copy 2016</p></footer>
   </div>
