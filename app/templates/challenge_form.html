@@ -1,0 +1,13 @@
+<form data-ng-submit="save(challenge)">
+  <label for="name">Challenge Title:</label>
+  <input type="text" name="name" data-ng-model="challenge.title">
+
+  <label for="question">Question:</label>
+  <input type="text" name="question" data-ng-model="challenge.question">
+
+  <label for="solution">Solution:</label>
+  <input type="text" name="flavor" data-ng-model="challenge.solutions[0]">
+
+  <ng-transclude></ng-transclude>
+  <button type="submit">Submit Challenge</button>
+</form>
