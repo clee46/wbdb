@@ -6,7 +6,7 @@ const basicHTTP = require(__dirname + '/../lib/basic_http');
 const saveUserDB = require(__dirname + '/../lib/save_new_user');
 const emailValidation = require(__dirname + '/../lib/email_validation.js');
 
-var authRouter = module.exports = exports = express.Router();
+const authRouter = module.exports = exports = express.Router();
 
 authRouter.post('/signup', jsonParser, (req, res) => {
 
