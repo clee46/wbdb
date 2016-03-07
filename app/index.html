@@ -21,17 +21,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">                                              <!--CSS RESETS-->
-  <link rel="stylesheet" href="css/skeleton.css">                                               <!--CSS GRID AND FLAT STYLING-->
-  <link rel="stylesheet" type="text/css" href="text_animation/text_animation.css" />            <!--CSS SCROLLING TEXT ANIMATION-->
-  <link rel="stylesheet" href="css/fonts.css" media="screen" title="no title" charset="utf-8">  <!--CSS FONT ICONS-->
   <link rel="stylesheet" href="css/styles.css" media="screen" title="no title" charset="utf-8"> <!--CSS AGENT STYLES-->
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
-  <script src="js/vendor/modernizr.custom.72111.js"></script>
+  </script>
 
   <style>
 
@@ -56,46 +52,11 @@
         </div>
       </div>
     </header>
-    <section class="rw-wrapper">
-      <h2 class="rw-sentence">
 
-        <span>Are you ready to whiteboard </span>
-        <div class="rw-words rw-words-1">
-          <span>arrays?</span>
-          <span>strings?</span>
-          <span>linked list?</span>
-          <span>trees?</span>
-          <span>saalmons?</span>
-          <span>bears?</span>
-        </div>
-      </h2>
-      <label for="search" alt="search" class="inline"><span class="icon-search"></span></label><input role="search" type="text" name="name" class="search" placeholder="search" autofocus autocomplete="off">
-    </section>
-      <h1 style="display:inline-block; margin: 50px 0 0 0;font-weight:700;">Arrays</h1>
+    <main data-ui-view>
 
-    <div class="row">
-      <div class="twelve columns" data-ng-controller="ChallengesController" data-ng-init="getAllChallenges()">
-        <section class="searchChal"  onclick="this.style.height = '100%'" data-ng-repeat="challenge in challenges">
-          <!--add toggle show hide-->
-          <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+    </main>
 
-          <button type="button" name="button" class="viewChal" onclick="this.style.display = 'none'">View Full Challenge</button>
-          <p>
-            {{challenge.question}}
-          </p>
-          <p>
-            {{challenge.author}}
-          </p>
-          <pre>
-            <code>
-              {{challenge.solutions[0]}}
-            </code>
-          </pre>
-          <a href="challenge.html"><button type="button" name="button" class="viewChal">Try Out the Other Solutions</button></a>
-          <p>{{challenge.tags}}</p>
-        </section>
-      </div>
-    </div>
 
     <div class="row">
 
@@ -408,7 +369,7 @@
       </div>
 
     </div>
-    
+
     <div class="row">
       <div class="twelve columns">
         <footer><p>WhiteBoard db &copy 2016</p></footer>

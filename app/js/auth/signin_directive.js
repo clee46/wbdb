@@ -30,7 +30,7 @@ module.exports = (app) => {
   app.directive('loginWidget', () => {
     return {
       restrict: 'EA',
-      templateUrl: '/modules/auth/directive/template.html',
+      templateUrl: 'templates/signin_directive_template.html',
       controller,
       replace: true
     };
