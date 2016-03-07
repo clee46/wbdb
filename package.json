@@ -20,6 +20,7 @@
     "angular": "^1.5.0",
     "angular-mocks": "^1.5.0",
     "angular-route": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
     "babel-core": "^6.6.5",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.4",
