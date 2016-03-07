@@ -26,19 +26,10 @@
         <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
-        <button type="button" name="button" class="viewChal" onclick="this.style.display = 'none'">View Full Challenge</button>
-        <p>
-          {{challenge.question}}
-        </p>
-        <p>
-          {{challenge.author}}
-        </p>
-        <!-- <pre>
-          <code>
-            {{challenge.solutions[0]}}
-          </code>
-        </pre> -->
-        <a href="challenge.html"><button type="button" name="button" class="viewChal">Try Out the Other Solutions</button></a>
+        <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
+        <p>{{challenge.question}}</p>
+        <p>{{challenge.author}}</p>        
         <p>{{challenge.tags}}</p>
       </section>
     </div>
