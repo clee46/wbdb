@@ -5,20 +5,20 @@ const sourcemaps = require('gulp-sourcemaps');
 const eslint = require('gulp-eslint');
 
 const webpack = require('webpack-stream');
-// const babel = require('babel-loader');
-// const html = require('html-loader');
 
 const scripts = ['server.js', 'gulpfile.js', 'lib/*.js', 'models/*.js',
   'routes/*.js', 'test/**/*.js', 'app/**/*.js', '!test/client/test_bundle.js',
   '!app/js/vendor/*'];
 
-gulp.task('html:dev', () => {
-  gulp.src(__dirname + '/app/**/*.html')
+gulp.task('static:dev', () => {
+  gulp.src(['app/**/*.html',
+    'app/images/*.png',
+    'app/fonts/*' ], { 'base': 'app' })
     .pipe(gulp.dest(__dirname + '/build'));
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src(__dirname + '/app/sass/*.scss')
+  gulp.src(__dirname + '/app/scss/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.init())
     .pipe(clean({ debug: true }, (details) => {
@@ -72,5 +72,5 @@ gulp.task('lint', () => {
     .pipe(eslint.format());
 });
 
-gulp.task('build:dev', ['lint', 'html:dev', 'sass:dev', 'webpack:dev']);
+gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);
