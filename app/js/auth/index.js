@@ -3,7 +3,7 @@
 
 const authSvc = require('./auth_service');
 const interceptor = require('./interceptor');
-const directive = require('./directive');
+const directive = require('./signin_directive');
 const userSvc = require('./user_service');
 
 module.exports = (app, API) => {
