@@ -45,7 +45,7 @@ gulp.task('webpack:dev', () => {
         ]
       }
     }))
-    .pipe(gulp.dest('build/js/'));
+    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('webpack:test', () => {
@@ -72,5 +72,5 @@ gulp.task('lint', () => {
     .pipe(eslint.format());
 });
 
-gulp.task('build:dev', ['lint', 'html:dev', 'sass:dev']);
+gulp.task('build:dev', ['lint', 'html:dev', 'sass:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);

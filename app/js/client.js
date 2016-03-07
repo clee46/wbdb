@@ -5,7 +5,6 @@ require('angular-route');
 require('angular-ui-router');
 const wbdbApp = angular.module('wbdbApp', ['ngRoute', 'ui.router']);
 
-
 require('./services')(wbdbApp);
 require('./challenges')(wbdbApp);
-require('./auth')(wbdbApp);
+// require('./auth')(wbdbApp);

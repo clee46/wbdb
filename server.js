@@ -13,4 +13,5 @@ app.use('/api', authRouter);
 app.use('/api', userRouter);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Server running on Port: ' + PORT));
+app.use(express.static(__dirname + '/build'))
+  .listen(PORT, () => console.log('Server running on Port: ' + PORT));
