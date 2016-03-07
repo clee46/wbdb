@@ -2,10 +2,15 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const clean = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
+const eslint = require('gulp-eslint');
 
 const webpack = require('webpack-stream');
-const babel = require('babel-loader');
-const html = require('html-loader');
+// const babel = require('babel-loader');
+// const html = require('html-loader');
+
+const scripts = ['server.js', 'gulpfile.js', 'lib/*.js', 'models/*.js',
+  'routes/*.js', 'test/**/*.js', 'app/**/*.js', '!test/client/test_bundle.js',
+  '!app/js/vendor/*'];
 
 gulp.task('html:dev', () => {
   gulp.src(__dirname + '/app/**/*.html')
@@ -16,7 +21,7 @@ gulp.task('sass:dev', () => {
   gulp.src(__dirname + '/app/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.init())
-    .pipe(clean({debug: true}, function(details) {
+    .pipe(clean({ debug: true }, (details) => {
       console.log(details.name + ': ' + details.stats.originalSize);
       console.log(details.name + ': ' + details.stats.minifiedSize);
     }))
@@ -28,7 +33,16 @@ gulp.task('webpack:dev', () => {
   gulp.src(__dirname + '/app/js/client.js')
     .pipe(webpack({
       output: {
-          filename: 'bundle.js'
+        filename: 'bundle.js'
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+          }
+        ]
       }
     }))
     .pipe(gulp.dest('build/js/'));
@@ -52,5 +66,11 @@ gulp.task('webpack:test', () => {
     .pipe(gulp.dest('test/'));
 });
 
-gulp.task('build:dev', ['webpack:dev', 'webpack:test', 'html:dev', 'sass:dev']);
+gulp.task('lint', () => {
+  return gulp.src(scripts)
+    .pipe(eslint())
+    .pipe(eslint.format());
+});
+
+gulp.task('build:dev', ['lint', 'html:dev', 'sass:dev']);
 gulp.task('default', ['build:dev']);

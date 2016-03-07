@@ -10,33 +10,51 @@ var authRouter = module.exports = exports = express.Router();
 
 authRouter.post('/signup', jsonParser, (req, res) => {
 
-  if (!(req.body.email || '').length && !emailValidation(req.body.email)) return res.status(400).json( { msg: 'Please enter an email' } );
+  if (!(req.body.email || '').length && !emailValidation(req.body.email)) {
+    return res.status(400).json({ msg: 'Please enter an email' });
+  }
 
-  if (!emailValidation(req.body.email)) return res.status(400).json( { msg: 'Please enter a valid email' } );
+  if (!emailValidation(req.body.email)) {
+    return res.status(400).json({ msg: 'Please enter a valid email' });
+  }
 
-  if (!(req.body.username || '').length) return res.status(400).json( { msg: 'Please enter a user name' } );
+  if (!(req.body.username || '').length) {
+    return res.status(400).json({ msg: 'Please enter a user name' });
+  }
 
-  if (!((req.body.password || '').length > 7)) return res.status(400).json( { msg: 'Please enter a password longer than 7 characters' } );
+  if (!((req.body.password || '').length > 7)) {
+    return res.status(400)
+      .json({ msg: 'Please enter a password longer than 7 characters' });
+  }
 
-  if (!(req.body.password === req.body.comfirmpassword)) return res.status(400).json( { msg: 'Passwords are not the same' } );
+  if (!(req.body.password === req.body.comfirmpassword)) {
+    return res.status(400).json({ msg: 'Passwords are not the same' });
+  }
 
-  User.find({ $or: [ { 'username': req.body.username }, { 'email': req.body.email } ] }, (err, data) => {
+  User.find({
+    $or: [{ 'username': req.body.username }, { 'email': req.body.email }]
+  }, (err, data) => {
     if (err) return handleDBError(err, res);
-    if (data.length) return res.status(400).json( { msg: 'User already exists! Please use a different username' } );
+    if (data.length) {
+      return res.status(400)
+        .json({ msg: 'User already exists! Please use a different username' });
+    }
     saveUserDB(req, res);
   });
 });
 
 authRouter.get('/signin', basicHTTP, (req, res) => {
 
-  User.findOne( { 'authentication.email': req.basicHTTP.email }, (err, user) => {
+  User.findOne({ 'authentication.email': req.basicHTTP.email }, (err, user) => {
 
     if (err) return handleDBError(err, res);
 
-    if (!user) return res.status(401).json( { msg: 'no user exists' } );
+    if (!user) return res.status(401).json({ msg: 'no user exists' });
 
-    if (!user.comparePassword(req.basicHTTP.password)) return res.status(401).json( { msg: 'incorrect password' } );
+    if (!user.comparePassword(req.basicHTTP.password)) {
+      return res.status(401).json({ msg: 'incorrect password' });
+    }
 
-    res.json( { msg: 'Success in signin', token: user.generateToken() } );
+    res.json({ msg: 'Success in signin', token: user.generateToken() });
   });
 });
