@@ -1,0 +1,23 @@
+<div>
+  <section data-ng-if="!loggedIn">
+    <button
+      data-ng-click="toggleSignup()">Sign Up</button>
+    <button
+      data-ng-click="toggleSignin()">Sign In</button>
+    <form data-ng-submit="submitForm(form)" data-ng-if="signup || signin">
+      <div data-ng-if="signup">
+        <label for="username">Username</label>
+        <input type="text" name="username" data-ng-model="form.username">
+      </div>
+        <label for="email">Email</label>
+        <input type="email" name="email" data-ng-model="form.email">
+        <label for="password">Password</label>
+        <input type="password" name="password" data-ng-model="form.password">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+  <section data-ng-if="loggedIn">
+    Hello, {{auth.username}}!
+    <button data-ng-click="logout()">Logout</button>
+  </section>
+</div>
