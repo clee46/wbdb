@@ -27,13 +27,9 @@ authRouter.post('/signup', jsonParser, (req, res) => {
       .json({ msg: 'Please enter a password longer than 7 characters' });
   }
 
-<<<<<<< HEAD
-  if (!(req.body.password === req.body.comfirmpassword)) {
+  if (!(req.body.password === req.body.confirmpassword)) {
     return res.status(400).json({ msg: 'Passwords are not the same' });
   }
-=======
-  if (!(req.body.password === req.body.confirmpassword)) return res.status(400).json( { msg: 'Passwords are not the same' } );
->>>>>>> added auth_routes tests and setup challenge routes test file
 
   User.find({
     $or: [{ 'username': req.body.username }, { 'email': req.body.email }]

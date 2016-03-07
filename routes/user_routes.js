@@ -3,7 +3,7 @@ const jwtAuth = require(__dirname + '/../lib/jwt_auth');
 const jsonParser = require('body-parser').json();
 const User = require(__dirname + '/../models/user');
 const Challenge = require(__dirname + '/../models/challenge');
-const Favorite = require(__dirname + '/../models/favorites');
+const Favorite = require(__dirname + '/../models/favorite');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const userRouter = module.exports = exports = express.Router();
 
@@ -22,13 +22,15 @@ userRouter.get('/favorites', jwtAuth, jsonParser, (req, res) => {
   // find all favorites with the user's ID
   Favorite.find({ userId: req.user._id }, (err, data) => {
 
+    if (err) console.log(err);
+
     // for each favorite, find the challenge that matches the favorite's challenge Id
     data.forEach((justOne) => {
-      Challenge.findOne({_id: justOne.challengeId}, (err, result) => {
+      Challenge.findOne({ _id: justOne.challengeId }, (err, result) => {
         if (err) return handleDBError(err, res);
         favs.push(result);  // add the challenge to the favorites array
       });
-    }));
+    });
 
     res.status(200).json(favs); // attach favorites array to the server response
   });
