@@ -16,17 +16,16 @@
 
   <!-- FONT  ????????????????????????????????NEED to CONDENSE FONTS INTO ONE REQUEST??????????????????????????????????????
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" type="text/css" href="text_animation/demo.css" />
-  <link rel="stylesheet" type="text/css" href="text_animation/style.css" />
-  <link rel="stylesheet" href="css/fonts.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/normalize.css">                                              <!--CSS RESETS-->
+  <link rel="stylesheet" href="css/skeleton.css">                                               <!--CSS GRID AND FLAT STYLING-->
+  <link rel="stylesheet" type="text/css" href="text_animation/text_animation.css" />            <!--CSS SCROLLING TEXT ANIMATION-->
+  <link rel="stylesheet" href="css/fonts.css" media="screen" title="no title" charset="utf-8">  <!--CSS FONT ICONS-->
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title" charset="utf-8"> <!--CSS AGENT STYLES-->
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -35,40 +34,7 @@
   <script src="js/vendor/modernizr.custom.72111.js"></script>
 
   <style>
-    .no-cssanimations .rw-wrapper .rw-sentence span:first-child{
-      opacity: 1;
-    }
-    .rw-sentence{
-      margin-bottom: 20px;
-    }
-    button{
-      margin: 20px;
-    }
-    .button-primary{
-      background-color: #6B969D;
-    }
-    .search{
-      width: 300px;
-      display:inline-block;
-    }
-    .icon-search{
-      padding: 10px;
-    }
-    .inline{
-      display: inline-block;
-    }
-    .searchChal{
-      background: #fff;
-      height: 200px; width: 200px;
-      border: 2px dotted #ccc;
-    }
-    footer{
-      position: fixed;
-      bottom: 10px;
-    }
-    footer p{
-      text-align: center;
-    }
+
   </style>
 
 </head>
@@ -78,10 +44,18 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <header>
-      <h1 style="display:inline-block;"><span>WB</span>U</h1>
-      <h2 style="float:right; display:inline-block;margin-top:-40px;"><a href="home.html"><input class="button-primary" value="Learn More" type="submit"></a><button type="button" name="button">login</button>
-  </h2>
-        </header>
+      <div class="container">
+        <div class="row">
+          <div class="six columns header">
+            <h1 style="display:inline-block;"><span>WB</span><span class="icon-data"></span>db</h1>
+          </div>
+          <div class="six columns">
+              <button type="button" name="button" class="login">login</button>
+              <a href="challenge.html"><input class="button-primary" value="Learn More" type="submit"></a>
+          </div>
+        </div>
+      </div>
+    </header>
     <section class="rw-wrapper">
       <h2 class="rw-sentence">
 
@@ -95,17 +69,368 @@
           <span>bears?</span>
         </div>
       </h2>
-      <label for="search" alt="search" class="inline"><span class="icon-search"></span></label><input role="search" type="text" name="name" value="search" class="search" placeholder="Search">
+      <label for="search" alt="search" class="inline"><span class="icon-search"></span></label><input role="search" type="text" name="name" class="search" placeholder="search" autofocus autocomplete="off">
     </section>
-    <section class="searchChal">
-      <!--add toggle show hide-->
-      <h2>Challenge Title</h2>
-      <p>BLLLLL.............................</p>
-      <button type="button" name="button">View</button>
-      <p>Categories/Tags</p>
-    </section>
-    <footer><p>Copyright &copy 2016</p></footer>
+      <h1 style="display:inline-block; margin: 50px 0 0 0;font-weight:700;">Arrays</h1>
+
+    <div class="row">
+      <div class="twelve columns">
+        <section class="searchChal"  onclick="this.style.height = '100%'">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <button type="button" name="button" class="viewChal" onclick="this.style.display = 'none'">View Full Challenge</button>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: <span>What if you cannot use additional data structures?</span></strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <a href="challenge.html"><button type="button" name="button" class="viewChal">Try Out the Other Solutions</button></a>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="six columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+            <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="six columns">
+        <section class="searchChal searchChal2">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Rotate a Matrix
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2></h2>
+            <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="three columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="three columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="three columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="three columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="four columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="four columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="four columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>Bonus: What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="twelve columns">
+        <footer><p>WhiteBoard db &copy 2016</p></footer>
+      </div>
+    </div>
   </div>
+
+
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>

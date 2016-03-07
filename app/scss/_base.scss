@@ -1,0 +1,69 @@
+html{
+	height: 100%;
+}
+body{
+	background: #fff url(../images/lghtmesh.png) repeat center center;
+	font-family: 'Open Sans Condensed','Arial Narrow', serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #333;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+a{
+	color: #555;
+	text-decoration: none;
+}
+.container{
+	width: 100%;
+	min-width: 320px;
+	position: relative;
+}
+.clr{
+	clear: both;
+	padding: 0;
+	height: 0;
+	margin: 0;
+}
+.container > header{
+	margin: 10px;
+	padding: 10px;
+	position: relative;
+	display: block;
+    text-align: left;
+}
+.container > header h1{
+	font-size: 36px;
+	line-height: 40px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	font-weight: 300;
+	color: #333;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+.container > header h1 span{
+	font-weight: 700;
+}
+.container > header h2{
+	font-size: 20px;
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin: 0;
+	margin-top: -50px;
+	padding: 15px 0 5px 0;
+	color: #0000FE;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+
+.search{
+  width: 300px;
+  margin-bottom: 0;
+}
+
+header{
+  border-bottom: 3px solid #434343;
+}
