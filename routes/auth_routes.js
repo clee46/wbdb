@@ -28,12 +28,16 @@ authRouter.post('/signup', jsonParser, (req, res) => {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   if (!(req.body.password === req.body.comfirmpassword)) {
     return res.status(400).json({ msg: 'Passwords are not the same' });
   }
 =======
   if (!(req.body.password === req.body.confirmpassword)) return res.status(400).json( { msg: 'Passwords are not the same' } );
 >>>>>>> added auth_routes tests and setup challenge routes test file
+=======
+  if (!(req.body.password === req.body.confirmpassword)) return res.status(400).json( { msg: 'Passwords are not the same' } );
+>>>>>>> 7c36de8b3a18fa65a1a433ee6c0b1dcd61056afc
 
   User.find({
     $or: [{ 'username': req.body.username }, { 'email': req.body.email }]
