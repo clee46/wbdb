@@ -14,7 +14,7 @@ router.get('/challenges', (req, res) => {
 });
 
 router.post('/challenges', jwtAuth, jsonParser, (req, res) => {
-  var newChallenge = new Challenge(req.body);
+  const newChallenge = new Challenge(req.body);
   newChallenge.save((err, data) => {
     if (err) return handleDBError(err, res);
     res.status(200).json(data);
@@ -23,7 +23,7 @@ router.post('/challenges', jwtAuth, jsonParser, (req, res) => {
 
 // Add Middleware to check admin privileges
 router.put('/challenges/:id', jwtAuth, jsonParser, (req, res) => {
-  var newData = req.body;
+  const newData = req.body;
   delete newData._id;
   Challenge.update({ _id: req.params.id }, newData, (err) => {
     if (err) return handleDBError(err, res);

@@ -12,5 +12,5 @@ app.use('/api', challengeRouter);
 app.use('/api', authRouter);
 app.use('/api', userRouter);
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('Server running on Port: ' + PORT));
