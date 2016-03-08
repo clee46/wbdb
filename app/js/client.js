@@ -1,5 +1,5 @@
 const angular = require('angular');
-const uiRouter = require('angular-ui-router');
+require('angular-ui-router');
 
 const wbdbApp = angular.module('wbdbApp', ['ui.router']);
 require('./controllers/home_controller.js')(wbdbApp);

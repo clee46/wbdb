@@ -1,3 +1,3 @@
 module.exports = function(app) {
-  require('./resource')(app);  
+  require('./resource')(app);
 };
