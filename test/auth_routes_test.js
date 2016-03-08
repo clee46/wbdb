@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 chai.use(require('chai-http'));
 
-process.env.MONGO_URI = 'mongodb://localhost/app_dev_test';
+process.env.MONGOLAB_URI = 'mongodb://localhost/app_dev_test';
 
 const server = require(__dirname + '/../server.js');
 const User = require(__dirname + '/../models/user.js');

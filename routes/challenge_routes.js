@@ -13,6 +13,13 @@ challengeRouter.get('/challenges', (req, res) => {
   });
 });
 
+challengeRouter.get('/challenges/:id', (req, res) => {
+  Challenge.findOne({ _id: req.params.id }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
 challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
   var newChallenge = new Challenge(req.body);
   newChallenge.save((err, data) => {
