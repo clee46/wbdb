@@ -17,23 +17,26 @@ describe('user routes', () => {
     var newUser = new User();
     newUser.authentication.email = 'notify@codefellows.com';
     newUser.hashPassword('password');
-    newUser.save( (err, data) => {
+    newUser.save((err, data) => {
+      if (err) console.log(err);
       userToken = data.generateToken();
       done();
     });
   });
   after((done) => {
-    User.remove({}, function(err) {
-      Post.remove({}, function(err) {
+    User.remove({}, (err) => {
+      if (err) console.log(err);
+      Post.remove({}, (err) => {
+        if (err) console.log(err);
         done();
-      })
+      });
     });
   });
   it('should be able to create a new post', (done) => {
     chai.request(baseUri)
       .post('/user/new')
       .set('token', userToken)
-      .send({"title":"test post", "content.text":"test content"})
+      .send({ 'title': 'test post', 'content.text': 'test content' })
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
@@ -42,11 +45,14 @@ describe('user routes', () => {
         expect(res.body.createdPost.title).to.eql('test post');
         expect(res.body.createdPost.content.text).to.eql('test content');
         done();
-      })
+      });
   });
   describe('rest requests that require a post already in db', () => {
     beforeEach((done) => {
-      Post.create({ title: "test post", content: {text:"test content"}}, (err, data) => {
+      Post.create({
+        title: 'test post', content: { text: 'test content' }
+      }, (err, data) => {
+        if (err) console.log(err);
         this.testPost = data;
         done();
       });
@@ -55,7 +61,7 @@ describe('user routes', () => {
       chai.request(baseUri)
         .get('/user/posts')
         .set('token', userToken)
-        .end((err,res) => {
+        .end((err, res) => {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('All posts retrieved');
           expect(Array.isArray(res.body.posts)).to.eql(true);
@@ -67,7 +73,7 @@ describe('user routes', () => {
       chai.request(baseUri)
       .put('/user/post/' + this.testPost._id)
       .set('token', userToken)
-      .send({title: "Updated Title"})
+      .send({ title: 'Updated Title' })
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
@@ -86,5 +92,13 @@ describe('user routes', () => {
         done();
       });
     });
+
+    after((done) => {
+      mongoose.connection.db.dropDatabase(done);
+    });
+  });
+
+  after((done) => {
+    server.close(done);
   });
 });

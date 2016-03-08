@@ -17,28 +17,32 @@ userRouter.get('/currentuser', jwtAuth, jsonParser, (req, res) => {
 
 // Retrieves all challenges favorited by the user
 userRouter.get('/favorites', jwtAuth, jsonParser, (req, res) => {
-  var favs = [];  // stores all the challenges favorited by the user
+  // stores all the challenges favorited by the user
+  var favs = [];
 
   // find all favorites with the user's ID
   Favorite.find({ userId: req.user._id }, (err, data) => {
 
     if (err) console.log(err);
 
-    // for each favorite, find the challenge that matches the favorite's challenge Id
+    // for each favorite, find the challenge that
+    // matches the favorite's challenge Id
     data.forEach((justOne) => {
       Challenge.findOne({ _id: justOne.challengeId }, (err, result) => {
         if (err) return handleDBError(err, res);
-        favs.push(result);  // add the challenge to the favorites array
+        // add the challenge to the favorites array
+        favs.push(result);
       });
     });
-
-    res.status(200).json(favs); // attach favorites array to the server response
+    // attach favorites array to the server response
+    res.status(200).json(favs);
   });
 });
 
 
 // Retrieves all challenges created by the user
-// this route is unnecessary if we decide to use the /pending and /approved routes instead
+// this route is unnecessary if we decide to use the
+// /pending and /approved routes instead
 userRouter.get('/mychallenges', jwtAuth, jsonParser, (req, res) => {
   Challenge.find({ _id: req.user._id }, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -46,7 +50,8 @@ userRouter.get('/mychallenges', jwtAuth, jsonParser, (req, res) => {
   });
 });
 
-// Retrieve all challenges created by the user that have not yet been approved by admin
+// Retrieve all challenges created by the user that
+// have not yet been approved by admin
 userRouter.get('/pending', jwtAuth, jsonParser, (req, res) => {
   Challenge.find({ _id: req.user._id, isPublished: false }, (err, data) => {
     if (err) return handleDBError(err, res);
