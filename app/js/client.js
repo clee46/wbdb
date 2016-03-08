@@ -1,8 +1,8 @@
 const angular = require('angular');
-const uiRouter = require('angular-ui-router');
 const highlight = require('angular-highlightjs');
 
 const wbdbApp = angular.module('wbdbApp', ['ui.router', 'hljs']);
+require('angular-ui-router');
 
 require('./controllers/home_controller.js')(wbdbApp);
 require('./controllers/challenge_controller.js')(wbdbApp);

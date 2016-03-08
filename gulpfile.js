@@ -9,16 +9,17 @@ const webpack = require('webpack-stream');
 const scripts = ['server.js', 'gulpfile.js', 'lib/*.js', 'models/*.js',
   'routes/*.js', 'test/**/*.js', 'app/**/*.js', '!test/client/test_bundle.js',
   '!app/js/vendor/*'];
+const clientScripts = ['app/**/*.js'];
+const staticFiles = ['app/**/*.html', 'app/images/*', 'app/fonts/*'];
+const sassFiles = ['app/scss/*.scss'];
 
 gulp.task('static:dev', () => {
-  gulp.src(['app/**/*.html',
-    'app/images/*.png',
-    'app/fonts/*' ], { 'base': 'app' })
+  gulp.src(staticFiles, { 'base': 'app' })
     .pipe(gulp.dest(__dirname + '/build'));
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src(__dirname + '/app/scss/*.scss')
+  gulp.src(sassFiles)
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.init())
     .pipe(clean({ debug: true }, (details) => {
@@ -26,11 +27,11 @@ gulp.task('sass:dev', () => {
       console.log(details.name + ': ' + details.stats.minifiedSize);
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(__dirname + '/build/css'));
+    .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('webpack:dev', () => {
-  gulp.src(__dirname + '/app/js/client.js')
+  gulp.src('app/js/client.js')
     .pipe(webpack({
       output: {
         filename: 'bundle.js'
@@ -49,13 +50,18 @@ gulp.task('webpack:dev', () => {
 });
 
 gulp.task('webpack:test', () => {
-  gulp.src(__dirname + '/test/test_entry.js')
+  gulp.src('test/test_entry.js')
     .pipe(webpack({
       module: {
         loaders: [
           {
             test: /\.html$/,
             loader: 'html'
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
           }
         ]
       },
@@ -72,5 +78,12 @@ gulp.task('lint', () => {
     .pipe(eslint.format());
 });
 
+gulp.task('watch', () => {
+  gulp.watch(scripts, ['lint']);
+  gulp.watch(clientScripts, ['webpack:dev']);
+  gulp.watch(staticFiles, ['static:dev']);
+  gulp.watch(sassFiles, ['sass:dev']);
+});
+
 gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev']);
-gulp.task('default', ['build:dev']);
+gulp.task('default', ['watch', 'build:dev']);

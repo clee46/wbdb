@@ -1,4 +1,4 @@
-module.exports =  (app, API) => {
+module.exports = (app, API) => {
   app.factory('authInterceptor', ['auth', (auth) => {
     return {
       request(config) {
