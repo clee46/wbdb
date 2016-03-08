@@ -54,10 +54,22 @@ userRouter.get('/favorites', jwtAuth, jsonParser, (req, res) => {
     .catch((err) => handleDBError(err, res));
 });
 
+userRouter.post('/favorites', jwtAuth, jsonParser, (req, res) => {
+  var newFavorite = new Favorite(req.body);
+  newFavorite.save((err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
 
-// Retrieves all challenges created by the user
-// this route is unnecessary if we decide to use the
-// /pending and /approved routes instead
+userRouter.delete('/favorites/:id', jwtAuth, jsonParser, (req, res) => {
+  Favorite.remove({ challengeId: req.params.id }, (err) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json({ msg: 'Successfully Deleted Challenge' });
+  });
+});
+
+
 userRouter.get('/mychallenges', jwtAuth, jsonParser, (req, res) => {
   Challenge.find({ _id: req.user._id }, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -65,8 +77,7 @@ userRouter.get('/mychallenges', jwtAuth, jsonParser, (req, res) => {
   });
 });
 
-// Retrieve all challenges created by the user that
-// have not yet been approved by admin
+
 userRouter.get('/pending', jwtAuth, jsonParser, (req, res) => {
   Challenge.find({ _id: req.user._id, isPublished: false }, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -74,7 +85,6 @@ userRouter.get('/pending', jwtAuth, jsonParser, (req, res) => {
   });
 });
 
-// Retrieve all challenges created by the user that have been approved by admin
 userRouter.get('/approved', jwtAuth, jsonParser, (req, res) => {
   Challenge.find({ _id: req.user._id, isPublished: true }, (err, data) => {
     if (err) return handleDBError(err, res);

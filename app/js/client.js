@@ -1,11 +1,14 @@
 const angular = require('angular');
+const highlight = require('angular-highlightjs');
+
+const wbdbApp = angular.module('wbdbApp', ['ui.router', 'hljs']);
 require('angular-ui-router');
 
-const wbdbApp = angular.module('wbdbApp', ['ui.router']);
 require('./controllers/home_controller.js')(wbdbApp);
 require('./controllers/challenge_controller.js')(wbdbApp);
 require('./services')(wbdbApp);
 // require('./home')(wbdbApp);
+
 
 wbdbApp.config(['$stateProvider', '$urlRouterProvider',
   ($stateProvider, $urlRouterProvider) => {
