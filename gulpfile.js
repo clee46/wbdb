@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const mocha = require('gulp-mocha');
 const sass = require('gulp-sass');
 const clean = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
@@ -16,6 +17,11 @@ const sassFiles = ['app/scss/*.scss'];
 gulp.task('static:dev', () => {
   gulp.src(staticFiles, { 'base': 'app' })
     .pipe(gulp.dest(__dirname + '/build'));
+});
+
+gulp.task('test:server', () => {
+  gulp.src('./test-server/*.js')
+    .pipe(mocha());
 });
 
 gulp.task('sass:dev', () => {
