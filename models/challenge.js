@@ -9,6 +9,7 @@ var challengeSchema = new mongoose.Schema({
   rating: Number,
   difficulty: Number,
   language: String,
+  createdOn: String,
   userId: mongoose.Schema.Types.ObjectId,
   published: { type: Boolean, default: false }
 });
