@@ -5,7 +5,7 @@ const wbdbApp = angular.module('wbdbApp', ['ui.router']);
 require('angular-ui-router');
 
 require('./controllers')(wbdbApp);
-require('./services')(wbdbApp);
+require('./services')(wbdbApp, 'localhost:3000/api');
 // require('./home')(wbdbApp);
 
 

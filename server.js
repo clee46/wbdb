@@ -8,11 +8,13 @@ const challengeRouter = require(__dirname + '/routes/challenge_routes');
 const authRouter = require(__dirname + '/routes/auth_routes');
 const userRouter = require(__dirname + '/routes/user_routes');
 const adminRouter = require(__dirname + '/routes/admin_routes');
+const favoriteRouter = require(__dirname + '/routes/favorite_routes');
 
 app.use('/api', challengeRouter);
 app.use('/api', authRouter);
 app.use('/api', userRouter);
 app.use('/api', adminRouter);
+app.use('/api', favoriteRouter);
 app.use(express.static(__dirname + '/build'));
 
 // app.use((req, res, next) => {
