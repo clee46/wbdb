@@ -27,6 +27,9 @@ module.exports = (app) => {
         $window.localStorage.removeItem('jwtToken');
         cb();
       }
+      getUserId() {
+        return this.parseJWT(this.token).id;
+      }
     }
 
     return new Auth();

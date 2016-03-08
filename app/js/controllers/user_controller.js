@@ -1,9 +1,12 @@
 module.exports = function(app) {
-  app.controller('UserController', ['$scope', '$http', 'Resource', '$stateParams',
-    function($scope, $http, Resource, $stateParams) {
+  app.controller('UserController', ['$scope', '$http', 'Resource', '$stateParams', 'auth',
+    function($scope, $http, Resource, $stateParams, auth) {
+
+      $scope.tags = [{tag: "Arrays"}, {tag: "Strings"}, {tag: "Trees"}, {tag: "Queues"},
+        {tag: "Hash Table"}, {tag: "Recursion"}, {tag: "Stacks"}, {tag: "Binary Tree"}];
       $scope.myChallenges = [];
       $scope.favorites = [];
-      $scope.newPost = {}
+      $scope.newChallenge = {};
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
 
@@ -14,12 +17,18 @@ module.exports = function(app) {
           weekday: "long", year: "numeric", month: "short",
           day: "numeric", hour: "2-digit", minute: "2-digit"
         };
-        $scope.newPost.createdOn = currentDate.toLocaleTimeString('en-us', options);
-
+        $scope.newChallenge.createdOn = currentDate.toLocaleTimeString('en-us', options);
+        var copiedChallenge = angular.copy($scope.newChallenge);
+        $scope.newChallenge.solutions = [$scope.newChallenge.solution];
         // Send newPost to the DB
-        $scope.challengeService.create($scope.newPost, (err, res) => {
+        copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
+        copiedChallenge.userId = auth.getUserId();
+        $scope.challengeService.create(copiedChallenge, (err, res) => {
           if (err) return console.log(err);
+          $scope.newChallenge = null;
+          $scope.myChallenges.push(res);
         });
+
       }
       $scope.getAllFavorites = function() {
         $scope.favoriteService.getAll((err, res) => {
