@@ -15,6 +15,11 @@ app.use('/api', userRouter);
 app.use('/api', adminRouter);
 app.use(express.static(__dirname + '/build'));
 
+// app.use((req, res, next) => {
+//   res.redirect('/#', req.url);
+//   next();
+// });
+
 const PORT = process.env.PORT || 3000;
 module.exports = exports = (port, cb) => {
   return app.listen(port || PORT,

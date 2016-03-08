@@ -85,11 +85,11 @@ gulp.task('lint', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(scripts, ['lint', 'test:server']);
+  gulp.watch(scripts, ['lint']);
   gulp.watch(clientScripts, ['webpack:dev']);
   gulp.watch(staticFiles, ['static:dev']);
   gulp.watch(sassFiles, ['sass:dev']);
 });
 
-gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev', 'test:server']);
+gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev']);
 gulp.task('default', ['watch', 'build:dev']);
