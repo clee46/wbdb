@@ -13,13 +13,6 @@ challengeRouter.get('/challenges', (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 7c36de8b3a18fa65a1a433ee6c0b1dcd61056afc
-=======
->>>>>>> 679a6c188eaf799a80b8a104c4b042dda52f92a1
 challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
   var newChallenge = new Challenge(req.body);
   newChallenge.save((err, data) => {
@@ -29,10 +22,7 @@ challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
 });
 
 // Add Middleware to check admin privileges
-<<<<<<< HEAD
 
-=======
->>>>>>> 7c36de8b3a18fa65a1a433ee6c0b1dcd61056afc
 challengeRouter.put('/challenges/:id', jwtAuth, jsonParser, (req, res) => {
   var newData = req.body;
   delete newData._id;
