@@ -7,4 +7,5 @@ module.exports = (app) => {
   require('./home_controller')(app);
   require('./user_controller')(app);
   require('./admin_controller')(app);
+  require('./nav_controller')(app);
 };

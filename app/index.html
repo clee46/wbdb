@@ -32,7 +32,7 @@
   </style>
 
 </head>
-<body data-ng-app="wbdbApp">
+<body data-ng-app="wbdbApp" data-ng-controller="NavController">
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -44,7 +44,9 @@
             <h1 style="display:inline-block;"><a data-ui-sref="home()"><span>WB</span><span class="icon-data"></span>db</a></h1>
           </div>
           <div class="six columns">
-              <button type="button" name="button" class="login" data-ui-sref="auth()">login</button>
+              <button data-ng-if="!loggedIn" type="button" name="button" class="login" data-ui-sref="auth()">Login</button>
+              <button data-ng-click="logout()" data-ng-if="loggedIn" type="button" name="button" class="login" data-ui-sref="home()">Logout</button>
+
               <a href="challenge.html"><input class="button-primary" value="Learn More" type="submit"></a>
           </div>
         </div>
