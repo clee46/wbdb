@@ -27,7 +27,7 @@ authRouter.post('/signup', jsonParser, (req, res) => {
       .json({ msg: 'Please enter a password longer than 7 characters' });
   }
 
-  if (!(req.body.password === req.body.comfirmpassword)) {
+  if (!(req.body.password === req.body.confirmpassword)) {
     return res.status(400).json({ msg: 'Passwords are not the same' });
   }
 
