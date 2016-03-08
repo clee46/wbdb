@@ -5,9 +5,17 @@
 module.exports = function(app) {
   app.controller('ChallengeController', ['$scope', '$http', 'Resource',
     '$stateParams', ($scope, $http, Resource, $stateParams) => {
-      $scope.challenge = $stateParams.challengeData;
-      $scope.hints = [];
       $scope.favoriteService = new Resource('/favorites');
+      $scope.challengeService = new Resource('/challenges');
+
+      $scope.challenge = $stateParams.challengeData;
+      if (!$scope.challenge) {
+        $scope.challengeService.getOne($stateParams.id, (err, data) => {
+          if (err) return console.log(err);
+          $scope.challenge = data;
+        });
+      }
+      $scope.hints = [];
       $scope.showAdd = true;
 
       $scope.addFavorite = function() {
