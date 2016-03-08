@@ -1,0 +1,23 @@
+<div>
+  <div class="row">
+    <div class="twelve columns">
+      <section class="searchChal">
+        <!--add toggle show hide-->
+        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+
+        <p>
+          {{challenge.question}}
+        </p>
+        <p>
+          {{challenge.author}}
+        </p>
+        <pre>
+          <code>
+            {{challenge.solutions[0]}}
+          </code>
+        </pre>
+        <p>{{challenge.tags}}</p>
+      </section>
+    </div>
+  </div>
+</div>

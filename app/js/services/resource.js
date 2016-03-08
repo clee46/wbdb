@@ -17,6 +17,11 @@ module.exports = (app) => {
         this.resourceName = resourceName;
       }
 
+      getOne(id, cb) {
+        $http.get(`http://localhost:3000/api${this.resourceName}/${id}`)
+          .then(handleSuccess(cb), handleFailure(cb));
+      }
+
       getAll(cb) {
         $http.get(`http://localhost:3000/api${this.resourceName}`)
           .then(handleSuccess(cb), handleFailure(cb));
