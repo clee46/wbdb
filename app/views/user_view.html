@@ -23,4 +23,35 @@
     </label>
     <input class="button-primary" type="submit" value="Submit">
   </form>
+  <div class="row">
+    <div class="six columns" data-ng-init="getAllFavorites()">
+      <h2>Favorites</h2>
+      <section class="searchChal" data-ng-repeat="favorite in favorites">
+        <!--add toggle show hide-->
+        <h2>{{favorite.title}}</h2><span>{{favorite.difficulty}}</span>
+
+        <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({ challengeData: favorite, id: favorite._id })">
+          View Full Favorite
+        </button>
+        <p>{{favorite.question}}</p>
+        <p>{{favorite.author}}</p>
+        <p>{{favorite.tags}}</p>
+      </section>
+    </div>
+
+    <div class="six columns" data-ng-init="getUserChallenges()">
+      <h2>Your Challenges</h2>
+      <section class="searchChal" data-ng-repeat="challenge in myChallenges">
+        <!--add toggle show hide-->
+        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+
+        <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
+        <p>{{challenge.question}}</p>
+        <p>{{challenge.author}}</p>
+        <p>{{challenge.tags}}</p>
+      </section>
+    </div>
+  </div>
 </div>
