@@ -1,0 +1,37 @@
+<div>
+  <section class="rw-wrapper">
+    <h2 class="rw-sentence">
+
+      <span>Are you ready to whiteboard </span>
+      <div class="rw-words rw-words-1">
+        <span>arrays?</span>
+        <span>strings?</span>
+        <span>linked list?</span>
+        <span>trees?</span>
+        <span>saalmons?</span>
+        <span>bears?</span>
+      </div>
+    </h2>
+
+    <label for="search" alt="search" class="inline"><span class="icon-search"></span>
+    </label><input role="search" type="text" name="name" class="search" placeholder="search"
+    autofocus autocomplete="off" ng-model="search">
+
+  </section>
+
+  <div class="row">
+    <div class="twelve columns" data-ng-init="getAllChallenges()" data-ng-show="search.length !== 0">
+      <section class="searchChal"  onclick="this.style.height = '100%'"
+      data-ng-repeat="challenge in challenges | filter:search">
+        <!--add toggle show hide-->
+        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+
+        <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
+        <p>{{challenge.question}}</p>
+        <p>{{challenge.author}}</p>        
+        <p>{{challenge.tags}}</p>
+      </section>
+    </div>
+  </div>
+</div>

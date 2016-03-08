@@ -1,0 +1,84 @@
+@import "fonts";
+@import "normalize2";
+@import "skeleton";
+@import "stylesSkel";
+@import "text_animation";
+
+@import "normalize";
+@import "base";
+@import "layout";
+@import "state";
+@import "module";
+@import "theme";
+
+.no-cssanimations .rw-wrapper .rw-sentence span:first-child{
+  opacity: 1;
+}
+.rw-sentence{
+  margin-bottom: 20px;
+}
+button, button-primary{
+  font-family: 'Raleway', sans-serif;
+  margin-left: 20px;
+  float:right;
+}
+.button-primary{
+  background-color: #6B969D;
+  float: right;
+}
+.dashboardBtn{
+  float: none;
+}
+
+[class^="icon-"]{
+  font-size: 30px;
+  font-weight: 700;
+}
+input[type="text"]{
+  height: 50px;
+  font-size: 30px;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 80px;
+}
+.icon-search{
+  padding: 10px;
+}
+.inline{
+  display: inline-block;
+}
+.row .columns .searchChal{
+  height: 240px;
+  overflow: hidden;
+}
+.searchChal{
+  background: #fff;
+  border: 2px dotted #ccc;
+  margin: 10px auto 50px;
+  padding: 0 20px;
+}
+.searchChal h2{
+  margin: 30px 0 0 0;
+}
+.searchChal h2 span{
+  font-size: 20px;
+  float: right;
+}
+.searchChal h2 span:nth-child(5){
+  color: #9B6B9D;
+}
+.searchChal2 h2 span:nth-child(5),.searchChal2 h2 span:nth-child(4),.searchChal2 h2 span:nth-child(3),.searchChal2 h2 span:nth-child(3){
+  color: #9B6B9D;
+}
+.searchChal {
+  font-size: 12px;
+}
+.viewChal{
+  margin: 10px auto;
+}
+p strong span{
+  font-weight: 100;
+}
+footer p{
+  font-size: 12px;
+  text-align: center;
+}

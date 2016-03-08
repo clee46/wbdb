@@ -1,0 +1,32 @@
+<div>
+  <div class="row">
+    <div class="twelve columns">
+      <section class="searchChal">
+        <!--add toggle show hide-->
+        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+
+        <p>
+          {{challenge.question}}
+        </p>
+        <p>
+          {{challenge.author}}
+        </p>
+        <!-- <pre> -->
+          <!-- <code> -->
+          <div highlight highlight-language="javascript">
+            {{challenge.solutions[0]}}
+          </div>
+          <!-- </code> -->
+        <!-- </pre> -->
+        <p>{{challenge.tags}}</p>
+
+        <button type="button" name="button" class="viewChal" onclick="">Show Hint</button>
+        <button type="button" name="button" class="viewChal" onclick="">Show One Solution</button>
+        <button type="button" name="button" class="viewChal" onclick="">Show All Solutions</button>
+        <button type="button" name="button" class="viewChal" ng-show="showAdd" ng-click="showAdd = !showAdd">Add To Favorites</button>
+        <button type="button" name="button" class="viewChal" ng-show="!showAdd" ng-click="showAdd = !showAdd">Remove From Favorites</button>
+
+      </section>
+    </div>
+  </div>
+</div>

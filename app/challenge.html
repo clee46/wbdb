@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>WB db - Challenges</title>
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT  ????????????????????????????????NEED to CONDENSE FONTS INTO ONE REQUEST??????????????????????????????????????
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">                                              <!--CSS RESETS-->
+  <link rel="stylesheet" href="css/skeleton.css">                                               <!--CSS GRID AND FLAT STYLING-->
+  <link rel="stylesheet" type="text/css" href="text_animation/text_animation.css" />            <!--CSS SCROLLING TEXT ANIMATION-->
+  <link rel="stylesheet" href="css/fonts.css" media="screen" title="no title" charset="utf-8">  <!--CSS FONT ICONS-->
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title" charset="utf-8"> <!--CSS AGENT STYLES-->
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script src="js/vendor/modernizr.custom.72111.js"></script>
+
+  <style>
+
+  </style>
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="five columns">
+            <h1 style="display:inline-block;"><span>WB</span>db</h1>
+          </div>
+          <div class="seven columns">
+              <button type="button" name="button" class="login">login</button>
+              <a href="challenge.html"><input class="button-primary" value="Learn More" type="submit"></a>
+              <a href="dashboard.html"><button type="button" name="button" class="dashboardBtn">dashboard</button></a>
+          </div>
+        </div>
+      </div>
+
+
+    </header>
+    <section class="rw-wrapper" style="margin-left:0px; width:95%;">
+      <h2 class="chalH2">
+        <strong>Arrays</strong>  -  Unique
+          <span style="float:right;margin-right:-10px;">
+            <span class="icon-diamond"></span>
+            <span class="icon-diamond"></span>
+            <span class="icon-diamond"></span>
+            <span class="icon-diamond"></span>
+            <span class="icon-diamond"></span>
+          </span> <br>
+        <span class="thin">Implement an algorithm to determine if a string has all unique characters.</span>
+      </h2>
+      </section>
+      <h1 style="display:inline-block; margin: 50px 0 0 0;font-weight:700;">Hints</h1>
+    <div class="row">
+
+      <div class="seven columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Answer</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="five columns">
+          <button type="button" name="button" class="viewChal">Some Places to Get Started</button>
+      </div>
+
+    </div>
+
+    <section class="rw-wrapper">
+      </section>
+      <h1 style="display:inline-block; margin: 50px 0 0 0;font-weight:700;">Arrays</h1>
+    <div class="row">
+
+      <div class="eight columns">
+        <section class="searchChal">
+          <!--add toggle show hide-->
+          <h2><strong>Arrays</strong>  -  Unique
+            <span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+              <span class="icon-diamond"></span>
+            </span></h2>
+          <p>
+            <strong>Implement an algorithm to determine if a string has all unique characters.</strong> <br>
+            <strong>What if you cannot use additional data structures?</strong>
+          </p>
+          <pre>
+            <code>
+              // =====================================
+              // Method #1
+              function isUnique(str) {
+                for (var i = 0; i < str.length; i++) {
+                  if (str.indexOf(str[i]) !== str.lastIndexOf(str[i])) return false;
+                }
+                return true;
+              }
+              console.log(isUnique('hello'));
+              console.log(isUnique('abcd'));
+            </code>
+          </pre>
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+          <p>Categories/Tags</p>
+        </section>
+      </div>
+      <div class="four columns">
+          <button type="button" name="button" class="viewChal">View Full Challenge</button>
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="twelve columns">
+        <footer><p>WhiteBoard db &copy 2016</p></footer>
+      </div>
+    </div>
+  </div>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
