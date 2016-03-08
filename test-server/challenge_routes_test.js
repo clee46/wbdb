@@ -17,7 +17,7 @@ describe('challege routes', () => {
 
   before((done) => {
     var newUser = new User();
-    newUser.authentication.email = 'notify@codefellows.com';
+    newUser.authentication.email = 'wbdb@codefellows.com';
     newUser.hashPassword('password');
     newUser.save((err, data) => {
       if (err) console.log(err);

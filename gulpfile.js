@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const mocha = require('gulp-mocha');
 const sass = require('gulp-sass');
 const clean = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
@@ -16,6 +17,11 @@ const sassFiles = ['app/scss/*.scss'];
 gulp.task('static:dev', () => {
   gulp.src(staticFiles, { 'base': 'app' })
     .pipe(gulp.dest(__dirname + '/build'));
+});
+
+gulp.task('test:server', () => {
+  gulp.src('./test-server/*.js')
+    .pipe(mocha());
 });
 
 gulp.task('sass:dev', () => {
@@ -79,11 +85,11 @@ gulp.task('lint', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(scripts, ['lint']);
+  gulp.watch(scripts, ['lint', 'test:server']);
   gulp.watch(clientScripts, ['webpack:dev']);
   gulp.watch(staticFiles, ['static:dev']);
   gulp.watch(sassFiles, ['sass:dev']);
 });
 
-gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev']);
+gulp.task('build:dev', ['lint', 'static:dev', 'sass:dev', 'webpack:dev', 'test:server']);
 gulp.task('default', ['watch', 'build:dev']);
