@@ -13,7 +13,10 @@ app.use('/api', challengeRouter);
 app.use('/api', authRouter);
 app.use('/api', userRouter);
 app.use('/api', adminRouter);
+app.use(express.static(__dirname + '/build'));
 
 const PORT = process.env.PORT || 3000;
-module.exports = exports = app.use(express.static(__dirname + '/build'))
-  .listen(PORT, () => console.log('Server running on Port: ' + PORT));
+module.exports = exports = (port, cb) => {
+  return app.listen(port || PORT,
+    cb || (() => console.log('Server running on Port: ' + PORT)));
+};

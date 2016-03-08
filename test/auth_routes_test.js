@@ -1,31 +1,32 @@
-var chai = require('chai');
-var chaiHTTP = require('chai-http');
-chai.use(chaiHTTP);
-var mongoose = require('mongoose');
-var expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
+chai.use(require('chai-http'));
 
-process.env.MONGO_URI = 'mongodb://localhost/app_dev';
+process.env.MONGO_URI = 'mongodb://localhost/app_dev_test';
 
 const server = require(__dirname + '/../server.js');
 const User = require(__dirname + '/../models/user.js');
-var baseUri = 'localhost:3000';
+const baseUri = 'localhost:4000';
 
 describe('the authorization route', () => {
-  after((done) => {
-    User.remove({}, (err) => {
-      if (err) console.log(err);
-      done();
-    });
+  before((done) => {
+    this.server = server(4000, done);
   });
+
   it('should create a new user with a POST request', (done) => {
     chai.request(baseUri)
       .post('/api/signup')
-      .send({ 'email': 'notify@codefellows.com', 'password': 'password' })
+      .send({
+        'username': 'test',
+        'email': 'test@example.com',
+        'password': 'password',
+        'confirmpassword': 'password'
+      })
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
-        expect(res.body).to.have.property('user');
+        expect(res.body).to.have.property('msg');
         done();
       });
   });
@@ -49,29 +50,20 @@ describe('the authorization route', () => {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(res.body).to.have.property('token');
-          expect(res.body).to.have.property('user');
+          expect(res.body).to.have.property('msg');
           done();
         });
-    });
-    // it('should be able to update a user', (done) => {
-    //   chai.request(baseUri)
-    //     .put('/auth/update/' + this.userId)
-    //     .set('token', this.userToken)
-    //     .send({authentication: {email: "notefellows@codefellows.com", password: "8675309"}})
-    //     .end((err, res) => {
-    //       expect(err).to.eql(null);
-    //       expect(res).to.have.status(200);
-    //       expect(res.body.msg).to.eql('User updated');
-    //       done();
-    //     });
-    // });
-
-    after((done) => {
-      mongoose.connection.db.dropDatabase(done);
     });
   });
 
   after((done) => {
-    server.close(done);
+    this.server.close(done);
+  });
+
+  after((done) => {
+    User.remove({}, (err) => {
+      if (err) console.log(err);
+      done();
+    });
   });
 });
