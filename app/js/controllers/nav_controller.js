@@ -1,7 +1,9 @@
 module.exports = function(app) {
-  app.controller('NavController', ['$scope', 'auth', 'user', '$rootScope',
-    function($scope, auth, user, $rootScope) {
+  app.controller('NavController', ['$scope', 'auth', 'user', '$rootScope', '$location',
+    function($scope, auth, user, $rootScope, $location) {
       $scope.auth = auth;
+      $rootScope.loginPage = false;
+      $scope.location = $location;
       // console.log(auth.parseJWT(auth.token));
       console.log('loading nav controller');
       // console.log(user.getUser());
@@ -20,6 +22,9 @@ module.exports = function(app) {
       // else $rootScope.isAdmin = false;
 
       $rootScope.loggedIn = !!auth.token;
-      $scope.logout = auth.logout.bind(auth, () => $rootScope.loggedIn = false);
+      $scope.logout = auth.logout.bind(auth, () => {
+        $rootScope.loggedIn = false;
+        $rootScope.loginPage = false;
+      });
   }]);
 };
