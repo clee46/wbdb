@@ -5,6 +5,10 @@
 module.exports = function(app) {
   app.controller('ChallengeController', ['$scope', '$http', 'Resource',
     '$stateParams', 'auth', ($scope, $http, Resource, $stateParams, auth) => {
+      $scope.solutions = [];
+      $scope.hints = [];
+      $scope.tags = [];
+
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
       $scope.hintService = new Resource('/hints');
@@ -12,7 +16,6 @@ module.exports = function(app) {
       $scope.solutionService = new Resource('/solutions');
 
       $scope.currId = auth.getUserId();
-      $scope.hints = [];
 
       $scope.challenge = $stateParams.challengeData;
       if (!$scope.challenge) {
@@ -68,14 +71,30 @@ module.exports = function(app) {
 
       $scope.getAllSolutions = function() {
         // $scope.hints.push(challenge.hints[i]);
+        $scope.solutionService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            console.log(res);
+            if (err) return console.log(err);
+            $scope.solutions = res;
+          });
       };
 
       $scope.getAllHints = function() {
         // $scope.hints.push(challenge.hints[i]);
+        $scope.hintService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            if (err) return console.log(err);
+            $scope.hints = res;
+          });
       };
 
       $scope.getAllTags = function() {
         // $scope.hints.push(challenge.hints[i]);
+        $scope.tagService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            if (err) return console.log(err);
+            $scope.tags = res;
+          });
       };
 
 

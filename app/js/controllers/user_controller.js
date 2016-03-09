@@ -9,7 +9,7 @@ module.exports = function(app) {
       $scope.newChallenge = {};
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
-
+      $scope.solutionService = new Resource('/solutions');
       $scope.submitChallenge = function() {
         // Set the current date and time
         var currentDate = new Date();
@@ -19,12 +19,20 @@ module.exports = function(app) {
         };
         $scope.newChallenge.createdOn = currentDate.toLocaleTimeString('en-us', options);
         var copiedChallenge = angular.copy($scope.newChallenge);
-        $scope.newChallenge.solutions = [$scope.newChallenge.solution];
+
         // Send newPost to the DB
         copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
         copiedChallenge.userId = auth.getUserId();
+
         $scope.challengeService.create(copiedChallenge, (err, res) => {
           if (err) return console.log(err);
+          $scope.solutionService.create({
+            solution: $scope.newChallenge.solution,
+            challengeId: res._id,
+            userId: auth.getUserId()
+          }, (err) => {
+              if (err) return console.log(err);
+          });
           $scope.newChallenge = null;
           $scope.myChallenges.push(res);
         });
