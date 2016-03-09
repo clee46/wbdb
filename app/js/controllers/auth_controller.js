@@ -4,8 +4,12 @@ module.exports = function(app) {
       $scope.signin = true;
       $scope.form = {};
       $scope.login = (user) => {
+        $scope.responseLogin = null;
         userService.login(user, (err, res) => {
-          if (err) return console.log(err.data.msg);
+          if (err) {
+            $scope.responseLogin = err.data.msg;
+            return console.log(err.data.msg);
+          }
           $rootScope.loggedIn = true;
           if (res.isAdmin) {
             $rootScope.isAdmin = true;
@@ -17,8 +21,12 @@ module.exports = function(app) {
         });
       };
       $scope.register = (user) => {
+        $scope.responseRegister = null;
         userService.createUser(user, (err) => {
-          if (err) return console.log(err.data.msg);
+          if (err) {
+            $scope.responseRegister = err.data.msg;
+            return console.log(err.data.msg);
+          }
           $rootScope.loggedIn = true;
           $location.path('/user');
         });
