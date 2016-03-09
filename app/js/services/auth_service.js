@@ -28,7 +28,8 @@ module.exports = (app) => {
         cb();
       }
       getUserId() {
-        return this.parseJWT(this.token).id;
+        if (this.token) return this.parseJWT(this.token).id;
+        else return null;
       }
     }
 
