@@ -1,20 +1,20 @@
 const express = require('express');
 const jwtAuth = require(__dirname + '/../lib/jwt_auth');
 const jsonParser = require('body-parser').json();
-const Solution = require(__dirname + '/../models/solutiion');
+const Solution = require(__dirname + '/../models/solution');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const solutionRouter = module.exports = exports = express.Router();
 
 // future goal: threshold get request
-solutionRouter.get('/solutions', (req, res) => {
-  Solution.find({}, (err, data) => {
+solutionRouter.get('/solutions', jsonParser, (req, res) => {
+  Solution.find({ challengeId: req.body.challengeId }, (err, data) => {
     if (err) return handleDBError(err, res);
     res.status(200).json(data);
   });
 });
 
 solutionRouter.get('/solutions/:id', (req, res) => {
-  Solution.findOne({ _id: req.params.id }, (err, data) => {
+  Solution.find({ challengeId: req.params.id }, (err, data) => {
     if (err) return handleDBError(err, res);
     res.status(200).json(data);
   });

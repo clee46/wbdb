@@ -12,7 +12,7 @@ module.exports = (app, API) => {
       },
 
       response(res) {
-        if (res.data.token) {
+        if (res.data && res.data.token) {
           auth.saveToken(res.data.token);
         }
 
