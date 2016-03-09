@@ -21,7 +21,7 @@ hintRouter.get('/hints/:id', (req, res) => {
 });
 
 hintRouter.post('/hints', jwtAuth, jsonParser, (req, res) => {
-  var newHint = new Challenge(req.body);
+  var newHint = new Hint(req.body);
   newHint.save((err, data) => {
     if (err) return handleDBError(err, res);
     res.status(200).json(data);
@@ -39,7 +39,7 @@ hintRouter.put('/hints/:id', jwtAuth, jsonParser, (req, res) => {
   });
 });
 
-challengeRouter.delete('/hints/:id', jwtAuth, jsonParser, (req, res) => {
+hintRouter.delete('/hints/:id', jwtAuth, jsonParser, (req, res) => {
   Hint.remove({ _id: req.params.id }, (err) => {
     if (err) return handleDBError(err, res);
     res.status(200).json({ msg: 'Successfully Deleted Hint' });

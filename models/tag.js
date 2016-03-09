@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-var hintSchema = new mongoose.Schema({
-  hint: String,
+var tagSchema = new mongoose.Schema({
+  tag: String,
   challengeId: mongoose.Schema.Types.ObjectId,
   userId: mongoose.Schema.Types.ObjectId,
   published: { type: Boolean, default: false }
 });
 
-module.exports = mongoose.model('Hint', hintSchema);
+module.exports = mongoose.model('Tag', tagSchema);

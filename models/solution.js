@@ -1,15 +1,8 @@
 const mongoose = require('mongoose');
 
 var solutionSchema = new mongoose.Schema({
-  title: String,
-  question: String,
-  solutions: [String],
-  hints: [String],
-  tags: [String],
-  rating: Number,
-  difficulty: Number,
-  language: String,
-  createdOn: String,
+  solution: String,
+  challengeId: mongoose.Schema.Types.ObjectId,
   userId: mongoose.Schema.Types.ObjectId,
   published: { type: Boolean, default: false }
 });
