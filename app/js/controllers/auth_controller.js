@@ -6,7 +6,6 @@ module.exports = function(app) {
       $scope.login = (user) => {
         userService.login(user, (err, res) => {
           if (err) return console.log(err.data.msg);
-          console.log(res);
           $rootScope.loggedIn = true;
           if (res.isAdmin) {
             $rootScope.isAdmin = true;
