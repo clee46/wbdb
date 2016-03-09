@@ -1,9 +1,10 @@
 module.exports = (app) => {
-  app.factory('auth', ['$window', ($window) => {
+  app.factory('auth', ['$rootScope', '$window', ($rootScope, $window) => {
     class Auth {
       constructor() {
         this.token = $window.localStorage.jwtToken || null;
         this.username = this.token ? this.parseJWT(this.token).username : null;
+        $rootScope.loggedIn = !!this.token;
       }
 
       parseJWT(token) {
@@ -27,8 +28,10 @@ module.exports = (app) => {
         $window.localStorage.removeItem('jwtToken');
         cb();
       }
+
       getUserId() {
-        return this.parseJWT(this.token).id;
+        if (this.token) return this.parseJWT(this.token).id;
+        else return null;
       }
     }
 

@@ -37,7 +37,7 @@ module.exports = function(app) {
         });
       };
       $scope.getUserChallenges = function() {
-        $http.get('http://localhost:3000/api/mychallenges')
+        $http.get(__BASEURL__ + '/api/mychallenges')
           .then((res) => {
             console.log(res);
             $scope.myChallenges = res.data;

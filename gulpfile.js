@@ -29,8 +29,8 @@ gulp.task('test:server', () => {
 
 gulp.task('sass:dev', () => {
   gulp.src(sassFiles)
-    .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
     .pipe(clean({ debug: true }, (details) => {
       console.log(details.name + ': ' + details.stats.originalSize);
       console.log(details.name + ': ' + details.stats.minifiedSize);
@@ -53,7 +53,12 @@ gulp.task('webpack:dev', () => {
             loader: 'babel-loader'
           }
         ]
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          __BASEURL__: JSON.stringify('http://localhost:3000')
+        })
+      ]
     }))
     .pipe(gulp.dest('build/'));
 });
@@ -74,7 +79,9 @@ gulp.task('webpack:prod', () => {
         ]
       },
       plugins: [
-        new webpack.optimize.DedupePlugin()
+        new webpack.DefinePlugin({
+          __BASEURL__: JSON.stringify('https://vast-refuge-66852.herokuapp.com')
+        })
       ],
       devtool: 'source-map'
     }))
