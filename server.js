@@ -17,10 +17,8 @@ app.use('/api', adminRouter);
 app.use('/api', favoriteRouter);
 app.use(express.static(__dirname + '/build'));
 
-// app.use((req, res, next) => {
-//   res.redirect('/#', req.url);
-//   next();
-// });
+
+
 
 const PORT = process.env.PORT || 3000;
 module.exports = exports = (port, cb) => {
