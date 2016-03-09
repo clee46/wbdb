@@ -11,10 +11,8 @@ adminRouter.get('/admin', jwtAuth, checkAdmin, (req, res) => {
   // find challenges with isPublished = false;
   // returns data, which is an array of all database
   // challenges not yet published
-  console.log('inside admin get route');
   Challenge.find({ published: false }, (err, data) => {
     if (err) return handleDBError(err, res);
-    console.log(data);
     res.status(200).json(data);
   });
 });
