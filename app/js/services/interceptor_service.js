@@ -5,7 +5,7 @@ module.exports = (app, API) => {
         const token = auth.getToken();
 
         if (config.url.includes(API) && token) {
-          config.headers.authorization = "Bearer " + token;
+          config.headers.Authorization = 'Bearer ' + token;
         }
 
         return config;

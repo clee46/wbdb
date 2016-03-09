@@ -6,7 +6,7 @@ require('angular-aria');
 const wbdbApp = angular.module('wbdbApp', ['ui.router', 'ngAria']);
 
 require('./controllers')(wbdbApp);
-require('./services')(wbdbApp, 'localhost:3000/api');
+require('./services')(wbdbApp, __BASEURL__);
 // require('./home')(wbdbApp);
 
 
