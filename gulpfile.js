@@ -29,8 +29,8 @@ gulp.task('test:server', () => {
 
 gulp.task('sass:dev', () => {
   gulp.src(sassFiles)
-    .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
     .pipe(clean({ debug: true }, (details) => {
       console.log(details.name + ': ' + details.stats.originalSize);
       console.log(details.name + ': ' + details.stats.minifiedSize);
