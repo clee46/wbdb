@@ -11,20 +11,20 @@ const handleFailure = (cb) => {
 };
 
 module.exports = (app) => {
-  app.factory('user', ['$http', ($http) => {
+  app.factory('user', ['$http', 'auth', ($http, auth) => {
     class User {
       constructor() {}
 
       createUser(user, cb) {
         console.log(user);
-        $http.post('http://localhost:3000/api/signup', user)
+        $http.post(__BASEURL__ + '/api/signup', user)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       login(user, cb) {
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/api/signin',
+          url: __BASEURL__ + '/api/signin',
           headers: {
             'Authorization': `Basic ${btoa(user.email + ':' + user.password)}`
           }
@@ -32,8 +32,19 @@ module.exports = (app) => {
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
-      getUsername(cb) {
-        $http.get('http://localhost:3000/api/currentuser')
+      getUser(cb) {
+        cb = cb || function() {};
+        // $http.get('http://localhost:3000/api/currentuser')
+        $http({
+          method: 'GET',
+          url: __BASEURL__ + '/api/currentuser',
+          headers: {
+            token: auth.getToken()
+          },
+          user: {
+            _id: auth.getUserId()
+          }
+        })
           .then(handleSuccess(cb), handleFailure(cb));
       }
     }
