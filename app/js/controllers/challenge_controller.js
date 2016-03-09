@@ -5,8 +5,12 @@
 module.exports = function(app) {
   app.controller('ChallengeController', ['$scope', '$http', 'Resource',
     '$stateParams', 'auth', ($scope, $http, Resource, $stateParams, auth) => {
-      $scope.favoriteService = new Resource('/favorites');
       $scope.challengeService = new Resource('/challenges');
+      $scope.favoriteService = new Resource('/favorites');
+      $scope.hintService = new Resource('/hints');
+      $scope.tagService = new Resource('/tags');
+      $scope.solutionService = new Resource('/solutions');
+
       $scope.currId = auth.getUserId();
       $scope.hints = [];
 
@@ -18,7 +22,7 @@ module.exports = function(app) {
         });
       }
 
-      // check which button to show (either add/remove favorite)
+      // check which button to show (either add/remove favorite); run on load
       $scope.checkFavoritedOrNot = (function() {
         $scope.showAdd = true;
         $scope.favoriteService.getAll((err, res) => {
@@ -57,6 +61,37 @@ module.exports = function(app) {
       $scope.getNewHint = function() {
         // $scope.hints.push(challenge.hints[i]);
       };
+
+      $scope.getNewSolution = function() {
+        // $scope.hints.push(challenge.hints[i]);
+      };
+
+      $scope.getAllSolutions = function() {
+        // $scope.hints.push(challenge.hints[i]);
+      };
+
+      $scope.getAllHints = function() {
+        // $scope.hints.push(challenge.hints[i]);
+      };
+
+      $scope.getAllTags = function() {
+        // $scope.hints.push(challenge.hints[i]);
+      };
+
+
+
+
+
+      $scope.addSolution = function() {
+
+      };
+      $scope.addHint = function() {
+
+      };
+      $scope.addTag = function() {
+
+      };
+
 
   }]);
 };
