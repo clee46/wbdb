@@ -5,10 +5,17 @@
 module.exports = function(app) {
   app.controller('ChallengeController', ['$scope', '$http', 'Resource',
     '$stateParams', 'auth', ($scope, $http, Resource, $stateParams, auth) => {
-      $scope.favoriteService = new Resource('/favorites');
-      $scope.challengeService = new Resource('/challenges');
-      $scope.currId = auth.getUserId();
+      $scope.solutions = [];
       $scope.hints = [];
+      $scope.tags = [];
+
+      $scope.challengeService = new Resource('/challenges');
+      $scope.favoriteService = new Resource('/favorites');
+      $scope.hintService = new Resource('/hints');
+      $scope.tagService = new Resource('/tags');
+      $scope.solutionService = new Resource('/solutions');
+
+      $scope.currId = auth.getUserId();
 
       $scope.challenge = $stateParams.challengeData;
       if (!$scope.challenge) {
@@ -18,7 +25,7 @@ module.exports = function(app) {
         });
       }
 
-      // check which button to show (either add/remove favorite)
+      // check which button to show (either add/remove favorite); run on load
       $scope.checkFavoritedOrNot = (function() {
         $scope.showAdd = true;
         $scope.favoriteService.getAll((err, res) => {
@@ -57,6 +64,53 @@ module.exports = function(app) {
       $scope.getNewHint = function() {
         // $scope.hints.push(challenge.hints[i]);
       };
+
+      $scope.getNewSolution = function() {
+        // $scope.hints.push(challenge.hints[i]);
+      };
+
+      $scope.getAllSolutions = function() {
+        // $scope.hints.push(challenge.hints[i]);
+        $scope.solutionService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            console.log(res);
+            if (err) return console.log(err);
+            $scope.solutions = res;
+          });
+      };
+
+      $scope.getAllHints = function() {
+        // $scope.hints.push(challenge.hints[i]);
+        $scope.hintService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            if (err) return console.log(err);
+            $scope.hints = res;
+          });
+      };
+
+      $scope.getAllTags = function() {
+        // $scope.hints.push(challenge.hints[i]);
+        $scope.tagService.getAllWithId($scope.challenge._id,
+          (err, res) => {
+            if (err) return console.log(err);
+            $scope.tags = res;
+          });
+      };
+
+
+
+
+
+      $scope.addSolution = function() {
+
+      };
+      $scope.addHint = function() {
+
+      };
+      $scope.addTag = function() {
+
+      };
+
 
   }]);
 };

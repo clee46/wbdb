@@ -20,13 +20,25 @@
         <!-- </pre> -->
         <p>{{challenge.tags}}</p>
 
-        <button type="button" name="button" class="viewChal" onclick="">Show Hint</button>
-        <button type="button" name="button" class="viewChal" onclick="">Show One Solution</button>
-        <button type="button" name="button" class="viewChal" onclick="">Show All Solutions</button>
+        <button type="button" name="button" class="viewChal" data-ng-click="getNewHint()">Show Hint</button>
+        <button type="button" name="button" class="viewChal" data-ng-click="getNewSolution()">Show One Solution</button>
+        <button type="button" name="button" class="viewChal" data-ng-click="getAllSolutions()">Show All Solutions</button>
         <button data-ng-if="showAdd" data-ng-click="addFavorite()" type="button" name="button" class="viewChal">Add to Favorites</button>
         <button  data-ng-if="!showAdd" data-ng-click="removeFavorite()" type="button" name="button" class="viewChal">Remove From Favorites</button>
+    </div>
+
+    <div class="row">
+      <div class="twelve columns">
+        <h2>Solutions:</h2>
+        <section class="searchChal"
+        data-ng-repeat="solution in solutions">
+        <!--add toggle show hide-->
+        <p>{{solution.solution}}</p>
+        <p>{{solution.userId}}</p>
 
 
+      </section>
+    </div>
 
       </section>
     </div>

@@ -22,6 +22,10 @@ module.exports = (app) => {
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
+      getAllWithId(data, cb) {
+        this.getOne(data, cb);
+      }
+
       getAll(cb) {
         $http.get(__BASEURL__ + `/api${this.resourceName}`)
           .then(handleSuccess(cb), handleFailure(cb));
@@ -43,6 +47,7 @@ module.exports = (app) => {
           data._id, data)
             .then(handleSuccess(cb), handleFailure(cb));
       }
+
     }
 
     return Resource;

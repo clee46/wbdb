@@ -5,14 +5,14 @@ module.exports = (app, API) => {
         const token = auth.getToken();
 
         if (config.url.includes(API) && token) {
-          config.headers.authorization = "Bearer " + token;
+          config.headers.Authorization = 'Bearer ' + token;
         }
 
         return config;
       },
 
       response(res) {
-        if (res.data.token) {
+        if (res.data && res.data.token) {
           auth.saveToken(res.data.token);
         }
 

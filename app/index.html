@@ -44,10 +44,11 @@
             <h1 style="display:inline-block;"><a data-ui-sref="home()"><span>WB</span><span class="icon-data"></span>db</a></h1>
           </div>
           <div class="six columns">
-              <button data-ng-if="!loggedIn" type="button" name="button" class="login" data-ui-sref="auth()">Login</button>
+              <button data-ng-if="!loggedIn && !loginPage " type="button" name="button" class="login" data-ui-sref="auth()">Login</button>
               <button data-ng-if="loggedIn" data-ng-click="logout()" type="button" name="button" class="login" data-ui-sref="home()">Logout</button>
-              <button data-ng-if="loggedIn && !isAdmin" type="button" name="button" class="login" data-ui-sref="user()">My Dashboard</button>
-              <button data-ng-if="loggedIn && isAdmin" type="button" name="button" class="login" data-ui-sref="admin()">Admin Dashboard</button>
+              <button data-ng-if="loggedIn && !isAdmin && location.url() !== '/user'" type="button" name="button" class="login" data-ui-sref="user()">My Dashboard</button>
+              <button data-ng-if="loggedIn && isAdmin && location.url() !== '/admin'" type="button" name="button" class="login" data-ui-sref="admin()">Admin Dashboard</button>
+              <button data-ng-if="loggedIn && location.url() !== '/'" type="button" name="button" class="login" data-ui-sref="home()">Search DB</button>
               <!-- <a href="challenge.html"><input class="button-primary" value="Learn More" type="submit"></a> -->
           </div>
         </div>
