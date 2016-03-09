@@ -3,6 +3,7 @@ module.exports = function(app) {
     '$location', ($rootScope, $scope, userService, $location) => {
       $scope.signin = true;
       $scope.form = {};
+      $rootScope.loginPage = true;
       $scope.login = (user) => {
         $scope.responseLogin = null;
         userService.login(user, (err, res) => {
