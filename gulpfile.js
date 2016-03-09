@@ -53,7 +53,12 @@ gulp.task('webpack:dev', () => {
             loader: 'babel-loader'
           }
         ]
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          __BASEURL__: JSON.stringify('http://localhost:3000')
+        })
+      ]
     }))
     .pipe(gulp.dest('build/'));
 });
@@ -74,7 +79,9 @@ gulp.task('webpack:prod', () => {
         ]
       },
       plugins: [
-        new webpack.optimize.DedupePlugin()
+        new webpack.DefinePlugin({
+          __BASEURL__: JSON.stringify('https://vast-refuge-66852.herokuapp.com')
+        })
       ],
       devtool: 'source-map'
     }))

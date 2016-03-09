@@ -17,14 +17,14 @@ module.exports = (app) => {
 
       createUser(user, cb) {
         console.log(user);
-        $http.post('http://localhost:3000/api/signup', user)
+        $http.post(__BASEURL__ + '/api/signup', user)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       login(user, cb) {
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/api/signin',
+          url: __BASEURL__ + '/api/signin',
           headers: {
             'Authorization': `Basic ${btoa(user.email + ':' + user.password)}`
           }
@@ -33,11 +33,11 @@ module.exports = (app) => {
       }
 
       getUser(cb) {
-        cb = cb || function(){};
+        cb = cb || function() {};
         // $http.get('http://localhost:3000/api/currentuser')
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/api/currentuser',
+          url: __BASEURL__ + '/api/currentuser',
           headers: {
             token: auth.getToken()
           },

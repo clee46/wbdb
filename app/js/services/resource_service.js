@@ -18,28 +18,28 @@ module.exports = (app) => {
       }
 
       getOne(id, cb) {
-        $http.get(`http://localhost:3000/api${this.resourceName}/${id}`)
+        $http.get(__BASEURL__ + `/api${this.resourceName}/${id}`)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       getAll(cb) {
-        $http.get(`http://localhost:3000/api${this.resourceName}`)
+        $http.get(__BASEURL__ + `/api${this.resourceName}`)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       create(data, cb) {
-        $http.post(`http://localhost:3000/api${this.resourceName}`, data)
+        $http.post(__BASEURL__ + `/api${this.resourceName}`, data)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       update(data, cb) {
-        $http.put(`http://localhost:3000/api${this.resourceName}/${data._id}`,
+        $http.put(__BASEURL__ + `/api${this.resourceName}/${data._id}`,
           data)
             .then(handleSuccess(cb), handleFailure(cb));
       }
 
       delete(data, cb) {
-        $http.delete('http://localhost:3000/api' + this.resourceName + '/' +
+        $http.delete(__BASEURL__ + '/api' + this.resourceName + '/' +
           data._id, data)
             .then(handleSuccess(cb), handleFailure(cb));
       }
