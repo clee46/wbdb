@@ -30,7 +30,7 @@
           data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
         <p>{{challenge.question}}</p>
         <p>{{challenge.author}}</p>
-        <p>{{challenge.tags}}</p>
+        <p>Tags: {{challenge.tags.join()}}</p>
       </section>
     </div>
   </div>

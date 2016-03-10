@@ -25,7 +25,7 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'views/challenge_view.html',
         controller: 'ChallengeController',
         params: { challengeData: null, id: { value: null, squash: false } },
-        authenticate: true
+        authenticate: false
       })
       .state('auth', {
         url: '/auth',
