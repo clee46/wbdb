@@ -48,11 +48,7 @@
     <div class="twelve columns">
       <section data-ng-if="showSolutions" class="searchChal" data-ng-repeat="solution in solutions">
         <h2>Solutions:</h2>
-        <pre>
-          <code class="language-javascript">
-            {{solution.solution}}
-          </code>
-        </pre>
+          <div hljs source='solution.solution' language='javascript'></div>
         <p>Submitted by: {{solution.author}} on {{solution.createdOn}}</p>
       </section>
     </div>
