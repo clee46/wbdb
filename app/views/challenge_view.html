@@ -1,46 +1,61 @@
 <div>
+
   <div class="row">
     <div class="twelve columns">
       <section class="searchChal">
-        <!--add toggle show hide-->
-        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
-        <p>
-          {{challenge.question}}
-        </p>
-        <p>
-          {{challenge.author}}
-        </p>
-        <!-- <pre> -->
-          <!-- <code> -->
-          <div highlight highlight-language="javascript">
-            {{challenge.solutions[0]}}
-          </div>
-          <!-- </code> -->
-        <!-- </pre> -->
+        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+        <p>{{challenge.question}}</p>
+        <p>{{challenge.author}}</p>
         <p>{{challenge.tags}}</p>
 
-        <button type="button" name="button" class="viewChal" data-ng-click="getNewHint()">Show Hint</button>
-        <button type="button" name="button" class="viewChal" data-ng-click="getNewSolution()">Show One Solution</button>
-        <button type="button" name="button" class="viewChal" data-ng-click="getAllSolutions()">Show All Solutions</button>
-        <button data-ng-if="showAdd" data-ng-click="addFavorite()" type="button" name="button" class="viewChal">Add to Favorites</button>
-        <button  data-ng-if="!showAdd" data-ng-click="removeFavorite()" type="button" name="button" class="viewChal">Remove From Favorites</button>
-    </div>
+        <!-- <button type="button" name="button" class="viewChal" data-ng-click="getNewHint()">Show Hint</button> -->
+        <!-- <button type="button" name="button" class="viewChal" data-ng-click="getNewSolution()">Show One Solution</button> -->
+        <button type="button" name="button" class="viewChal" data-ng-if="!isAdmin && !showSubmitForm" data-ng-click="showForm()">Submit a Solution</button>
 
-    <div class="row">
-      <div class="twelve columns">
-        <h2>Solutions:</h2>
-        <section class="searchChal"
-        data-ng-repeat="solution in solutions">
-        <!--add toggle show hide-->
-        <p>{{solution.solution}}</p>
-        <p>{{solution.userId}}</p>
+        <button type="button" name="button" class="viewChal" data-ng-if="!showSolutions" data-ng-click="getAllSolutions()">Show Solutions</button>
+        <button type="button" name="button" class="viewChal" data-ng-if="showSolutions" data-ng-click="hideButton()">Hide Solutions</button>
 
+        <button type="button" name="button" class="viewChal" data-ng-if="showAdd && !isAdmin && loggedIn" data-ng-click="addFavorite()">Add to Favorites</button>
+        <button type="button" name="button" class="viewChal" data-ng-if="!showAdd && !isAdmin && loggedIn" data-ng-click="removeFavorite()" >Remove From Favorites</button>
 
-      </section>
-    </div>
+        <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && !challenge.published" data-ng-click="publish()">Publish</button>
+        <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && challenge.published" data-ng-click="unpublish()">Unpublish</button>
+
 
       </section>
     </div>
   </div>
+
+  <div class="row">
+    <div class="twelve columns" data-ng-if="showSubmitForm">
+      <h1>Submit a New Solution</h1>
+      <form data-ng-submit="submitSolution(newSolution)">
+        <label for="solutionInput">Solution</label>
+        <textarea
+          data-ng-model="newSolution.solution"
+          name="solutionInput"
+          class="u-full-width"
+          placeholder="Enter Challenge Solution …"
+          ></textarea>
+        <input class="button-primary" type="submit" value="Submit">
+      </form>
+      <button data-ng-click="hideForm()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="twelve columns">
+      <section data-ng-if="showSolutions" class="searchChal" data-ng-repeat="solution in solutions">
+        <h2>Solutions:</h2>
+        <pre>
+          <code class="language-javascript">
+            {{solution.solution}}
+          </code>
+        </pre>
+        <p>Submitted by: {{solution.author}} on {{solution.createdOn}}</p>
+      </section>
+    </div>
+  </div>
+
 </div>
