@@ -17,7 +17,6 @@ module.exports = function(app) {
     function($rootScope, $scope, $http) {
       $scope.search = '';
       $scope.published = [];
-      $scope.tags = [];
       $rootScope.loginPage = false;
       $scope.getPublished = function() {
         $http.get(__BASEURL__ + '/api/published')

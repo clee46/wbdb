@@ -1,9 +1,40 @@
-module.exports = exports = function(app) {
-  app.factory('adminService', ['$http', ($http) => {
-    // NEEDS TO DO THE FOLLOWING:
-    // #1 $http GET request to server to retrieve unpublished challenges from database
-    // #2 $http PUT request to publish a submitted challenge
-    // #3 $http DELETE request to reject a submitted challenge
-    // OTHERS??
+const handleSuccess = function(cb) {
+  return (res) => {
+    cb(null, res.data);
+  };
+};
+
+const handleFailure = function(cb) {
+  return (res) => {
+    cb(res);
+  };
+};
+
+module.exports = function(app) {
+  app.factory('admin', ['$http', ($http) => {
+    class Admin {
+      constructor() {}
+
+      getChallenges(cb) {
+        $http.get(__BASEURL__ + `/api/admin/challenges`)
+          .then(handleSuccess(cb), handleFailure(cb));
+      }
+
+      getSolutions(cb) {
+        $http.get(__BASEURL__ + `/api/admin/solutions`)
+          .then(handleSuccess(cb), handleFailure(cb));
+      }
+
+      getSolutionChallenge(id, cb) {
+        console.log('called getSolutionChallenge');
+        console.log(id);
+        $http.get(__BASEURL__ + `/api/solutions/${id}`)
+          .then(handleSuccess(cb), handleFailure(cb));
+      }
+
+
+    }
+
+    return new Admin();
   }]);
 };
