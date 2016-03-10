@@ -9,7 +9,7 @@ module.exports = function(app) {
         console.log('Getting pending challenges');
         $scope.adminService.getAll((err, res) => {
           // if (err) return console.log(err);
-          if (err.statusText === 'Unauthorized') {
+          if (err && err.statusText === 'Unauthorized') {
             //  $location.path('/auth');
             $timeout(() => {
                 $location.path('/auth');

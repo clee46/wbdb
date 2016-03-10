@@ -14,7 +14,6 @@
           name="tags"
           data-ng-options="tag.tag for tag in tags"
           class="u-full-width">
-<!--           <option value="{{tag}}" data-ng-repeat="tag in tags">{{tag}}</option> -->
         </select>
       </div>
     </div>
@@ -40,7 +39,6 @@
     <div class="six columns" data-ng-init="getAllFavorites()">
       <h2>Favorites</h2>
       <section class="searchChal" data-ng-repeat="favorite in favorites">
-        <!--add toggle show hide-->
         <h2>{{favorite.title}}</h2><span>{{favorite.difficulty}}</span>
 
         <button type="button" name="button" class="viewChal"
@@ -65,7 +63,8 @@
         <p>{{challenge.question}}</p>
         <p>Submitted by: {{challenge.author}}</p>
         <p>Created on: {{challenge.createdOn}}</p>
-        <p>{{challenge.tags}}</p>
+        <p data-ng-if="challenge.published" class="published">PUBLISHED</p>
+        <p data-ng-if="!challenge.published" class="pending">PENDING</p>
       </section>
     </div>
   </div>
