@@ -49,8 +49,7 @@ challengeRouter.get('/published', (req, res) => {
 
 challengeRouter.get('/challenges/:id', (req, res) => {
   console.log('Inside Challenges/id route');
-  console.log(req.body);
-  Challenge.find({}).exec()
+  Challenge.findOne({ _id: req.params.id }).exec()
     .then((challenge) => {
       const challengeId = challenge._id;
       const solutionProm = Solution.find({ challengeId }).exec();
