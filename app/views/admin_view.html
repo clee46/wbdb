@@ -4,12 +4,11 @@
     <div class="twelve columns" data-ng-init="getQueue()">
       <h2>Pending Challenges</h2>
       <section class="searchChal" data-ng-repeat="challenge in queue">
-        <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
         <button type="button" name="button" class="viewChal"
           data-ui-sref="challenge({ challengeData: challenge, id: challenge._id })">
-          View Full Favorite
+          View Full Challenge
         </button>
         <p>{{challenge.question}}</p>
         <p>{{challenge.author}}</p>

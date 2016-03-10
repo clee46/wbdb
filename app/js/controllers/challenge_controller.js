@@ -1,13 +1,10 @@
-
-// we need to add code to handle if a user visits the view
-// directly through an external link
-
 module.exports = function(app) {
   app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
     '$stateParams', 'auth', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
+      $scope.showSolutions = false;
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -40,7 +37,6 @@ module.exports = function(app) {
         });
       })();
 
-
       $scope.publish = function() {
         $scope.challengeService.update({
           _id: $scope.challenge._id,
@@ -48,10 +44,8 @@ module.exports = function(app) {
         }, (err) => {
           if (err) return console.log(err);
           $location.path('/admin');
-        })
+        });
       };
-
-
 
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;
@@ -73,25 +67,25 @@ module.exports = function(app) {
         });
       };
 
-      $scope.getNewHint = function() {
-        // $scope.hints.push(challenge.hints[i]);
-      };
-
-      $scope.getNewSolution = function() {
-        // $scope.hints.push(challenge.hints[i]);
-      };
-
       $scope.getAllSolutions = function() {
         // $scope.hints.push(challenge.hints[i]);
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
             $scope.solutions = res;
+            if ($scope.solutions.length === 0) {
+              console.log('Sorry, no solutions!');
+            } else {
+              $scope.showSolutions = true;
+            }
           });
       };
 
+      $scope.hideButton = function() {
+        $scope.showSolutions = false;
+      };
+
       $scope.getAllHints = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.hintService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
@@ -100,7 +94,6 @@ module.exports = function(app) {
       };
 
       $scope.getAllTags = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.tagService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
@@ -108,20 +101,8 @@ module.exports = function(app) {
           });
       };
 
-
-
-
-
       $scope.addSolution = function() {
 
       };
-      $scope.addHint = function() {
-
-      };
-      $scope.addTag = function() {
-
-      };
-
-
   }]);
 };
