@@ -58,7 +58,7 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
       console.log(auth.token);
       if (toState.authenticate && !auth.token) {
         // $location.path('/auth');
-        $timeout(function () {
+        $timeout(function() {
             $location.path('/auth');
         });
         console.log('authenticate');
