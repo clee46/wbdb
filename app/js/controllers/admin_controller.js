@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.controller('AdminController', ['$scope', '$http', 'Resource', '$location', '$timeout',
-    ($scope, $http, Resource, $location, $timeout) => {
+  app.controller('AdminController', ['$scope', '$http', 'Resource', '$location',
+    '$timeout', ($scope, $http, Resource, $location, $timeout) => {
       console.log('AdminController loaded');
       $scope.adminService = new Resource('/admin');
       $scope.queue = [];
@@ -11,7 +11,7 @@ module.exports = function(app) {
           // if (err) return console.log(err);
           if (err.statusText === 'Unauthorized') {
             //  $location.path('/auth');
-            $timeout(function () {
+            $timeout(() => {
                 $location.path('/auth');
             });
             return console.log('err /admin');
@@ -19,6 +19,5 @@ module.exports = function(app) {
           $scope.queue = res;
         });
       };
-
   }]);
 };

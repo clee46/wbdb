@@ -9,11 +9,13 @@ const webpackStream = require('webpack-stream');
 const uglify = require('gulp-uglify');
 const through = require('through2');
 const ngAnnotate = require('gulp-ng-annotate');
+const Server = require('karma').Server;
 
 const scripts = ['server.js', 'gulpfile.js', 'lib/*.js', 'models/*.js',
   'routes/*.js', 'test/**/*.js', 'app/**/*.js', '!test/client/test_bundle.js',
   '!app/js/vendor/*'];
-const clientScripts = ['app/**/*.js'];
+const clientScripts = ['app/**/*.js', 'test-client/*.js',
+  '!test-client/test_bundle.js'];
 const staticFiles = ['app/**/*.html', 'app/images/*', 'app/fonts/*'];
 const sassFiles = ['app/scss/*.scss'];
 
@@ -25,6 +27,13 @@ gulp.task('static:dev', () => {
 gulp.task('test:server', () => {
   gulp.src('./test-server/*.js')
     .pipe(mocha());
+});
+
+gulp.task('test:client', ['webpack:test'], (done) => {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('sass:dev', () => {
@@ -100,7 +109,7 @@ gulp.task('webpack:prod', () => {
 });
 
 gulp.task('webpack:test', () => {
-  gulp.src('test/test_entry.js')
+  return gulp.src('test-client/test_entry.js')
     .pipe(webpackStream({
       module: {
         loaders: [
@@ -117,9 +126,14 @@ gulp.task('webpack:test', () => {
       },
       output: {
         filename: 'test_bundle.js'
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          __BASEURL__: JSON.stringify('http://localhost:3000')
+        })
+      ]
     }))
-    .pipe(gulp.dest('test/'));
+    .pipe(gulp.dest('test-client/'));
 });
 
 gulp.task('lint', () => {
@@ -128,9 +142,11 @@ gulp.task('lint', () => {
     .pipe(eslint.format());
 });
 
+gulp.task('test', ['test:server', 'test:client']);
+
 gulp.task('watch', () => {
   gulp.watch(scripts, ['lint']);
-  gulp.watch(clientScripts, ['webpack:dev']);
+  gulp.watch(clientScripts, ['webpack:dev', 'test:client']);
   gulp.watch(staticFiles, ['static:dev']);
   gulp.watch(sassFiles, ['sass:dev']);
 });

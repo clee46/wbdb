@@ -1,4 +1,4 @@
-module.exports = (app) => {
+module.exports = function(app) {
   app.factory('auth', ['$rootScope', '$window', ($rootScope, $window) => {
     class Auth {
       constructor() {
@@ -31,7 +31,7 @@ module.exports = (app) => {
 
       getUserId() {
         if (this.token) return this.parseJWT(this.token).id;
-        else return null;
+        return null;
       }
     }
 

@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.controller('NavController', ['$scope', 'auth', 'user', '$rootScope', '$location',
-    function($scope, auth, user, $rootScope, $location) {
+  app.controller('NavController', ['$scope', 'auth', 'user', '$rootScope',
+  '$location', ($scope, auth, user, $rootScope, $location) => {
       $scope.auth = auth;
       $rootScope.loginPage = false;
       $scope.location = $location;

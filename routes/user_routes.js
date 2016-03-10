@@ -3,7 +3,6 @@ const jwtAuth = require(__dirname + '/../lib/jwt_auth');
 const jsonParser = require('body-parser').json();
 const User = require(__dirname + '/../models/user');
 const Challenge = require(__dirname + '/../models/challenge');
-const Favorite = require(__dirname + '/../models/favorite');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const userRouter = module.exports = exports = express.Router();
 
