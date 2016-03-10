@@ -55,6 +55,9 @@ authRouter.get('/signin', basicHTTP, (req, res) => {
       return res.status(401).json({ msg: 'incorrect password' });
     }
 
-    res.json({ msg: 'Success in signin', token: user.generateToken(), isAdmin: user.authentication.isAdmin });
+    res.json({
+      msg: 'Success in signin',
+      token: user.generateToken(),
+      isAdmin: user.authentication.isAdmin });
   });
 });

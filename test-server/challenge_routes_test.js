@@ -21,16 +21,27 @@ describe('challege routes', () => {
     newUser.authentication.email = 'wbdb@codefellows.com';
     newUser.hashPassword('password');
     newUser.save((err, data) => {
-      if (err) console.log(err);
+      if (err) return console.log(err);
       this.testUser = data;
       this.userToken = data.generateToken();
       done();
     });
   });
+
+  after((done) => {
+    this.server.close(done);
+  });
+
+  after((done) => {
+   mongoose.connection.db.dropDatabase(() => {
+     done();
+   });
+  });
+
   it('should be able to create a new post', (done) => {
     chai.request(baseUri)
       .post('/api/challenges')
-      .set('authorization','Bearer ' + this.userToken)
+      .set('authorization', 'Bearer ' + this.userToken)
       .send({ 'title': 'test challenge', 'question': 'test question' })
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -47,7 +58,7 @@ describe('challege routes', () => {
         question: 'test question',
         userId: this.testUser._id
       }, (err, data) => {
-        if (err) console.log(err);
+        if (err) return console.log(err);
         this.testChallenge = data;
         done();
       });
@@ -66,8 +77,11 @@ describe('challege routes', () => {
     it('should be able to post a challenge', (done) => {
       chai.request(baseUri)
         .post('/api/challenges')
-        .set('authorization','Bearer ' + this.userToken)
-        .send({ title: 'post challenge', question: 'post question', userId: this.testUser._id })
+        .set('authorization', 'Bearer ' + this.userToken)
+        .send({
+          title: 'post challenge',
+          question: 'post question',
+          userId: this.testUser._id })
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(res.body.title).to.eql('post challenge');
@@ -79,7 +93,7 @@ describe('challege routes', () => {
     it('should be able to update a challenge', (done) => {
       chai.request(baseUri)
         .put(`/api/challenges/${this.testChallenge._id}`)
-        .set('authorization','Bearer ' + this.userToken)
+        .set('authorization', 'Bearer ' + this.userToken)
         .send({ title: 'Updated Title' })
         .end((err, res) => {
           expect(err).to.eql(null);
@@ -91,7 +105,7 @@ describe('challege routes', () => {
     it('should be able to delete a post', (done) => {
       chai.request(baseUri)
         .delete(`/api/challenges/${this.testChallenge._id}`)
-        .set('authorization','Bearer ' + this.userToken)
+        .set('authorization', 'Bearer ' + this.userToken)
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
@@ -100,24 +114,4 @@ describe('challege routes', () => {
         });
     });
   });
-
-  after((done) => {
-    this.server.close(done);
-  });
-
-  after((done) => {
-    User.remove({}, (err) => {
-      if (err) console.log(err);
-      Challenge.remove({}, (err) => {
-        if (err) console.log(err);
-        done();
-      });
-    });
-  });
-  after((done) => {
-   mongoose.connection.db.dropDatabase(() => {
-     done();
-   });
-  });
-
 });
