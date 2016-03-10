@@ -48,20 +48,22 @@ challengeRouter.get('/published', (req, res) => {
 });
 
 challengeRouter.get('/challenges/:id', (req, res) => {
+  console.log('Inside Challenges/id route');
+  console.log(req.body);
   Challenge.find({}).exec()
     .then((challenge) => {
       const challengeId = challenge._id;
       const solutionProm = Solution.find({ challengeId }).exec();
       const hintProm = Hint.find({ challengeId }).exec();
-      const tagProm = Tag.find({ challengeId }).exec();
+      // const tagProm = Tag.find({ challengeId }).exec();
 
-      return Promise.all([solutionProm, hintProm, tagProm])
+      return Promise.all([solutionProm, hintProm])
         .then((resolutions) => {
           const solutions = resolutions[0];
           const hints = resolutions[1];
-          const tags = resolutions[2];
+          // const tags = resolutions[2];
           res.status(200).json(Object.assign(challenge.toObject(),
-            { solutions, hints, tags }));
+            { solutions, hints }));
         });
     })
     .catch((err) => handleDBError(err, res));

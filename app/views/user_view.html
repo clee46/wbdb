@@ -52,7 +52,7 @@
         <p>{{favorite.question}}</p>
         <p>Submitted by: {{favorite.author}}</p>
         <p style="margin-bottom:20px;">Created on: {{favorite.createdOn}}</p>
-        <p>{{favorite.tags}}</p>
+        <p>Tags: {{favorite.tags.join()}}</p>
       </section>
     </div>
 
@@ -67,6 +67,7 @@
         <p>{{challenge.question}}</p>
         <p>Submitted by: {{challenge.author}}</p>
         <p>Created on: {{challenge.createdOn}}</p>
+        <p>Tags: {{challenge.tags.join()}}</p>
         <p data-ng-if="challenge.published" class="published">PUBLISHED</p>
         <p data-ng-if="!challenge.published" class="pending">PENDING</p>
       </section>

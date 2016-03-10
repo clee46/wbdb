@@ -26,16 +26,13 @@ module.exports = function(app) {
         };
         $scope.newChallenge.createdOn =
           currentDate.toLocaleTimeString('en-us', options);
-        console.log($scope.newChallenge);
+
         var copiedChallenge = angular.copy($scope.newChallenge);
+        if (!copiedChallenge.tags) {
+          copiedChallenge.tags = [{ tag: 'None' }];
+        }
         copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
         copiedChallenge.userId = auth.getUserId();
-        console.log(copiedChallenge);
-        // copiedChallenge.solutions = [copiedChallenge.solution];
-        // $scope.challengeService.create(copiedChallenge, (err, res) => {
-        //   if (err) return console.log(err);
-        //   $scope.newChallenge = null;
-        //   $scope.myChallenges.push(res);
 
         user.getUser((err, res) => {
           if (err) return console.log(err);
@@ -44,13 +41,13 @@ module.exports = function(app) {
           $scope.challengeService.create(copiedChallenge, (err, res) => {
             if (err) return console.log(err);
 
-            // save solution only if user entered a solution
             if (copiedChallenge.solution && copiedChallenge.solution.length !== 0) {
               $scope.solutionService.create({
                 solution: $scope.newChallenge.solution,
                 challengeId: res._id,
                 userId: auth.getUserId(),
-                author: copiedChallenge.author
+                author: copiedChallenge.author,
+                published: true
               }, (err) => {
                   if (err) return console.log(err);
               });
