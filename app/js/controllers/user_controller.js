@@ -3,7 +3,7 @@ const { angular } = window;
 module.exports = function(app) {
   app.controller('UserController', ['$scope', '$http', 'Resource',
     '$stateParams', 'user', 'auth', '$location', '$timeout',
-    ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
+   ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
 
       $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' },
         { tag: 'Trees' }, { tag: 'Queues' },
@@ -18,12 +18,6 @@ module.exports = function(app) {
       $scope.favoriteService = new Resource('/favorites');
       $scope.solutionService = new Resource('/solutions');
 
-      $scope.newChallenge = {};
-      $scope.myChallenges = [];
-      $scope.favorites = [];
-      $scope.tags = [{tag: "Arrays"}, {tag: "Strings"}, {tag: "Trees"}, {tag: "Queues"},
-        {tag: "Hash Tables"}, {tag: "Recursion"}, {tag: "Stacks"}, {tag: "Binary Trees"}, {tag: "Linked Lists"}];
-
       $scope.submitChallenge = function() {
         var currentDate = new Date();
         var options = {
@@ -36,13 +30,11 @@ module.exports = function(app) {
         var copiedChallenge = angular.copy($scope.newChallenge);
         copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
         copiedChallenge.userId = auth.getUserId();
-<<<<<<< HEAD
-        copiedChallenge.solutions = [copiedChallenge.solution];
-        $scope.challengeService.create(copiedChallenge, (err, res) => {
-          if (err) return console.log(err);
-          $scope.newChallenge = null;
-          $scope.myChallenges.push(res);
-=======
+        // copiedChallenge.solutions = [copiedChallenge.solution];
+        // $scope.challengeService.create(copiedChallenge, (err, res) => {
+        //   if (err) return console.log(err);
+        //   $scope.newChallenge = null;
+        //   $scope.myChallenges.push(res);
 
         user.getUser((err, res) => {
           if (err) return console.log(err);
@@ -65,32 +57,26 @@ module.exports = function(app) {
             $scope.newChallenge = null;
             $scope.myChallenges.push(res);
           });
->>>>>>> some housekeeping, challenges now show author username and date
         });
       };
 
-<<<<<<< HEAD
-      };
-=======
->>>>>>> some housekeeping, challenges now show author username and date
-      $scope.getAllFavorites = function() {
-        $scope.favoriteService.getAll((err, res) => {
-          if (err) {
-            if (err.statusText === 'Unauthorized') {
-            //   $scope.$apply(function() {
-            //      $location.path('/auth');
-            //  });
-            $timeout(() => {
-                $location.path('/auth');
-            });
+      $scope.favoriteService.getAll((err, res) => {
+        if (err) {
+          if (err.statusText === 'Unauthorized') {
+          //   $scope.$apply(function() {
+          //      $location.path('/auth');
+          //  });
+          $timeout(() => {
+              $location.path('/auth');
+          });
 
 
-              return console.log('err /api/favorites');
-            }
+            return console.log('err /api/favorites');
           }
-          $scope.favorites = res;
-        });
-      };
+        }
+        $scope.favorites = res;
+      });
+
       $scope.getUserChallenges = function() {
         $http.get(__BASEURL__ + '/api/mychallenges')
           .then((res) => {
@@ -107,7 +93,7 @@ module.exports = function(app) {
 
               return console.log('err /api/mychallenges');
             }
-          });
+        });
       };
   }]);
 };
