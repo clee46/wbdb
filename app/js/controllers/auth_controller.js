@@ -29,6 +29,7 @@ module.exports = function(app) {
             return console.log(err.data.msg);
           }
           $rootScope.loggedIn = true;
+          $rootScope.isAdmin = false;
           $location.path('/user');
         });
       };

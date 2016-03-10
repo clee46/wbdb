@@ -7,10 +7,11 @@
         <input type="text" data-ng-model="newChallenge.title" placeholder="Title" required name="title">
       </div>
       <div class="six columns">
-        <label for="exampleRecipientInput">Reason for contacting</label>
+        <label for="tags">Select Challenge Tags</label>
         <select
           data-ng-model="newChallenge.tags"
           multiple
+          name="tags"
           data-ng-options="tag.tag for tag in tags"
           class="u-full-width">
 <!--           <option value="{{tag}}" data-ng-repeat="tag in tags">{{tag}}</option> -->

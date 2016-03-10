@@ -1,10 +1,12 @@
 module.exports = function(app) {
   app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
-    '$stateParams', 'auth', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth) => {
+    '$stateParams', 'auth', 'user', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth, user) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
+      $scope.newSolution = {};
       $scope.showSolutions = false;
+      $scope.showSubmitForm = false;
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -46,6 +48,11 @@ module.exports = function(app) {
           $location.path('/admin');
         });
       };
+
+
+
+
+
 
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;
@@ -101,8 +108,37 @@ module.exports = function(app) {
           });
       };
 
-      $scope.addSolution = function() {
-
+      $scope.showForm = function() {
+        $scope.showSubmitForm = true;
       };
+
+      $scope.hideForm = function() {
+        $scope.showSubmitForm = false;
+      };
+
+      $scope.submitSolution = function() {
+        var currentDate = new Date();
+        var options = {
+          weekday: 'long', year: 'numeric', month: 'short',
+          day: 'numeric', hour: '2-digit', minute: '2-digit'
+        };
+
+        user.getUser((err, res) => {
+          if (err) return console.log(err);
+          $scope.solutionService.create({
+            solution: $scope.newSolution.solution,
+            challengeId: $scope.challenge._id,
+            createdOn: currentDate.toLocaleTimeString('en-us', options),
+            userId: $scope.currId,
+            author: res.username
+          }, (err) => {
+              if (err) return console.log(err);
+              $scope.newSolution = null;
+              $scope.showSubmitForm = false;
+              // notify user that solution is pending approval from admin
+          });
+        });
+      };
+
   }]);
 };
