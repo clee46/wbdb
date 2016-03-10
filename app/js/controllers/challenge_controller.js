@@ -3,8 +3,8 @@
 // directly through an external link
 
 module.exports = function(app) {
-  app.controller('ChallengeController', ['$scope', '$http', 'Resource',
-    '$stateParams', 'auth', ($scope, $http, Resource, $stateParams, auth) => {
+  app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
+    '$stateParams', 'auth', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
@@ -39,6 +39,19 @@ module.exports = function(app) {
           }
         });
       })();
+
+
+      $scope.publish = function() {
+        $scope.challengeService.update({
+          _id: $scope.challenge._id,
+          published: true
+        }, (err) => {
+          if (err) return console.log(err);
+          $location.path('/admin');
+        })
+      };
+
+
 
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;

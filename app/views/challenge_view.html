@@ -4,27 +4,16 @@
       <section class="searchChal">
         <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
-
-        <p>
-          {{challenge.question}}
-        </p>
-        <p>
-          {{challenge.author}}
-        </p>
-        <!-- <pre> -->
-          <!-- <code> -->
-          <div highlight highlight-language="javascript">
-            {{challenge.solutions[0]}}
-          </div>
-          <!-- </code> -->
-        <!-- </pre> -->
+        <p>{{challenge.question}}</p>
+        <p>{{challenge.author}}</p>
         <p>{{challenge.tags}}</p>
 
         <button type="button" name="button" class="viewChal" data-ng-click="getNewHint()">Show Hint</button>
         <button type="button" name="button" class="viewChal" data-ng-click="getNewSolution()">Show One Solution</button>
         <button type="button" name="button" class="viewChal" data-ng-click="getAllSolutions()">Show All Solutions</button>
-        <button data-ng-if="showAdd" data-ng-click="addFavorite()" type="button" name="button" class="viewChal">Add to Favorites</button>
-        <button  data-ng-if="!showAdd" data-ng-click="removeFavorite()" type="button" name="button" class="viewChal">Remove From Favorites</button>
+        <button data-ng-if="showAdd && !isAdmin" data-ng-click="addFavorite()" type="button" name="button" class="viewChal">Add to Favorites</button>
+        <button  data-ng-if="!showAdd && !isAdmin" data-ng-click="removeFavorite()" type="button" name="button" class="viewChal">Remove From Favorites</button>
+        <button  data-ng-if="isAdmin" data-ng-click="publish()" type="button" name="button" class="viewChal">Publish</button>
     </div>
 
     <div class="row">
@@ -33,7 +22,11 @@
         <section class="searchChal"
         data-ng-repeat="solution in solutions">
         <!--add toggle show hide-->
-        <p>{{solution.solution}}</p>
+        <pre>
+          <code>
+          {{solution.solution}}
+        </code>
+      </pre>
         <p>{{solution.userId}}</p>
 
 
