@@ -40,6 +40,13 @@ challengeRouter.get('/challenges', (req, res) => {
     .catch((err) => handleDBError(err, res));
 });
 
+challengeRouter.get('/published', (req, res) => {
+  Challenge.find({ published: true }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
 challengeRouter.get('/challenges/:id', (req, res) => {
   Challenge.find({}).exec()
     .then((challenge) => {
@@ -97,6 +104,15 @@ challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
         });
     })
     .catch((err) => handleDBError(err, res));
+
+  // COMMENTED OUT MERGE CONFLICT
+  // console.log(req.body);
+  // var newChallenge = new Challenge(req.body);
+  // newChallenge.save((err, data) => {
+  //   if (err) return handleDBError(err, res);
+  //   res.status(200).json(data);
+  // });
+
 });
 
 // Add Middleware to check admin privileges

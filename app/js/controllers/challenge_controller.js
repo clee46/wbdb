@@ -1,13 +1,12 @@
-
-// we need to add code to handle if a user visits the view
-// directly through an external link
-
 module.exports = function(app) {
-  app.controller('ChallengeController', ['$scope', '$http', 'Resource',
-    '$stateParams', 'auth', ($scope, $http, Resource, $stateParams, auth) => {
+  app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
+    '$stateParams', 'auth', 'user', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth, user) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
+      $scope.newSolution = {};
+      $scope.showSolutions = false;
+      $scope.showSubmitForm = false;
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -40,6 +39,21 @@ module.exports = function(app) {
         });
       })();
 
+      $scope.publish = function() {
+        $scope.challengeService.update({
+          _id: $scope.challenge._id,
+          published: true
+        }, (err) => {
+          if (err) return console.log(err);
+          $location.path('/admin');
+        });
+      };
+
+
+
+
+
+
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;
 
@@ -60,25 +74,25 @@ module.exports = function(app) {
         });
       };
 
-      $scope.getNewHint = function() {
-        // $scope.hints.push(challenge.hints[i]);
-      };
-
-      $scope.getNewSolution = function() {
-        // $scope.hints.push(challenge.hints[i]);
-      };
-
       $scope.getAllSolutions = function() {
         // $scope.hints.push(challenge.hints[i]);
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
             $scope.solutions = res;
+            if ($scope.solutions.length === 0) {
+              console.log('Sorry, no solutions!');
+            } else {
+              $scope.showSolutions = true;
+            }
           });
       };
 
+      $scope.hideButton = function() {
+        $scope.showSolutions = false;
+      };
+
       $scope.getAllHints = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.hintService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
@@ -87,7 +101,6 @@ module.exports = function(app) {
       };
 
       $scope.getAllTags = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.tagService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
@@ -95,20 +108,37 @@ module.exports = function(app) {
           });
       };
 
-
-
-
-
-      $scope.addSolution = function() {
-
-      };
-      $scope.addHint = function() {
-
-      };
-      $scope.addTag = function() {
-
+      $scope.showForm = function() {
+        $scope.showSubmitForm = true;
       };
 
+      $scope.hideForm = function() {
+        $scope.showSubmitForm = false;
+      };
+
+      $scope.submitSolution = function() {
+        var currentDate = new Date();
+        var options = {
+          weekday: 'long', year: 'numeric', month: 'short',
+          day: 'numeric', hour: '2-digit', minute: '2-digit'
+        };
+
+        user.getUser((err, res) => {
+          if (err) return console.log(err);
+          $scope.solutionService.create({
+            solution: $scope.newSolution.solution,
+            challengeId: $scope.challenge._id,
+            createdOn: currentDate.toLocaleTimeString('en-us', options),
+            userId: $scope.currId,
+            author: res.username
+          }, (err) => {
+              if (err) return console.log(err);
+              $scope.newSolution = null;
+              $scope.showSubmitForm = false;
+              // notify user that solution is pending approval from admin
+          });
+        });
+      };
 
   }]);
 };

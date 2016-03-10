@@ -20,16 +20,16 @@
   </section>
 
   <div class="row">
-    <div class="twelve columns" data-ng-init="getAllChallenges()" data-ng-show="search.length !== 0">
+    <div class="twelve columns" data-ng-init="getPublished()" data-ng-show="search.length !== 0">
       <section class="searchChal"  onclick="this.style.height = '100%'"
-      data-ng-repeat="challenge in challenges | filter:search">
+      data-ng-repeat="challenge in published | filter:search">
         <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
         <button type="button" name="button" class="viewChal"
           data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
         <p>{{challenge.question}}</p>
-        <p>{{challenge.author}}</p>        
+        <p>{{challenge.author}}</p>
         <p>{{challenge.tags}}</p>
       </section>
     </div>

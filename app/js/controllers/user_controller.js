@@ -2,8 +2,8 @@ const { angular } = window;
 
 module.exports = function(app) {
   app.controller('UserController', ['$scope', '$http', 'Resource',
-    '$stateParams', 'auth', '$location', '$timeout',
-    ($scope, $http, Resource, $stateParams, auth, $location, $timeout) => {
+    '$stateParams', 'user', 'auth', '$location', '$timeout',
+   ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
 
       $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' },
         { tag: 'Trees' }, { tag: 'Queues' },
@@ -13,11 +13,12 @@ module.exports = function(app) {
       $scope.myChallenges = [];
       $scope.favorites = [];
       $scope.newChallenge = {};
+
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
       $scope.solutionService = new Resource('/solutions');
+
       $scope.submitChallenge = function() {
-        // Set the current date and time
         var currentDate = new Date();
         var options = {
           weekday: 'long', year: 'numeric', month: 'short',
@@ -27,36 +28,55 @@ module.exports = function(app) {
           currentDate.toLocaleTimeString('en-us', options);
 
         var copiedChallenge = angular.copy($scope.newChallenge);
-
-        // Send newPost to the DB
         copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
         copiedChallenge.userId = auth.getUserId();
-        copiedChallenge.solutions = [copiedChallenge.solution];
-        $scope.challengeService.create(copiedChallenge, (err, res) => {
+        // copiedChallenge.solutions = [copiedChallenge.solution];
+        // $scope.challengeService.create(copiedChallenge, (err, res) => {
+        //   if (err) return console.log(err);
+        //   $scope.newChallenge = null;
+        //   $scope.myChallenges.push(res);
+
+        user.getUser((err, res) => {
           if (err) return console.log(err);
-          $scope.newChallenge = null;
-          $scope.myChallenges.push(res);
-        });
+          copiedChallenge.author = res.username;
 
-      };
-      $scope.getAllFavorites = function() {
-        $scope.favoriteService.getAll((err, res) => {
-          if (err) {
-            if (err.statusText === 'Unauthorized') {
-            //   $scope.$apply(function() {
-            //      $location.path('/auth');
-            //  });
-            $timeout(() => {
-                $location.path('/auth');
-            });
+          $scope.challengeService.create(copiedChallenge, (err, res) => {
+            if (err) return console.log(err);
 
-
-              return console.log('err /api/favorites');
+            // save solution only if user entered a solution
+            if (copiedChallenge.solution.length !== 0) {
+              $scope.solutionService.create({
+                solution: $scope.newChallenge.solution,
+                challengeId: res._id,
+                userId: auth.getUserId(),
+                author: copiedChallenge.author
+              }, (err) => {
+                  if (err) return console.log(err);
+              });
             }
-          }
-          $scope.favorites = res;
+            $scope.newChallenge = null;
+            $scope.myChallenges.push(res);
+          });
         });
       };
+
+      $scope.favoriteService.getAll((err, res) => {
+        if (err) {
+          if (err.statusText === 'Unauthorized') {
+          //   $scope.$apply(function() {
+          //      $location.path('/auth');
+          //  });
+          $timeout(() => {
+              $location.path('/auth');
+          });
+
+
+            return console.log('err /api/favorites');
+          }
+        }
+        $scope.favorites = res;
+      });
+
       $scope.getUserChallenges = function() {
         $http.get(__BASEURL__ + '/api/mychallenges')
           .then((res) => {
@@ -73,7 +93,7 @@ module.exports = function(app) {
 
               return console.log('err /api/mychallenges');
             }
-          });
+        });
       };
   }]);
 };
