@@ -1,53 +1,57 @@
 <div>
-  <h1>Submit a New Challenge</h1>
+
+  <h1 class="chalh1">Submit a Challenge</h1>
   <form data-ng-submit="submitChallenge(newChallenge)">
     <div class="row">
-      <div class="six columns">
+      <div class="four columns challengeDiv">
         <label for="title">Title</label>
-        <input type="text" data-ng-model="newChallenge.title" placeholder="Title" required name="title">
-      </div>
-      <div class="six columns">
-        <label for="tags">Select Challenge Tags</label>
+
+        <input type="text" data-ng-model="newChallenge.title" placeholder="Title" required name="title" style="width:260px">
+
+        <label style="margin-top: 26px;" for="exampleRecipientInput">Challenge Type <span class="thin">(select multiple if needed)</span></label>
         <select
           data-ng-model="newChallenge.tags"
           multiple
           name="tags"
           data-ng-options="tag.tag for tag in tags"
-          class="u-full-width">
+          class="u-full-width chalType">
         </select>
+        <input class="button-primary" type="submit" value="Submit" style="float:left;">
+      </div>
+      <div class="eight columns">
+        <label for="questionInput">Question</label>
+        <textarea
+          data-ng-model="newChallenge.question"
+          name="questionInput"
+          class="u-full-width"
+          placeholder="Enter Challenge Question …"
+          required
+          ></textarea>
+        <label for="solutionInput">Solution <span class="thin">(solution will render as code when submitted)</span></label>
+        <textarea
+          data-ng-model="newChallenge.solution"
+          name="solutionInput"
+          class="u-full-width chalSol"
+          placeholder="Enter Challenge Solution …"
+          ></textarea>
       </div>
     </div>
-    <label for="questionInput">Question</label>
-    <textarea
-      data-ng-model="newChallenge.question"
-      name="questionInput"
-      class="u-full-width"
-      placeholder="Enter Challenge Question …"
-      required
-      ></textarea>
-    <label for="solutionInput">Solution</label>
-    <textarea
-      data-ng-model="newChallenge.solution"
-      name="solutionInput"
-      class="u-full-width"
-      placeholder="Enter Challenge Solution …"
-      ></textarea>
-    <input class="button-primary" type="submit" value="Submit">
+
   </form>
 
-  <div class="row">
+  <div class="row userBottom">
     <div class="six columns" data-ng-init="getAllFavorites()">
       <h2>Favorites</h2>
       <section class="searchChal" data-ng-repeat="favorite in favorites">
         <h2>{{favorite.title}}</h2><span>{{favorite.difficulty}}</span>
 
-        <button type="button" name="button" class="viewChal"
+        <button type="button" name="button" class="viewChal viewChalChal"
           data-ui-sref="challenge({ challengeData: favorite, id: favorite._id })">
           View Full Favorite
         </button>
         <p>{{favorite.question}}</p>
         <p>Submitted by: {{favorite.author}}</p>
-        <p>Created on: {{favorite.createdOn}}</p>
+        <p style="margin-bottom:20px;">Created on: {{favorite.createdOn}}</p>
         <p>{{favorite.tags}}</p>
       </section>
     </div>
@@ -58,7 +62,7 @@
         <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
-        <button type="button" name="button" class="viewChal"
+        <button type="button" name="button" class="viewChal viewChalChal"
           data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
         <p>{{challenge.question}}</p>
         <p>Submitted by: {{challenge.author}}</p>
