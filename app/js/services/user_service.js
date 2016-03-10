@@ -1,17 +1,17 @@
-const handleSuccess = (cb) => {
+const handleSuccess = function(cb) {
   return (res) => {
     cb(null, res.data);
   };
 };
 
-const handleFailure = (cb) => {
+const handleFailure = function(cb) {
   return (res) => {
     cb(res);
   };
 };
 
-module.exports = (app) => {
-  app.factory('user', ['$http', 'auth', ($http, auth) => {
+module.exports = function(app) {
+  app.factory('user', ['$http', ($http) => {
     class User {
       constructor() {}
 
@@ -34,17 +34,7 @@ module.exports = (app) => {
 
       getUser(cb) {
         cb = cb || function() {};
-        // $http.get('http://localhost:3000/api/currentuser')
-        $http({
-          method: 'GET',
-          url: __BASEURL__ + '/api/currentuser',
-          headers: {
-            token: auth.getToken()
-          },
-          user: {
-            _id: auth.getUserId()
-          }
-        })
+        $http.get(__BASEURL__ + '/api/currentuser')
           .then(handleSuccess(cb), handleFailure(cb));
       }
     }

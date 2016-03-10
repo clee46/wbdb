@@ -1,16 +1,16 @@
-const handleSuccess = (cb) => {
+const handleSuccess = function(cb) {
   return (res) => {
     cb(null, res.data);
   };
 };
 
-const handleFailure = (cb) => {
+const handleFailure = function(cb) {
   return (res) => {
     cb(res);
   };
 };
 
-module.exports = (app) => {
+module.exports = function(app) {
   app.factory('Resource', ['$http', ($http) => {
     class Resource {
       constructor(resourceName) {

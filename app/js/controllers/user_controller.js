@@ -1,7 +1,9 @@
+const { angular } = window;
+
 module.exports = function(app) {
-  app.controller('UserController',
-   ['$scope', '$http', 'Resource', '$stateParams', 'auth', '$location', '$timeout',
-      function($scope, $http, Resource, $stateParams, auth, $location, $timeout) {
+  app.controller('UserController', ['$scope', '$http', 'Resource',
+    '$stateParams', 'auth', '$location', '$timeout',
+    ($scope, $http, Resource, $stateParams, auth, $location, $timeout) => {
 
       $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' },
         { tag: 'Trees' }, { tag: 'Queues' },
@@ -51,7 +53,7 @@ module.exports = function(app) {
             //   $scope.$apply(function() {
             //      $location.path('/auth');
             //  });
-            $timeout(function () {
+            $timeout(() => {
                 $location.path('/auth');
             });
 
@@ -73,7 +75,7 @@ module.exports = function(app) {
             //   $scope.$apply(function() {
             //      $location.path('/auth');
             //  });
-            $timeout(function () {
+            $timeout(() => {
                 $location.path('/auth');
             });
 

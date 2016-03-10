@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.controller('HomeController', ['$scope', '$http', 'Resource', '$window', 'auth',
-    function($scope, $http, Resource, $window, auth) {
+  app.controller('HomeController', ['$scope', '$http', 'Resource', '$window',
+  'auth', ($scope, $http, Resource, $window, auth) => {
       $scope.search = '';
       $scope.challenges = [];
       $window.localStorage.removeItem('jwtToken');

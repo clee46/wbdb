@@ -7,7 +7,6 @@ const wbdbApp = angular.module('wbdbApp', ['ui.router', 'ngAria']);
 
 require('./controllers')(wbdbApp);
 require('./services')(wbdbApp, __BASEURL__);
-// require('./home')(wbdbApp);
 
 
 wbdbApp.config(['$stateProvider', '$urlRouterProvider',
@@ -58,7 +57,7 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
       console.log(auth.token);
       if (toState.authenticate && !auth.token) {
         // $location.path('/auth');
-        $timeout(function() {
+        $timeout(() => {
             $location.path('/auth');
         });
         console.log('authenticate');
