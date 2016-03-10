@@ -43,7 +43,6 @@ module.exports = function(app) {
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;
 
-        console.log($scope.currId);
         $scope.favoriteService
           .create({
             challengeId: $scope.challenge._id,
@@ -73,7 +72,6 @@ module.exports = function(app) {
         // $scope.hints.push(challenge.hints[i]);
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
-            console.log(res);
             if (err) return console.log(err);
             $scope.solutions = res;
           });

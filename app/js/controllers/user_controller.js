@@ -29,16 +29,9 @@ module.exports = function(app) {
         // Send newPost to the DB
         copiedChallenge.tags = copiedChallenge.tags.map((tag) => tag.tag);
         copiedChallenge.userId = auth.getUserId();
-
+        copiedChallenge.solutions = [copiedChallenge.solution];
         $scope.challengeService.create(copiedChallenge, (err, res) => {
           if (err) return console.log(err);
-          $scope.solutionService.create({
-            solution: $scope.newChallenge.solution,
-            challengeId: res._id,
-            userId: auth.getUserId()
-          }, (err) => {
-              if (err) return console.log(err);
-          });
           $scope.newChallenge = null;
           $scope.myChallenges.push(res);
         });
@@ -65,7 +58,6 @@ module.exports = function(app) {
       $scope.getUserChallenges = function() {
         $http.get(__BASEURL__ + '/api/mychallenges')
           .then((res) => {
-            console.log(res);
             $scope.myChallenges = res.data;
           }, (err) => {
             if (err.statusText === 'Unauthorized') {
