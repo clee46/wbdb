@@ -1,9 +1,13 @@
 module.exports = function(app) {
-  app.controller('UserController', ['$scope', '$http', 'Resource', '$stateParams', 'auth',
-    function($scope, $http, Resource, $stateParams, auth) {
+  app.controller('UserController',
+   ['$scope', '$http', 'Resource', '$stateParams', 'auth', '$location', '$timeout',
+      function($scope, $http, Resource, $stateParams, auth, $location, $timeout) {
 
-      $scope.tags = [{tag: "Arrays"}, {tag: "Strings"}, {tag: "Trees"}, {tag: "Queues"},
-        {tag: "Hash Tables"}, {tag: "Recursion"}, {tag: "Stacks"}, {tag: "Binary Trees"}, {tag: "Linked Lists"}];
+      $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' },
+        { tag: 'Trees' }, { tag: 'Queues' },
+        { tag: 'Hash Tables' }, { tag: 'Recursion' },
+        { tag: 'Stacks' }, { tag: 'Binary Trees' },
+        { tag: 'Linked Lists' }];
       $scope.myChallenges = [];
       $scope.favorites = [];
       $scope.newChallenge = {};
@@ -14,10 +18,12 @@ module.exports = function(app) {
         // Set the current date and time
         var currentDate = new Date();
         var options = {
-          weekday: "long", year: "numeric", month: "short",
-          day: "numeric", hour: "2-digit", minute: "2-digit"
+          weekday: 'long', year: 'numeric', month: 'short',
+          day: 'numeric', hour: '2-digit', minute: '2-digit'
         };
-        $scope.newChallenge.createdOn = currentDate.toLocaleTimeString('en-us', options);
+        $scope.newChallenge.createdOn =
+          currentDate.toLocaleTimeString('en-us', options);
+
         var copiedChallenge = angular.copy($scope.newChallenge);
 
         // Send newPost to the DB
@@ -37,10 +43,22 @@ module.exports = function(app) {
           $scope.myChallenges.push(res);
         });
 
-      }
+      };
       $scope.getAllFavorites = function() {
         $scope.favoriteService.getAll((err, res) => {
-          if (err) return console.log(err);
+          if (err) {
+            if (err.statusText === 'Unauthorized') {
+            //   $scope.$apply(function() {
+            //      $location.path('/auth');
+            //  });
+            $timeout(function () {
+                $location.path('/auth');
+            });
+
+
+              return console.log('err /api/favorites');
+            }
+          }
           $scope.favorites = res;
         });
       };
@@ -50,7 +68,17 @@ module.exports = function(app) {
             console.log(res);
             $scope.myChallenges = res.data;
           }, (err) => {
-            console.log(err);
+            if (err.statusText === 'Unauthorized') {
+              // $location.path('/auth');
+            //   $scope.$apply(function() {
+            //      $location.path('/auth');
+            //  });
+            $timeout(function () {
+                $location.path('/auth');
+            });
+
+              return console.log('err /api/mychallenges');
+            }
           });
       };
   }]);
