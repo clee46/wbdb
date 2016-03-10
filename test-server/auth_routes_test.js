@@ -24,7 +24,6 @@ describe('User Signup authentication Test: ', () => {
       'confirmpassword': 'password'
     })
     .end((err, res) => {
-      expect(err).to.eql(null);
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('token');
       expect(res.body).to.have.property('msg');
