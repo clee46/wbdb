@@ -1,4 +1,4 @@
-/* Larger than mobile */
+/* No Larger than mobile */
 @media (max-width: 400px) {
   header button{
     margin: -38px 0 0 0;
@@ -7,7 +7,39 @@
     margin-top: 30px;
     margin-left: 10px;
   }
+  .rw-sentence span{
+    font-size: 160%;
+  }
+  .rw-sentence{
+    margin-bottom: 50px;
+  }
   .search{
-    width: 240px;
+    width: 280px;
+  }
+  input[type="text"]{
+    height: 50px;
+    width: 250px;
+  }
+
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* No Larger than tablet */
+@media (max-width: 770px) {
+  .rw-sentence{
+    margin-bottom: 50px;
+  }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+  input[type="text"], input[type="password"], input[type="email"] {
+    height: 60px;
+    width: 420px;
   }
 }

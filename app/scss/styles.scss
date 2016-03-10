@@ -15,8 +15,9 @@
 .no-cssanimations .rw-wrapper .rw-sentence span:first-child{
   opacity: 1;
 }
-.rw-sentence{
-  margin-bottom: 20px;
+input {
+  font-size: 24px;
+  font-family: 'Raleway', sans-serif;
 }
 button, button-primary{
   font-family: 'Raleway', sans-serif;
@@ -31,15 +32,28 @@ button, button-primary{
   float: none;
 }
 
+.searchDB{
+  background-color: #6B969D;
+  color: white;
+  transition: all .25s ease-in;
+}
+.searchDB:hover{
+  background-color: #6B889D;
+  border: 1px solid #6B889D;
+  color: white;
+}
+
 [class^="icon-"]{
   font-size: 30px;
   font-weight: 700;
 }
-input[type="text"]{
-  height: 50px;
-  font-size: 30px;
-  font-family: 'Raleway', sans-serif;
-  margin-bottom: 80px;
+
+.authEmail {
+  margin-top: 10px;
+}
+
+.search {
+  margin: 40px 0 80px 10px;
 }
 .icon-search{
   padding: 10px;
@@ -48,17 +62,78 @@ input[type="text"]{
   display: inline-block;
 }
 .row .columns .searchChal{
-  height: 240px;
+  min-height: 240px;
   // overflow: hidden;
 }
+.chalSol {
+  min-height: 160px;
+  font-family: monospace;
+}
+
+.createdOn{
+  margin-bottom: 20px;
+}
+
+form input {
+  width: 220px; height: 35px;
+  margin: 10px 0;
+}
+.loginBtn, .regBtn{
+  float: right;
+  margin: 30px -80px 80px 0;
+}
+.msg {
+  color: #D63284;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.userBottom{
+  margin-top: 40px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  min-height: 200px;
+}
+
+.chalh1{
+  margin-top: -10px;
+}
+
+.chalType {
+  margin-top: 10px;
+  height: 80px; width: 262px;
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  color: #919191;
+}
+textarea {
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  color: #919191;
+  margin-bottom: 30px;
+}
+.tall{
+  min-height: 140px;
+  font-family: monospace;
+}
+
+label{
+  font-weight: 700;
+}
+
 .searchChal{
   background: #fff;
   border: 2px dotted #ccc;
   margin: 10px auto 50px;
   padding: 0 20px;
+  position: relative;
 }
 .searchChal h2{
   margin: 30px 0 0 0;
+  font-weight: 700;
+  font-size: 20px;
 }
 .searchChal h2 span{
   font-size: 20px;
@@ -71,10 +146,16 @@ input[type="text"]{
   color: #9B6B9D;
 }
 .searchChal {
-  font-size: 12px;
+  font-size: 16px;
+}
+.viewChalChal{
+  margin: 20px auto 0;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 .viewChal{
-  margin: 10px auto;
+  margin-right: 10px;
 }
 p strong span{
   font-weight: 100;

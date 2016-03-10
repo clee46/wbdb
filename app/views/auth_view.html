@@ -1,56 +1,64 @@
-<div>
-  <ul class="tab-nav">
-    <li>
-      <a class="button ng-class:{ 'active': signin }" data-ng-click="signin = true; responseLogin = null">Signin</a>
-    </li>
-    <li>
-      <a class="button ng-class:{ 'active': !signin }" data-ng-click="signin = false; responseRegister = null">Signup</a>
-    </li>
-  </ul>
+<div class="container">
   <div class="row">
-    <div class="twelve columns">
-      <form data-ng-if="signin" role="form" style="display: block;" data-ng-submit="login(user)">
-        <div class="form-group">
-          <input type="text" name="email" placeholder="Email" data-ng-model="user.email" required>
-        </div>
-        <div class="form-group">
-          <input type="password" name="password" placeholder="Password" data-ng-model="user.password" required>
-        </div>
-        <p>
-          {{responseLogin}}
-        </p>
-        <div class="form-group">
-          <div class="row">
-            <div class="offset-by-three columns six">
-              <button type="submit" name="login-submit">Login</button>
+    <div class="six columns offset-by-three">
+      <ul class="tab-nav">
+        <li>
+          <a class="button ng-class:{ 'active': signin }" data-ng-click="signin = true; responseLogin = null">Signin</a>
+        </li>
+        <li>
+          <a class="button ng-class:{ 'active': !signin }" data-ng-click="signin = false; responseRegister = null">Signup</a>
+        </li>
+      </ul>
+
+      <div class="row">
+        <div class="=four columns">
+          <form data-ng-if="signin" role="form" style="display: block;" data-ng-submit="login(user)">
+            <div class="form-group">
+              <input type="text" name="email" placeholder="Email" data-ng-model="user.email" required>
             </div>
-          </div>
-        </div>
-      </form>
-      <form data-ng-if="!signin" role="form" data-ng-submit="register(user)">
-        <div class="form-group">
-          <input type="text" name="username" placeholder="Username" data-ng-model="user.username" required>
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" placeholder="Email Address" data-ng-model="user.email" required>
-        </div>
-        <div class="form-group">
-          <input type="password" name="password" placeholder="Password" data-ng-model="user.password" required>
-        </div>
-        <div class="form-group">
-          <input type="password" name="confirm-password" placeholder="Confirm Password" data-ng-model="user.confirmpassword" required>
-        </div>
-        <p>
-          {{responseRegister}}
-        </p>
-        <div class="form-group">
-          <div class="row">
-            <div class="offset-by-three columns six">
-              <button type="submit" name="register-submit">Register</button>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" data-ng-model="user.password" required>
             </div>
-          </div>
+            <p class="msg">
+              {{responseLogin}}
+            </p>
+            <div class="form-group">
+              <div class="row">
+                <div class="offset-by-three columns six">
+                  <button type="submit" name="login-submit" class="button-primary loginBtn">Login</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <form data-ng-if="!signin" role="form" data-ng-submit="register(user)">
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Username" data-ng-model="user.username" required>
+            </div>
+            <div class="form-group">
+              <input class="authEmail" type="email" name="email" placeholder="Email Address" data-ng-model="user.email" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" data-ng-model="user.password" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="confirm-password" placeholder="Confirm Password" data-ng-model="user.confirmpassword" required>
+            </div>
+            <p class="msg">
+              {{responseRegister}}
+            </p>
+            <div class="form-group">
+              <div class="row">
+                <div class="offset-by-three columns six">
+                  <button type="submit" name="register-submit" class="button-primary regBtn">Register</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+
     </div>
   </div>
+</div>
+<div>
 </div>

@@ -450,16 +450,17 @@ a {
   margin: 0; }
 
 .container > header {
-  margin: 10px;
-  padding: 10px;
+  padding:30px 0 10px 0;
   position: relative;
   display: block;
-  text-align: left; }
+  text-align: left;
+  margin-bottom: 50px;
+}
 
 .container > header h1 {
+  display: inline-block;
   font-size: 36px;
   line-height: 40px;
-  margin: 0;
   padding: 0;
   position: relative;
   font-weight: 300;
@@ -534,9 +535,11 @@ button, button-primary {
 
 input[type="text"] {
   height: 50px;
-  font-size: 30px;
-  font-family: 'Raleway', sans-serif;
-  margin-bottom: 80px; }
+  font-family: 'Raleway', sans-serif; }
+
+input[type="password"] {
+  height: 50px;
+}
 
 .icon-search {
   padding: 10px; }
@@ -545,7 +548,7 @@ input[type="text"] {
   display: inline-block; }
 
 .row .columns .searchChal {
-  height: 240px;
+  min-height: 240px;
   overflow: hidden; }
 
 .searchChal {

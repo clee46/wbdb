@@ -11,24 +11,24 @@ const authRouter = module.exports = exports = express.Router();
 authRouter.post('/signup', jsonParser, (req, res) => {
 
   if (!(req.body.email || '').length && !emailValidation(req.body.email)) {
-    return res.status(400).json({ msg: 'Please enter an email' });
+    return res.status(400).json({ msg: 'Please Enter an Email' });
   }
 
   if (!emailValidation(req.body.email)) {
-    return res.status(400).json({ msg: 'Please enter a valid email' });
+    return res.status(400).json({ msg: 'Please Enter a Valid Email' });
   }
 
   if (!(req.body.username || '').length) {
-    return res.status(400).json({ msg: 'Please enter a user name' });
+    return res.status(400).json({ msg: 'Please Enter a User Name' });
   }
 
   if (!((req.body.password || '').length > 7)) {
     return res.status(400)
-      .json({ msg: 'Please enter a password longer than 7 characters' });
+      .json({ msg: 'Please Enter a Password Longer Than 7 Characters' });
   }
 
   if (!(req.body.password === req.body.confirmpassword)) {
-    return res.status(400).json({ msg: 'Passwords are not the same' });
+    return res.status(400).json({ msg: 'Passwords Are Not the Same' });
   }
 
   User.find({
@@ -37,7 +37,7 @@ authRouter.post('/signup', jsonParser, (req, res) => {
     if (err) return handleDBError(err, res);
     if (data.length) {
       return res.status(400)
-        .json({ msg: 'User already exists! Please use a different username' });
+        .json({ msg: 'User Already Exists! Please Use a Different Username' });
     }
     saveUserDB(req, res);
   });
@@ -49,15 +49,16 @@ authRouter.get('/signin', basicHTTP, (req, res) => {
 
     if (err) return handleDBError(err, res);
 
-    if (!user) return res.status(401).json({ msg: 'no user exists' });
+    if (!user) return res.status(401).json({ msg: 'No User Exists' });
 
     if (!user.comparePassword(req.basicHTTP.password)) {
-      return res.status(401).json({ msg: 'incorrect password' });
+      return res.status(401).json({ msg: 'Incorrect Password' });
     }
 
     res.json({
       msg: 'Success in signin',
       token: user.generateToken(),
       isAdmin: user.authentication.isAdmin });
+
   });
 });
