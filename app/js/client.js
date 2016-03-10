@@ -1,9 +1,8 @@
 const angular = require('angular');
-// const highlight = require('angular-highlightjs');
-
 require('angular-ui-router');
 require('angular-aria');
-const wbdbApp = angular.module('wbdbApp', ['ui.router', 'ngAria']);
+require('angular-highlightjs');
+const wbdbApp = angular.module('wbdbApp', ['ui.router', 'ngAria', 'hljs']);
 
 require('./controllers')(wbdbApp);
 require('./services')(wbdbApp, __BASEURL__);

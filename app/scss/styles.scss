@@ -3,6 +3,7 @@
 @import "skeleton";
 @import "stylesSkel";
 @import "text_animation";
+@import "highlight";
 
 @import "normalize";
 @import "base";
@@ -81,4 +82,7 @@ p strong span{
 footer p{
   font-size: 12px;
   text-align: center;
+}
+.hljs {
+  margin-left: 0px;
 }
