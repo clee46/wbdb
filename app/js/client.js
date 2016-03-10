@@ -18,31 +18,50 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
       .state('home', {
         url: '/',
         templateUrl: 'views/home_view.html',
-        controller: 'HomeController'
+        controller: 'HomeController',
+        authenticate: false
       })
       .state('challenge', {
         url: '/challenge/:id',
         templateUrl: 'views/challenge_view.html',
         controller: 'ChallengeController',
-        params: { challengeData: null, id: { value: null, squash: false } }
+        params: { challengeData: null, id: { value: null, squash: false } },
+        authenticate: true
       })
       .state('auth', {
         url: '/auth',
         templateUrl: 'views/auth_view.html',
-        controller: 'AuthController'
+        controller: 'AuthController',
+        authenticate: true
       })
       .state('user', {
         url: '/user',
         templateUrl: 'views/user_view.html',
-        controller: 'UserController'
+        controller: 'UserController',
+        authenticate: true
       })
       .state('admin', {
         url: '/admin',
         templateUrl: 'views/admin_view.html',
-        controller: 'AdminController'
+        controller: 'AdminController',
+        authenticate: true
+
       })
       .state('fourohfour', {
         url: '/fourohfour',
         templateUrl: 'views/fourohfour.html'
       });
-}]);
+}]).run(($rootScope, $location, auth, $timeout) => {
+    // Redirect to login if route requires auth and you're not logged in
+    $rootScope.$on('$stateChangeStart', (event, toState) => {
+      console.log(toState);
+      console.log(auth.token);
+      if (toState.authenticate && !auth.token) {
+        // $location.path('/auth');
+        $timeout(function () {
+            $location.path('/auth');
+        });
+        console.log('authenticate');
+      }
+    });
+});
