@@ -1,7 +1,7 @@
 <div>
 
   <h1 class="chalh1">Submit a Challenge</h1>
-  <form data-ng-submit="submitChallenge(newChallenge)">
+  <form data-ng-submit="submitChallenge()">
     <div class="row">
       <div class="four columns challengeDiv">
         <label for="title">Title</label>
@@ -29,7 +29,7 @@
           ></textarea>
         <label for="solutionInput">Solution <span class="thin">(solution will render as code when submitted)</span></label>
         <textarea
-          data-ng-model="newChallenge.solution"
+          data-ng-model="newSolution"
           name="solutionInput"
           class="u-full-width chalSol"
           placeholder="Enter Challenge Solution …"

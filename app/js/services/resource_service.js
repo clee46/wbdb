@@ -32,6 +32,7 @@ module.exports = function(app) {
       }
 
       create(data, cb) {
+        console.log(data);
         $http.post(__BASEURL__ + `/api${this.resourceName}`, data)
           .then(handleSuccess(cb), handleFailure(cb));
       }

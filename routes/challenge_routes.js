@@ -70,6 +70,8 @@ challengeRouter.get('/challenges/:id', (req, res) => {
 });
 
 challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
+  console.log('inside challenge router post request');
+  console.log(req.body);
   Challenge.create(req.body)
     .then((newChallenge) => {
       const challengeId = newChallenge._id;

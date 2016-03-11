@@ -80,6 +80,7 @@ module.exports = function(app) {
           (err, res) => {
             if (err) return console.log(err);
             $scope.solutions = res;
+
             if ($scope.solutions.length === 0) {
               console.log('Sorry, no solutions!');
             } else {
@@ -131,8 +132,9 @@ module.exports = function(app) {
             createdOn: currentDate.toLocaleTimeString('en-us', options),
             userId: $scope.currId,
             author: res.username
-          }, (err) => {
+          }, (err, res) => {
               if (err) return console.log(err);
+              $scope.solutions.push(res);
               $scope.newSolution = null;
               $scope.showSubmitForm = false;
               // notify user that solution is pending approval from admin
