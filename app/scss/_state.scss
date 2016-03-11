@@ -17,10 +17,16 @@
   .rw-sentence{
     margin-bottom: 50px;
   }
+  .searchDB{
+    margin-top: 0px;
+  }
+  .icon-search{
+    padding: 0px 0 0 10px;
+  }
 
   input[type="text"], input[type="password"], input[type="email"] {
     height: 60px;
-    width: 246px;
+    width: 236px;
     margin-left: 10px
   }
   input[type="text"]{
@@ -136,5 +142,11 @@
   .submitChal{
     float: left;
     margin: -71px 714px 0 25px;
+  }
+  // .icon-search{
+  //   padding-top: 4px;
+  // }
+  .icon-search{
+    padding: 4px 0 0 26px;
   }
 }
