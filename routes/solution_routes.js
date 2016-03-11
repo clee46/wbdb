@@ -7,20 +7,12 @@ const Hint = require(__dirname + '/../models/hint');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const solutionRouter = module.exports = exports = express.Router();
 
-// future goal: threshold get request
 solutionRouter.get('/solutions', jsonParser, (req, res) => {
   Solution.find({ challengeId: req.body.challengeId }, (err, data) => {
     if (err) return handleDBError(err, res);
     res.status(200).json(data);
   });
 });
-
-// solutionRouter.get('/solutions/:id', (req, res) => {
-//   Solution.find({ challengeId: req.params.id }, (err, data) => {
-//     if (err) return handleDBError(err, res);
-//     res.status(200).json(data);
-//   });
-// });
 
 solutionRouter.get('/solutions/:id', (req, res) => {
   console.log('Inside Challenges/id route');
@@ -38,8 +30,6 @@ solutionRouter.post('/solutions', jwtAuth, jsonParser, (req, res) => {
     res.status(200).json(data);
   });
 });
-
-// Add Middleware to check admin privileges
 
 solutionRouter.put('/solutions/:id', jwtAuth, jsonParser, (req, res) => {
   var newData = req.body;

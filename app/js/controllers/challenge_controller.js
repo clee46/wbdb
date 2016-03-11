@@ -71,7 +71,6 @@ module.exports = function(app) {
       };
 
       $scope.getAllSolutions = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
@@ -128,14 +127,15 @@ module.exports = function(app) {
             createdOn: currentDate.toLocaleTimeString('en-us', options),
             userId: $scope.currId,
             author: res.username
-          }, (err, res) => {
+            }, (err, res) => {
               if (err) return console.log(err);
               $scope.solutions.push(res);
               $scope.newSolution = null;
               $scope.showSubmitForm = false;
-              // notify user that solution is pending approval from admin
           });
         });
+
       };
+
   }]);
 };

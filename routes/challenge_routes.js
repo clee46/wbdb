@@ -8,7 +8,6 @@ const Tag = require(__dirname + '/../models/tag');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const challengeRouter = module.exports = exports = express.Router();
 
-// future goal: threshold get request
 challengeRouter.get('/challenges', (req, res) => {
   Challenge.find({}).exec()
     .then((challenges) => {
@@ -69,8 +68,6 @@ challengeRouter.get('/challenges/:id', (req, res) => {
 });
 
 challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
-  console.log('inside challenge router post request');
-  console.log(req.body);
   Challenge.create(req.body)
     .then((newChallenge) => {
       const challengeId = newChallenge._id;
@@ -107,18 +104,7 @@ challengeRouter.post('/challenges', jwtAuth, jsonParser, (req, res) => {
         });
     })
     .catch((err) => handleDBError(err, res));
-
-  // COMMENTED OUT MERGE CONFLICT
-  // console.log(req.body);
-  // var newChallenge = new Challenge(req.body);
-  // newChallenge.save((err, data) => {
-  //   if (err) return handleDBError(err, res);
-  //   res.status(200).json(data);
-  // });
-
 });
-
-// Add Middleware to check admin privileges
 
 challengeRouter.put('/challenges/:id', jwtAuth, jsonParser, (req, res) => {
   var newData = req.body;

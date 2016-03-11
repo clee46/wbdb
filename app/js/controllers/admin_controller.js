@@ -7,9 +7,7 @@ module.exports = function(app) {
 
       $scope.getChallengesQueue = function() {
         admin.getChallenges((err, res) => {
-          // if (err) return console.log(err);
           if (err && err.statusText === 'Unauthorized') {
-            //  $location.path('/auth');
             $timeout(() => {
                 $location.path('/auth');
             });
@@ -21,9 +19,7 @@ module.exports = function(app) {
 
       $scope.getSolutionsQueue = function() {
         admin.getSolutions((err, res) => {
-          // if (err) return console.log(err);
           if (err && err.statusText === 'Unauthorized') {
-            //  $location.path('/auth');
             $timeout(() => {
                 $location.path('/auth');
             });
@@ -31,11 +27,9 @@ module.exports = function(app) {
           }
           $scope.solutionsQueue = res;
 
-
           $scope.solutionsQueue.map((solution) => {
             admin.getSolutionChallenge(solution.challengeId, (err, res) => {
               if (err) return console.log(err);
-              console.log(res);
               solution.challenge = res;
             });
           });
@@ -44,16 +38,13 @@ module.exports = function(app) {
         });
       };
 
-
       $scope.publishSolution = function(solution) {
-        console.log(solution);
         solution.published = true;
         $scope.solutionService.update(solution, (err) => {
           if (err) return console.log(err);
           $scope.getSolutionsQueue();
         });
       };
-
 
   }]);
 };

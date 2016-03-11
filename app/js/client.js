@@ -52,14 +52,10 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
 }]).run(($rootScope, $location, auth, $timeout) => {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', (event, toState) => {
-      console.log(toState);
-      console.log(auth.token);
       if (toState.authenticate && !auth.token) {
-        // $location.path('/auth');
         $timeout(() => {
             $location.path('/auth');
         });
-        console.log('authenticate');
       }
     });
 });

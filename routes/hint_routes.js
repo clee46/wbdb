@@ -5,7 +5,6 @@ const Hint = require(__dirname + '/../models/hint');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const hintRouter = module.exports = exports = express.Router();
 
-// future goal: threshold get request
 hintRouter.get('/hints', (req, res) => {
   Hint.find({}, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -27,8 +26,6 @@ hintRouter.post('/hints', jwtAuth, jsonParser, (req, res) => {
     res.status(200).json(data);
   });
 });
-
-// Add Middleware to check admin privileges
 
 hintRouter.put('/hints/:id', jwtAuth, jsonParser, (req, res) => {
   var newData = req.body;

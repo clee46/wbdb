@@ -39,7 +39,6 @@ module.exports = function(app) {
         user.getUser((err, res) => {
           if (err) return console.log(err);
           copiedChallenge.author = res.username;
-          console.log(copiedChallenge);
           $scope.challengeService.create(copiedChallenge, (err, res) => {
             if (err) return console.log(err);
 
@@ -57,7 +56,6 @@ module.exports = function(app) {
               });
             }
             $scope.newChallenge = null;
-            //see if this clears the text box
             $scope.newSolution = null;
             $scope.myChallenges.push(res);
           });
@@ -67,13 +65,10 @@ module.exports = function(app) {
       $scope.favoriteService.getAll((err, res) => {
         if (err) {
           if (err.statusText === 'Unauthorized') {
-          //   $scope.$apply(function() {
-          //      $location.path('/auth');
-          //  });
+
           $timeout(() => {
               $location.path('/auth');
           });
-
 
             return console.log('err /api/favorites');
           }
