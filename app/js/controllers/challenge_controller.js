@@ -49,11 +49,6 @@ module.exports = function(app) {
         });
       };
 
-
-
-
-
-
       $scope.addFavorite = function() {
         $scope.showAdd = !$scope.showAdd;
 
@@ -141,6 +136,5 @@ module.exports = function(app) {
           });
         });
       };
-
   }]);
 };

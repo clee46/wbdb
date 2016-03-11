@@ -10,6 +10,7 @@ module.exports = function(app) {
         { tag: 'Hash Tables' }, { tag: 'Recursion' },
         { tag: 'Stacks' }, { tag: 'Binary Trees' },
         { tag: 'Linked Lists' }];
+      $scope.mySolutions = [];
       $scope.myChallenges = [];
       $scope.favorites = [];
       $scope.newChallenge = {};
@@ -48,10 +49,11 @@ module.exports = function(app) {
                 challengeId: res._id,
                 userId: auth.getUserId(),
                 author: copiedChallenge.author,
-                published: true,
+                published: false,
                 createdOn: copiedChallenge.createdOn
-              }, (err) => {
+              }, (err, res) => {
                   if (err) return console.log(err);
+                  $scope.mySolutions.push(res);
               });
             }
             $scope.newChallenge = null;
@@ -85,15 +87,27 @@ module.exports = function(app) {
             $scope.myChallenges = res.data;
           }, (err) => {
             if (err.statusText === 'Unauthorized') {
-              // $location.path('/auth');
-            //   $scope.$apply(function() {
-            //      $location.path('/auth');
-            //  });
             $timeout(() => {
                 $location.path('/auth');
             });
 
               return console.log('err /api/mychallenges');
+            }
+        });
+      };
+
+      $scope.getUserSolutions = function() {
+        console.log("inside user Solutions")
+        $http.get(__BASEURL__ + '/api/mysolutions')
+          .then((res) => {
+            $scope.mySolutions = res.data;
+          }, (err) => {
+            if (err.statusText === 'Unauthorized') {
+            $timeout(() => {
+                $location.path('/auth');
+            });
+
+              return console.log('err /api/mysolutions');
             }
         });
       };
