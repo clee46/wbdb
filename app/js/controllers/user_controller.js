@@ -15,18 +15,6 @@ module.exports = function(app) {
       $scope.newChallenge = {};
       $scope.newSolution = '';
 
-      // if ($scope.mySolutions.length === 0 && $scope.myChallenges.length === 0) {
-      //   $scope.nothingToShow = true;
-      // } else {
-      //   $scope.nothingToShow = false;
-      // }
-      //
-      // if ($scope.favorites.length === 0) {
-      //   $scope.noFavorites = true;
-      // } else {
-      //   $scope.noFavorites = false;
-      // }
-
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
       $scope.solutionService = new Resource('/solutions');
@@ -57,7 +45,7 @@ module.exports = function(app) {
           $scope.challengeService.create(copiedChallenge, (err, res) => {
             if (err) return console.log(err);
 
-            if ($scope.newSolution !== '') {
+            if ($scope.newSolution) {
               $scope.solutionService.create({
                 solution: $scope.newSolution,
                 challengeId: res._id,
