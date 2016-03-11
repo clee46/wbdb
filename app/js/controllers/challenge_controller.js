@@ -8,6 +8,7 @@ module.exports = function(app) {
       $scope.newSolution = {};
       $scope.showSolutions = false;
       $scope.showSubmitForm = false;
+      $scope.noSolutions = false;
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -77,8 +78,9 @@ module.exports = function(app) {
             $scope.solutions = res;
 
             if ($scope.solutions.length === 0) {
-              console.log('Sorry, no solutions!');
+              $scope.noSolutions = true;
             } else {
+              $scope.noSolutions = false;
               $scope.showSolutions = true;
             }
           });
