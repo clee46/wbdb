@@ -89,7 +89,7 @@ gulp.task('webpack:prod', () => {
       },
       plugins: [
         new webpack.DefinePlugin({
-          __BASEURL__: JSON.stringify('https://vast-refuge-66852.herokuapp.com')
+          __BASEURL__: JSON.stringify('https://wbdb.herokuapp.com')
         })
       ],
       devtool: 'source-map'
