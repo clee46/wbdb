@@ -66,7 +66,7 @@ button, button-primary{
   // overflow: hidden;
 }
 .chalSol {
-  min-height: 160px;
+  min-height: 200px;
   font-family: monospace;
 }
 
@@ -78,10 +78,6 @@ form input {
   width: 220px; height: 35px;
   margin: 10px 0;
 }
-.loginBtn, .regBtn{
-  float: right;
-  margin: 30px -80px 80px 0;
-}
 .msg {
   color: #D63284;
   font-size: 18px;
@@ -90,7 +86,7 @@ form input {
 }
 
 .userBottom{
-  margin-top: 40px;
+  margin-top: 20px;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   min-height: 200px;
@@ -102,7 +98,7 @@ form input {
 
 .chalType {
   margin-top: 10px;
-  height: 80px; width: 262px;
+  height: 123px;
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
   color: #919191;
@@ -122,6 +118,15 @@ textarea {
 label{
   font-weight: 700;
 }
+
+.pullUp{
+  margin-top: 42px;
+}
+
+.pullDown{
+  margin-top: 40px;
+}
+
 
 .searchChal{
   background: #fff;
@@ -153,10 +158,21 @@ label{
   position: absolute;
   bottom: 10px;
   right: 20px;
+  font-size: 12px;
 }
 .viewChal{
   margin-right: 10px;
 }
+
+.viewChalSol{
+  margin-right: 60px;
+}
+
+.favBack, .mychalBack{
+  background: #d3d3d3;
+  padding: 10px;
+}
+
 p strong span{
   font-weight: 100;
 }

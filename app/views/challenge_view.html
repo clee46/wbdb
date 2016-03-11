@@ -6,22 +6,20 @@
 
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
         <p>{{challenge.question}}</p>
-        <p>Submitted by: {{challenge.author}}</p>
-        <p>Tags: {{challenge.tags.join()}}</p>
+        <p><strong>Submitted by:</strong> {{challenge.author}}</p>
+        <p><strong>Tags:</strong> {{challenge.tags.join()}}</p>
 
-        <!-- <button type="button" name="button" class="viewChal" data-ng-click="getNewHint()">Show Hint</button> -->
-        <!-- <button type="button" name="button" class="viewChal" data-ng-click="getNewSolution()">Show One Solution</button> -->
-        <button type="button" name="button" class="viewChal" data-ng-if="!isAdmin && !showSubmitForm && loggedIn" data-ng-click="showForm()">Submit a Solution</button>
+        <div class="row pullDown">
 
-        <button type="button" name="button" class="viewChal" data-ng-if="!showSolutions" data-ng-click="getAllSolutions()">Show Solutions</button>
-        <button type="button" name="button" class="viewChal" data-ng-if="showSolutions" data-ng-click="hideButton()">Hide Solutions</button>
 
-        <button type="button" name="button" class="viewChal" data-ng-if="showAdd && !isAdmin && loggedIn" data-ng-click="addFavorite()">Add to Favorites</button>
-        <button type="button" name="button" class="viewChal" data-ng-if="!showAdd && !isAdmin && loggedIn" data-ng-click="removeFavorite()" >Remove From Favorites</button>
 
-        <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && !challenge.published" data-ng-click="publish()">Publish</button>
-        <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && challenge.published" data-ng-click="unpublish()">Unpublish</button>
-
+          <button type="button" name="button" class="viewChal viewChalSol" data-ng-if="!showSolutions" data-ng-click="getAllSolutions()">Show Solutions</button>
+          <button type="button" name="button" class="viewChal viewChalSol" data-ng-if="showSolutions" data-ng-click="hideButton()">Hide Solutions</button>
+          <button type="button" name="button" class="viewChal" data-ng-if="!isAdmin && !showSubmitForm && loggedIn" data-ng-click="showForm()">Submit a Solution</button>
+          <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && !challenge.published" data-ng-click="publish()">Publish</button>
+          <!-- <button type="button" name="button" class="viewChal" data-ng-if="isAdmin && challenge.published" data-ng-click="unpublish()">Unpublish</button> -->
+          <button type="button" name="button" class="viewChal" data-ng-if="showAdd && !isAdmin && loggedIn" data-ng-click="addFavorite()">Add to Favorites</button>
+          <button type="button" name="button" class="viewChal" data-ng-if="!showAdd && !isAdmin && loggedIn" data-ng-click="removeFavorite()" >Remove From Favorites</button>
 
       </section>
     </div>
@@ -29,22 +27,26 @@
 
   <div class="row">
     <div class="twelve columns" data-ng-if="showSubmitForm">
-      <h1>Submit a New Solution</h1>
-      <form data-ng-submit="submitSolution(newSolution)">
-        <label for="solutionInput">Solution</label>
-        <textarea
-          data-ng-model="newSolution.solution"
-          name="solutionInput"
-          class="u-full-width"
-          placeholder="Enter Challenge Solution …"
-          ></textarea>
-        <input class="button-primary" type="submit" value="Submit">
-      </form>
-      <button data-ng-click="hideForm()">Cancel</button>
+          <h1>Submit a New Solution</h1>
+          <form data-ng-submit="submitSolution(newSolution)">
+            <div class="row">
+              <div class="eight columns">
+                <textarea
+                  data-ng-model="newSolution.solution"
+                  name="solutionInput"
+                  class="u-full-width tall"
+                  placeholder="Enter Challenge Solution …"
+                  ></textarea>
+              </div>
+              <div class="four columns">
+                <input class="button-primary pullUp" type="submit" value="Submit">
+                <button data-ng-click="hideForm()">Cancel</button>
+              </div>
+            </div>
+          </form>
     </div>
   </div>
 
-  <div class="row">
     <div class="twelve columns">
       <section data-ng-if="showSolutions" class="searchChal" data-ng-repeat="solution in solutions">
         <h2>Solutions:</h2>
@@ -52,6 +54,5 @@
         <p>Submitted by: {{solution.author}} on {{solution.createdOn}}</p>
       </section>
     </div>
-  </div>
 
 </div>
