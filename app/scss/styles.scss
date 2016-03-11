@@ -15,6 +15,9 @@
 .no-cssanimations .rw-wrapper .rw-sentence span:first-child{
   opacity: 1;
 }
+[data-ng-cloak] {
+  display: none;
+}
 input {
   font-size: 24px;
   font-family: 'Raleway', sans-serif;
