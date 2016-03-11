@@ -4,8 +4,8 @@
   <form data-ng-submit="submitChallenge()">
     <div class="row">
       <div class="four columns challengeDiv">
-        <label for="title">Title</label>
 
+        <label for="title">Title</label>
         <input type="text" data-ng-model="newChallenge.title" placeholder="Title" required name="title">
 
         <label style="margin-top: 26px;" for="exampleRecipientInput">Challenge Tags <span class="thin">(select multiple if needed)</span></label>
@@ -16,7 +16,9 @@
           data-ng-options="tag.tag for tag in tags"
           class="u-full-width chalType">
         </select>
+
       </div>
+
       <div class="eight columns">
         <label for="questionInput" class="question">Question</label>
         <textarea
@@ -26,6 +28,7 @@
           placeholder="Enter Challenge Question …"
           required
           ></textarea>
+
         <label for="solutionInput">Solution <span class="thin">(solution will render as code when submitted)</span></label>
         <textarea
           data-ng-model="newSolution"
@@ -36,18 +39,17 @@
       </div>
       <input class="button-primary submitChal" type="submit" value="Submit">
     </div>
-
   </form>
 
   <div class="row userBottom btmRow">
-    <div class="six columns favBack" data-ng-init="getAllFavorites()">
-      <h2>Favorites</h2>
+    <div data-ng-if="!noFavorites" class="six columns favBack" data-ng-init="getAllFavorites()">
+      <h2>My Favorites</h2>
       <section class="searchChal" data-ng-repeat="favorite in favorites">
-        <h2>{{favorite.title}}</h2><span>{{favorite.difficulty}}</span>
+        <h2>{{favorite.title}}</h2>
 
         <button type="button" name="button" class="viewChal viewChalChal"
           data-ui-sref="challenge({ challengeData: favorite, id: favorite._id })">
-          Full View
+          Select
         </button>
         <p>{{favorite.question}}</p>
         <p><strong>Submitted by:</strong> {{favorite.author}}</p>
@@ -56,36 +58,39 @@
       </section>
     </div>
 
+    <div data-ng-if="noFavorites" class="six columns favBack">
+      <h2>Your favorited challenges will show up here. Search the database to get started!</h2>
+    </div>
 
-    <div class="six columns mychalBack" data-ng-init="getUserChallenges(); getUserSolutions()">
-      <h2>Your Challenges</h2>
-      <section class="searchChal" data-ng-repeat="challenge in myChallenges">
-        <!--add toggle show hide-->
-        <p data-ng-if="!challenge.published" class="pending">PENDING</p>
+    <div data-ng-if="!nothingToShow" class="six columns mychalBack" data-ng-init="getUserChallenges(); getUserSolutions()">
 
-        <h2 style="margin-top:-20px;">{{challenge.title}}</h2>
+        <h2>My Challenges</h2>
+        <section class="searchChal" data-ng-repeat="challenge in myChallenges">
+          <p data-ng-if="!challenge.published" class="pending">PENDING</p>
+          <p data-ng-if="challenge.published" class="published">PUBLISHED</p>
+          <h2 style="margin-top:-20px;">{{challenge.title}}</h2>
 
-        <button type="button" name="button" class="viewChal viewChalChal"
-          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">Full View</button>
-        <p>{{challenge.question}}</p>
+          <button type="button" name="button" class="viewChal viewChalChal"
+            data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">Select</button>
+          <p>{{challenge.question}}</p>
+          <p><strong>Created:</strong> {{challenge.createdOn}}</p>
+          <p><strong>Tags:</strong> {{challenge.tags.join()}}</p>
+        </section>
 
-        <p><strong>Created on:</strong> {{challenge.createdOn}}</p>
-        <p><strong>Tags:</strong> {{challenge.tags.join()}}</p>
-        <p data-ng-if="challenge.published" class="published">PUBLISHED</p>
-
-      </section>
-
-      <h2>Your Solutions</h2>
-      <section class="searchChal" data-ng-repeat="solution in mySolutions">
-        <!--add toggle show hide-->
-<!--         <button type="button" name="button" class="viewChal viewChalChal"
-          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button> -->
-        <p>{{solution.solution}}</p>
-        <p>Created on: {{solution.createdOn}}</p>
-        <p data-ng-if="solution.published" class="published">PUBLISHED</p>
-        <p data-ng-if="!solution.published" class="pending">PENDING</p>
-      </section>
+        <h2>My Solutions</h2>
+        <section class="searchChal" data-ng-repeat="solution in mySolutions">
+          <p data-ng-if="solution.published" class="published">PUBLISHED</p>
+          <p data-ng-if="!solution.published" class="pending">PENDING</p>
+          <div hljs source='solution.solution' language='javascript'></div>
+          <button type="button" name="button" class="viewChal viewChalChal"
+            data-ng-click="redirect(solution.challengeId)">Select</button>
+          <p><strong>Created:</strong> {{solution.createdOn}}</p>
+        </section>
 
     </div>
-  </div>
+
+    <div data-ng-if="nothingToShow" class="six columns mychalBack">
+      <h2>Your challenges and solutions will show up here. Submit your first challenge above!</h2>
+    </div>
+
 </div>

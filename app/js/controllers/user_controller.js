@@ -3,22 +3,37 @@ const { angular } = window;
 module.exports = function(app) {
   app.controller('UserController', ['$scope', '$http', 'Resource',
     '$stateParams', 'user', 'auth', '$location', '$timeout',
-   ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
+    ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
 
-      $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' },
-        { tag: 'Trees' }, { tag: 'Queues' },
-        { tag: 'Hash Tables' }, { tag: 'Recursion' },
-        { tag: 'Stacks' }, { tag: 'Binary Trees' },
-        { tag: 'Linked Lists' }];
+      $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' }, { tag: 'Trees' },
+        { tag: 'Queues' }, { tag: 'Hash Tables' }, { tag: 'Recursion' },
+        { tag: 'Stacks' }, { tag: 'Binary Trees' }, { tag: 'Linked Lists' },
+        { tag: 'Graphs' }, { tag: 'Heaps' }, { tag: 'Sort' }, { tag: 'Search' }];
       $scope.mySolutions = [];
       $scope.myChallenges = [];
       $scope.favorites = [];
       $scope.newChallenge = {};
       $scope.newSolution = '';
 
+      if ($scope.mySolutions.length === 0 && $scope.myChallenges.length === 0) {
+        $scope.nothingToShow = true;
+      } else {
+        $scope.nothingToShow = false;
+      }
+
+      if ($scope.favorites.length === 0) {
+        $scope.noFavorites = true;
+      } else {
+        $scope.noFavorites = false;
+      }
+
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
       $scope.solutionService = new Resource('/solutions');
+
+      $scope.redirect = function(id) {
+        $location.path('/challenge/' + id);
+      };
 
       $scope.submitChallenge = function() {
         var currentDate = new Date();
