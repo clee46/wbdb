@@ -31,7 +31,7 @@ Front-End:
 Angular, Sass, JavaScript, HTML, CSS
 
 Back-End:
-Node, Express, JavaScript, JWT
+Node, Express, JavaScript, JWT, Mongoose
 
 Testing:
 Gulp, Webpack, Karma, Jasmine, Mocha, Babel
