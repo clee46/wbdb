@@ -131,7 +131,7 @@ module.exports = function(app) {
             author: res.username
             }, (err, res) => {
               if (err) return console.log(err);
-              $scope.solutions.push(res);
+              // $scope.solutions.push(res);
               $scope.newSolution = null;
               $scope.showSubmitForm = false;
           });
