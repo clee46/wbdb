@@ -92,7 +92,6 @@ module.exports = function(app) {
       };
 
       $scope.getUserSolutions = function() {
-        console.log("inside user Solutions")
         $http.get(__BASEURL__ + '/api/mysolutions')
           .then((res) => {
             $scope.mySolutions = res.data;

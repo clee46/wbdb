@@ -1,6 +1,7 @@
 module.exports = function(app) {
-  app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
-    '$stateParams', 'auth', 'user', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth, user) => {
+  app.controller('ChallengeController', ['$rootScope', '$scope', '$location',
+  '$http', 'Resource', '$stateParams', 'auth', 'user', ($rootScope, $scope,
+    $location, $http, Resource, $stateParams, auth, user) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
@@ -24,7 +25,6 @@ module.exports = function(app) {
         });
       }
 
-      // check which button to show (either add/remove favorite); run on load
       $scope.checkFavoritedOrNot = (function() {
         if (!$scope.currId) return;
         $scope.showAdd = true;
