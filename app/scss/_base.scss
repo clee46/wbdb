@@ -28,11 +28,9 @@ a{
 	margin: 0;
 }
 .container > header{
-	margin: 10px;
-	padding: 10px;
 	position: relative;
 	display: block;
-    text-align: left;
+  text-align: left;
 }
 .container > header h1{
 	font-size: 36px;
@@ -66,4 +64,20 @@ a{
 
 header{
   border-bottom: 3px solid #434343;
+}
+
+.published{
+	color: green;
+}
+.pending {
+	color: red;
+	text-align: center;
+}
+
+.frame {
+    overflow-y: auto;
+    border: 1px solid black;
+    height: 3em;
+    width: 10em;
+    line-height: 1em;
 }

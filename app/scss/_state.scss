@@ -1,4 +1,4 @@
-/* Larger than mobile */
+/* No Larger than mobile */
 @media (max-width: 400px) {
   header button{
     margin: -38px 0 0 0;
@@ -7,7 +7,86 @@
     margin-top: 30px;
     margin-left: 10px;
   }
+  .rw-sentence span{
+    font-size: 160%;
+  }
+  .rw-sentence{
+    margin-bottom: 50px;
+  }
   .search{
-    width: 240px;
+    width: 400px;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"] {
+    height: 60px;
+    width: 320px;
+  }
+  .row{
+    padding: 0 10px;
+  }
+  .btmRow{
+    padding: 0;
+  }
+  input[type="submit"]{
+    margin: 0 0 0 75px;
+  }
+  .chalh1{
+    margin-left: 10px;
+  }
+  .searchDB{
+    margin-top: 10px;
+  }
+  .loginSpec{
+    margin-top: 10px;
+  }
+  .loginBtn, .regBtn{
+    margin: 0 4px 0 0;
+  }
+  .question{
+    margin-top: 20px;
+  }
+
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* No Larger than tablet */
+@media (max-width: 770px) {
+  .rw-sentence{
+    margin-bottom: 50px;
+  }
+  .chalh1{
+    margin-left: 10px;
+  }
+  .row{
+    padding: 0 10px;
+  }
+  .btmRow{
+    padding: 0;
+  }
+  .chalType{
+    width: 222px;
+  }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+  input[type="text"], input[type="password"], input[type="email"] {
+    height: 60px;
+    width: 420px;
+  }
+  input[type="submit"]{
+    margin: -68px 0 0 25px;
+  }
+  .loginBtn, .regBtn{
+    float: right;
+    margin: 30px -80px 80px 0;
+  }
+  .chalType{
+    width: 262px;
   }
 }

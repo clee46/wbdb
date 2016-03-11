@@ -1,15 +1,14 @@
 <div>
   <h1>Welcome Admin!</h1>
   <div class="row">
-    <div class="twelve columns" data-ng-init="getQueue()">
+    <div class="twelve columns" data-ng-init="getChallengesQueue()">
       <h2>Pending Challenges</h2>
-      <section class="searchChal" data-ng-repeat="challenge in queue">
-        <!--add toggle show hide-->
+      <section class="searchChal" data-ng-repeat="challenge in challengesQueue">
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
         <button type="button" name="button" class="viewChal"
           data-ui-sref="challenge({ challengeData: challenge, id: challenge._id })">
-          View Full Favorite
+          View Full Challenge
         </button>
         <p>{{challenge.question}}</p>
         <p>{{challenge.author}}</p>
@@ -17,4 +16,26 @@
       </section>
     </div>
   </div>
+
+  <div class="row">
+    <div class="twelve columns" data-ng-init="getSolutionsQueue()">
+      <h2>Pending Solutions</h2>
+      <section class="searchChal" data-ng-repeat="single in solutionsQueue track by $index">
+
+        <h2>{{single.challenge.title}}</h2>
+        <p>{{single.challenge.question}}</p>
+        <p>Challenge submitted by: {{single.challenge.author}}</p>
+        <h2>{{single.solution}}</h2>
+        <p>Created on: {{single.createdOn}}</p>
+        <p>Solution submitted by: {{single.author}}</p>
+        <button type="button" name="button" class="viewChal"
+          data-ng-click="publishSolution(single)" >
+          Publish
+        </button>
+
+      </section>
+    </div>
+  </div>
+
+
 </div>

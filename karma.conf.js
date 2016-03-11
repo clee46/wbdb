@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Mar 05 2016 11:18:27 GMT-0800 (PST)
+// Generated on Wed Feb 17 2016 09:31:49 GMT-0800 (PST)
 
 module.exports = function(config) {
   config.set({
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/test_bundle.js'
+      'test-client/test_bundle.js'
     ],
 
 
@@ -41,8 +41,7 @@ module.exports = function(config) {
 
 
     // enable / disable colors in the output (reporters and logs)
-    colo
-    rs: true,
+    colors: true,
 
 
     // level of logging
@@ -56,7 +55,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

@@ -1,16 +1,16 @@
-const handleSuccess = (cb) => {
+const handleSuccess = function(cb) {
   return (res) => {
     cb(null, res.data);
   };
 };
 
-const handleFailure = (cb) => {
+const handleFailure = function(cb) {
   return (res) => {
     cb(res);
   };
 };
 
-module.exports = (app) => {
+module.exports = function(app) {
   app.factory('Resource', ['$http', ($http) => {
     class Resource {
       constructor(resourceName) {
@@ -32,6 +32,7 @@ module.exports = (app) => {
       }
 
       create(data, cb) {
+        console.log(data);
         $http.post(__BASEURL__ + `/api${this.resourceName}`, data)
           .then(handleSuccess(cb), handleFailure(cb));
       }
