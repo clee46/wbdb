@@ -1,25 +1,34 @@
 /* No Larger than mobile */
 @media (max-width: 400px) {
   header button{
-    margin: -38px 0 0 0;
+    margin: 0;
   }
   .rw-wrapper{
     margin-top: 30px;
     margin-left: 10px;
   }
+  .rw-wrapper h2{
+    margin-left: -10px;
+  }
   .rw-sentence span{
-    font-size: 160%;
+    font-size: 150%;
+    margin-left: -7px;
   }
   .rw-sentence{
     margin-bottom: 50px;
   }
-  .search{
-    width: 400px;
-  }
 
   input[type="text"], input[type="password"], input[type="email"] {
     height: 60px;
-    width: 320px;
+    width: 246px;
+    margin-left: 10px
+  }
+  input[type="text"]{
+    width:246px; height: 46px;
+    margin: -40px 0 100px 10px;
+  }
+  .challengeDiv input[type="text"]{
+    margin: 8px 0 4px 0;
   }
   .row{
     padding: 0 10px;
@@ -36,14 +45,27 @@
   .searchDB{
     margin-top: 10px;
   }
+  .form-group input[type=text]{
+    margin: 40px 0 20px 10px;
+  }
+  .form-group input[type=password], .form-group input[type=email] {
+    margin: 0 0 12px 10px;
+    height: 46px;
+  }
   .loginSpec{
     margin-top: 10px;
   }
   .loginBtn, .regBtn{
-    margin: 0 4px 0 0;
+    margin: 0 15px 50px 0;
   }
   .question{
     margin-top: 20px;
+  }
+  .viewChal{
+    margin-right: -21px;
+  }
+  .viewChalSol {
+    margin-right: -21px;
   }
 
 }
@@ -69,18 +91,40 @@
     width: 222px;
   }
 }
+@media (max-width: 770px) {
+  .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"]{
+    width:340px;
+  }
+  .rw-wrapper input[type="text"]{
+    width: 390px;
+  }
+}
 
 /* Larger than desktop */
-@media (min-width: 1000px) {}
+@media (min-width: 1000px) {
+  .viewChal{
+    margin-right: 10px;
+  }
+
+  .viewChalSol{
+    margin-right: 60px;
+  }
+}
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
   input[type="text"], input[type="password"], input[type="email"] {
     height: 60px;
-    width: 420px;
+    width: 262px;
   }
   input[type="submit"]{
-    margin: -68px 0 0 25px;
+    margin: -71px 714px 0 25px
+  }
+  .rw-wrapper input[type="text"]{
+    width: 507px;
+  }
+  .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"]{
+    width:420px;
   }
   .loginBtn, .regBtn{
     float: right;
@@ -88,5 +132,8 @@
   }
   .chalType{
     width: 262px;
+  }
+  .submitChal{
+    float: left;
   }
 }
