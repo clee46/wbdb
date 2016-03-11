@@ -10,9 +10,11 @@ module.exports = function(app) {
         { tag: 'Hash Tables' }, { tag: 'Recursion' },
         { tag: 'Stacks' }, { tag: 'Binary Trees' },
         { tag: 'Linked Lists' }];
+      $scope.mySolutions = [];
       $scope.myChallenges = [];
       $scope.favorites = [];
       $scope.newChallenge = {};
+      $scope.newSolution = '';
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -37,22 +39,26 @@ module.exports = function(app) {
         user.getUser((err, res) => {
           if (err) return console.log(err);
           copiedChallenge.author = res.username;
-
+          console.log(copiedChallenge);
           $scope.challengeService.create(copiedChallenge, (err, res) => {
             if (err) return console.log(err);
 
-            if (copiedChallenge.solution && copiedChallenge.solution.length !== 0) {
+            if ($scope.newSolution !== '') {
               $scope.solutionService.create({
-                solution: $scope.newChallenge.solution,
+                solution: $scope.newSolution,
                 challengeId: res._id,
                 userId: auth.getUserId(),
                 author: copiedChallenge.author,
-                published: true
-              }, (err) => {
+                published: false,
+                createdOn: copiedChallenge.createdOn
+              }, (err, res) => {
                   if (err) return console.log(err);
+                  $scope.mySolutions.push(res);
               });
             }
             $scope.newChallenge = null;
+            //see if this clears the text box
+            $scope.newSolution = null;
             $scope.myChallenges.push(res);
           });
         });
@@ -81,15 +87,27 @@ module.exports = function(app) {
             $scope.myChallenges = res.data;
           }, (err) => {
             if (err.statusText === 'Unauthorized') {
-              // $location.path('/auth');
-            //   $scope.$apply(function() {
-            //      $location.path('/auth');
-            //  });
             $timeout(() => {
                 $location.path('/auth');
             });
 
               return console.log('err /api/mychallenges');
+            }
+        });
+      };
+
+      $scope.getUserSolutions = function() {
+        console.log("inside user Solutions")
+        $http.get(__BASEURL__ + '/api/mysolutions')
+          .then((res) => {
+            $scope.mySolutions = res.data;
+          }, (err) => {
+            if (err.statusText === 'Unauthorized') {
+            $timeout(() => {
+                $location.path('/auth');
+            });
+
+              return console.log('err /api/mysolutions');
             }
         });
       };
