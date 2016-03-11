@@ -15,6 +15,9 @@
 .no-cssanimations .rw-wrapper .rw-sentence span:first-child{
   opacity: 1;
 }
+[data-ng-cloak] {
+  display: none;
+}
 input {
   font-size: 24px;
   font-family: 'Raleway', sans-serif;
@@ -100,7 +103,12 @@ form input {
   font-weight: 700;
   margin-left: 10px;
 }
-
+.solutionMsg{
+	color: #D63284;
+  font-size: 18px;
+  font-weight: 700;
+	text-align: center;
+}
 .userBottom{
   margin-top: 20px;
   border-top: 3px solid #434343;

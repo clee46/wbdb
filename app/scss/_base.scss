@@ -61,17 +61,20 @@ a{
   width: 300px;
   margin-bottom: 0;
 }
-
+.searchDB{
+	float: right;
+}
 header{
   border-bottom: 3px solid #434343;
 }
 
 .published{
 	color: green;
+	text-align: right;
 }
 .pending {
 	color: red;
-	text-align: center;
+	text-align: right;
 }
 
 .frame {

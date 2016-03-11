@@ -5,7 +5,6 @@ const Tag = require(__dirname + '/../models/tag');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const tagRouter = module.exports = exports = express.Router();
 
-// future goal: threshold get request
 tagRouter.get('/hints', (req, res) => {
   Tag.find({}, (err, data) => {
     if (err) return handleDBError(err, res);
@@ -27,8 +26,6 @@ tagRouter.post('/tags', jwtAuth, jsonParser, (req, res) => {
     res.status(200).json(data);
   });
 });
-
-// Add Middleware to check admin privileges
 
 tagRouter.put('/tags/:id', jwtAuth, jsonParser, (req, res) => {
   var newData = req.body;

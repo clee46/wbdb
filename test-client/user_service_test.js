@@ -11,7 +11,6 @@ describe('user service', () => {
     $httpBackend = _$httpBackend_;
   }));
   it('should be a service', () => {
-    console.log(User);
     expect(typeof User).toBe('object');
   });
   it('createUser', () => {

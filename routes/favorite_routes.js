@@ -7,8 +7,6 @@ const User = require(__dirname + '/../models/user');
 const handleDBError = require(__dirname + '/../lib/handle_db_error');
 const favoriteRouter = module.exports = exports = express.Router();
 
-// Add new favorite if ids are valid and the user hasn't already favorited
-// this challenge
 favoriteRouter.post('/favorites', jwtAuth, jsonParser, (req, res) => {
   User.findOne({ _id: req.body.userId }).exec()
     .then((data) => {
@@ -36,7 +34,6 @@ favoriteRouter.post('/favorites', jwtAuth, jsonParser, (req, res) => {
     });
 });
 
-// Retrieves all challenges favorited by the user
 favoriteRouter.get('/favorites', jwtAuth, jsonParser, (req, res) => {
   console.log(req.user._id);
   Favorite.find({ userId: req.user._id }).exec()

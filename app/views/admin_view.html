@@ -1,41 +1,43 @@
 <div>
+
   <h1>Welcome Admin!</h1>
   <div class="row">
     <div class="twelve columns" data-ng-init="getChallengesQueue()">
-      <h2>Pending Challenges</h2>
+
+      <h2 data-ng-if="challengesQueue.length !== 0">Pending Challenges</h2>
+      <h2 data-ng-if="challengesQueue.length === 0">There are no pending challenges!</h2>
+
       <section class="searchChal" data-ng-repeat="challenge in challengesQueue">
-        <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
+        <h2>{{challenge.title}}</h2>
 
         <button type="button" name="button" class="viewChal"
           data-ui-sref="challenge({ challengeData: challenge, id: challenge._id })">
           View Full Challenge
         </button>
         <p>{{challenge.question}}</p>
-        <p>{{challenge.author}}</p>
-        <p>{{challenge.tags}}</p>
+        <p><strong>Submitted by:</strong> {{challenge.author}}</p>
+        <p><strong>Tags:</strong> {{challenge.tags.join()}}</p>
       </section>
+
     </div>
   </div>
 
   <div class="row">
     <div class="twelve columns" data-ng-init="getSolutionsQueue()">
-      <h2>Pending Solutions</h2>
+
+      <h2 data-ng-if="solutionsQueue.length !== 0">Pending Solutions</h2>
+      <h2 data-ng-if="solutionsQueue.length === 0">There are no pending solutions!</h2>
+
       <section class="searchChal" data-ng-repeat="single in solutionsQueue track by $index">
 
-        <h2>{{single.challenge.title}}</h2>
-        <p>{{single.challenge.question}}</p>
-        <p>Challenge submitted by: {{single.challenge.author}}</p>
-        <h2>{{single.solution}}</h2>
-        <p>Created on: {{single.createdOn}}</p>
-        <p>Solution submitted by: {{single.author}}</p>
+        <div hljs source='single.solution' language='javascript' style="overflow: visible"></div>
+        <p><strong>Created on:</strong> {{single.createdOn}}</p>
+        <p><strong>Submitted by:</strong> {{single.author}}</p>
         <button type="button" name="button" class="viewChal"
-          data-ng-click="publishSolution(single)" >
-          Publish
-        </button>
+          data-ng-click="publishSolution(single)">Publish</button>
 
       </section>
+
     </div>
   </div>
-
-
 </div>

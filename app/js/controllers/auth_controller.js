@@ -4,6 +4,7 @@ module.exports = function(app) {
       $scope.signin = true;
       $scope.form = {};
       $rootScope.loginPage = true;
+
       $scope.login = (user) => {
         $scope.responseLogin = null;
         userService.login(user, (err, res) => {
@@ -21,6 +22,7 @@ module.exports = function(app) {
           }
         });
       };
+
       $scope.register = (user) => {
         $scope.responseRegister = null;
         userService.createUser(user, (err) => {
@@ -33,5 +35,6 @@ module.exports = function(app) {
           $location.path('/user');
         });
       };
+
     }]);
 };

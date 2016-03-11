@@ -14,7 +14,7 @@
     </h2>
 
     <label for="search" alt="search" class="inline"><span class="icon-search icon-searchMaster"></span>
-    </label><input role="search" type="text" name="name" class="search" placeholder="search"
+    </label><input role="search" type="text" name="name" class="search" placeholder="search for a topic"
     autofocus autocomplete="off" ng-model="search">
 
   </section>
@@ -23,7 +23,6 @@
     <div class="twelve columns" data-ng-init="getPublished()" data-ng-show="search.length !== 0">
       <section class="searchChal"  onclick="this.style.height = '100%'"
       data-ng-repeat="challenge in published | filter:search">
-        <!--add toggle show hide-->
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
         <button type="button" name="button" class="viewChal"

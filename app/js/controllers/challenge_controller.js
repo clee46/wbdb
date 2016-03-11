@@ -1,12 +1,14 @@
 module.exports = function(app) {
-  app.controller('ChallengeController', ['$rootScope', '$scope', '$location', '$http', 'Resource',
-    '$stateParams', 'auth', 'user', ($rootScope, $scope, $location, $http, Resource, $stateParams, auth, user) => {
+  app.controller('ChallengeController', ['$rootScope', '$scope', '$location',
+  '$http', 'Resource', '$stateParams', 'auth', 'user', ($rootScope, $scope,
+    $location, $http, Resource, $stateParams, auth, user) => {
       $scope.solutions = [];
       $scope.hints = [];
       $scope.tags = [];
       $scope.newSolution = {};
       $scope.showSolutions = false;
       $scope.showSubmitForm = false;
+      $scope.noSolutions = false;
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -24,7 +26,6 @@ module.exports = function(app) {
         });
       }
 
-      // check which button to show (either add/remove favorite); run on load
       $scope.checkFavoritedOrNot = (function() {
         if (!$scope.currId) return;
         $scope.showAdd = true;
@@ -71,15 +72,15 @@ module.exports = function(app) {
       };
 
       $scope.getAllSolutions = function() {
-        // $scope.hints.push(challenge.hints[i]);
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
             if (err) return console.log(err);
             $scope.solutions = res;
 
             if ($scope.solutions.length === 0) {
-              console.log('Sorry, no solutions!');
+              $scope.noSolutions = true;
             } else {
+              $scope.noSolutions = false;
               $scope.showSolutions = true;
             }
           });
@@ -128,14 +129,15 @@ module.exports = function(app) {
             createdOn: currentDate.toLocaleTimeString('en-us', options),
             userId: $scope.currId,
             author: res.username
-          }, (err, res) => {
+            }, (err, res) => {
               if (err) return console.log(err);
               $scope.solutions.push(res);
               $scope.newSolution = null;
               $scope.showSubmitForm = false;
-              // notify user that solution is pending approval from admin
           });
         });
+
       };
+
   }]);
 };

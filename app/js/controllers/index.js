@@ -1,6 +1,3 @@
-// This auth scheme is inspired by the angular auth tutorial at
-// https://thinkster.io/angularjs-jwt-auth
-
 module.exports = function(app) {
   require('./auth_controller')(app);
   require('./challenge_controller')(app);
