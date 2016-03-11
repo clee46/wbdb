@@ -17,7 +17,6 @@ describe('resource service', () => {
   }));
 
   it('should be a service', () => {
-    console.log(Resource);
     expect(typeof Resource).toBe('function');
   });
 

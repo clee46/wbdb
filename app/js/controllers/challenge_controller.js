@@ -26,6 +26,7 @@ module.exports = function(app) {
 
       // check which button to show (either add/remove favorite); run on load
       $scope.checkFavoritedOrNot = (function() {
+        if (!$scope.currId) return;
         $scope.showAdd = true;
         $scope.favoriteService.getAll((err, res) => {
           if (err) return console.log(err);
