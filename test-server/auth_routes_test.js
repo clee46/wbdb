@@ -50,7 +50,7 @@ describe('the authorization route', () => {
       .send(invalidUser)
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.msg).to.eql('Please enter an email');
+        expect(res.body.msg).to.eql('Please Enter an Email');
         done();
       });
     });
@@ -66,7 +66,7 @@ describe('the authorization route', () => {
         .send(invalidUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.msg).to.eql('Please enter a valid email');
+          expect(res.body.msg).to.eql('Please Enter a Valid Email');
           done();
         });
     });
@@ -82,11 +82,11 @@ describe('the authorization route', () => {
         .send(invalidUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.body.msg).to.eql('Please enter a user name');
+          expect(res.body.msg).to.eql('Please Enter a User Name');
           done();
         });
      });
-     it('should fail to signup if user fail to enter a password > 7 charachters',
+     it('should fail to signup if user enter a password < 7 charachters',
        (done) => {
          var invalidUser = {
            username: 'test',
@@ -100,10 +100,28 @@ describe('the authorization route', () => {
            .end((err, res) => {
              expect(res).to.have.status(400);
              expect(res.body.msg).to
-               .eql('Please enter a password longer than 7 characters');
+               .eql('Please Enter a Password Longer Than 7 Characters');
              done();
            });
        });
+       it('should fail to signup if passwords are not same',
+         (done) => {
+           var invalidUser = {
+             username: 'test',
+             email: 'test@example.com',
+             password: 'password',
+             confirmpassword: 'passwordddd'
+           };
+           chai.request(baseUri)
+             .post('/api/signup')
+             .send(invalidUser)
+             .end((err, res) => {
+               expect(res).to.have.status(400);
+               expect(res.body.msg).to
+                 .eql('Passwords Are Not the Same');
+               done();
+             });
+         });
        it('should be able to check whether the user already exist for signup',
          (done) => {
            var sameUser = {
@@ -118,7 +136,7 @@ describe('the authorization route', () => {
               .end((err, res) => {
                 expect(res).to.have.status(400);
                 expect(res.body.msg).to
-                  .eql('User already exists! Please use a different username');
+                  .eql('User Already Exists! Please Use a Different Username');
                 done();
               });
           });
@@ -156,7 +174,7 @@ describe('the authorization route', () => {
           .auth('nouser@gmail.com', '12345678')
           .end((err, res) => {
             expect(res).to.have.status(401);
-            expect(res.body.msg).to.eql('no user exists');
+            expect(res.body.msg).to.eql('No User Exists');
             done();
           });
       });
@@ -168,7 +186,7 @@ describe('the authorization route', () => {
             .auth('chris@gmail.com', '12345679')
             .end((err, res) => {
               expect(res).to.have.status(401);
-              expect(res.body.msg).to.eql('incorrect password');
+              expect(res.body.msg).to.eql('Incorrect Password');
               done();
             });
         });
