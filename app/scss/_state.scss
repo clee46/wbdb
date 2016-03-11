@@ -118,7 +118,7 @@
     width: 262px;
   }
   input[type="submit"]{
-    margin: -71px 714px 0 25px
+    // margin: -71px 714px 0 25px
   }
   .rw-wrapper input[type="text"]{
     width: 507px;
@@ -135,5 +135,6 @@
   }
   .submitChal{
     float: left;
+    margin: -71px 714px 0 25px;
   }
 }
