@@ -42,7 +42,7 @@
   </form>
 
   <div class="row userBottom btmRow">
-    <div data-ng-if="!noFavorites" class="six columns favBack" data-ng-init="getAllFavorites()">
+    <div data-ng-if="favorites.length !== 0" class="six columns favBack" data-ng-init="favoriteService.getAll()">
       <h2>My Favorites</h2>
       <section class="searchChal" data-ng-repeat="favorite in favorites">
         <h2>{{favorite.title}}</h2>
@@ -58,12 +58,13 @@
       </section>
     </div>
 
-    <div data-ng-if="noFavorites" class="six columns favBack">
+    <div data-ng-if="favorites.length === 0" class="six columns favBack">
       <h2>Your favorited challenges will show up here. Search the database to get started!</h2>
     </div>
 
-    <div data-ng-if="!nothingToShow" class="six columns mychalBack" data-ng-init="getUserChallenges(); getUserSolutions()">
+    <div data-ng-init="getEverything()">
 
+      <div data-ng-if="mySolutions.length !== 0 || myChallenges.length !== 0" class="six columns mychalBack">
         <h2>My Challenges</h2>
         <section class="searchChal" data-ng-repeat="challenge in myChallenges">
           <p data-ng-if="!challenge.published" class="pending">PENDING</p>
@@ -86,11 +87,14 @@
             data-ng-click="redirect(solution.challengeId)">Select</button>
           <p><strong>Created:</strong> {{solution.createdOn}}</p>
         </section>
+      </div>
+
+      <div data-ng-if="mySolutions.length === 0 && myChallenges.length === 0" class="six columns mychalBack">
+        <h2>Your challenges and solutions will show up here. Submit your first challenge above!</h2>
+      </div>
 
     </div>
 
-    <div data-ng-if="nothingToShow" class="six columns mychalBack">
-      <h2>Your challenges and solutions will show up here. Submit your first challenge above!</h2>
-    </div>
+  </div>
 
 </div>

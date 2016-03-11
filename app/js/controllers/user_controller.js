@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.controller('UserController', ['$scope', '$http', 'Resource',
     '$stateParams', 'user', 'auth', '$location', '$timeout',
     ($scope, $http, Resource, $stateParams, user, auth, $location, $timeout) => {
-
+      console.log('User Controller loaded');
       $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' }, { tag: 'Trees' },
         { tag: 'Queues' }, { tag: 'Hash Tables' }, { tag: 'Recursion' },
         { tag: 'Stacks' }, { tag: 'Binary Trees' }, { tag: 'Linked Lists' },
@@ -15,17 +15,17 @@ module.exports = function(app) {
       $scope.newChallenge = {};
       $scope.newSolution = '';
 
-      if ($scope.mySolutions.length === 0 && $scope.myChallenges.length === 0) {
-        $scope.nothingToShow = true;
-      } else {
-        $scope.nothingToShow = false;
-      }
-
-      if ($scope.favorites.length === 0) {
-        $scope.noFavorites = true;
-      } else {
-        $scope.noFavorites = false;
-      }
+      // if ($scope.mySolutions.length === 0 && $scope.myChallenges.length === 0) {
+      //   $scope.nothingToShow = true;
+      // } else {
+      //   $scope.nothingToShow = false;
+      // }
+      //
+      // if ($scope.favorites.length === 0) {
+      //   $scope.noFavorites = true;
+      // } else {
+      //   $scope.noFavorites = false;
+      // }
 
       $scope.challengeService = new Resource('/challenges');
       $scope.favoriteService = new Resource('/favorites');
@@ -78,6 +78,7 @@ module.exports = function(app) {
       };
 
       $scope.favoriteService.getAll((err, res) => {
+        console.log('inside favorite service getall');
         if (err) {
           if (err.statusText === 'Unauthorized') {
 
@@ -91,10 +92,18 @@ module.exports = function(app) {
         $scope.favorites = res;
       });
 
+      $scope.getEverything = function() {
+        console.log('getting everything');
+        $scope.getUserChallenges();
+        $scope.getUserSolutions();
+      };
+
       $scope.getUserChallenges = function() {
+        console.log('getting challenges');
         $http.get(__BASEURL__ + '/api/mychallenges')
           .then((res) => {
             $scope.myChallenges = res.data;
+            console.log($scope.myChallenges);
           }, (err) => {
             if (err.statusText === 'Unauthorized') {
             $timeout(() => {
@@ -107,9 +116,11 @@ module.exports = function(app) {
       };
 
       $scope.getUserSolutions = function() {
+        console.log('getting solutions');
         $http.get(__BASEURL__ + '/api/mysolutions')
           .then((res) => {
             $scope.mySolutions = res.data;
+            console.log($scope.mySolutions);
           }, (err) => {
             if (err.statusText === 'Unauthorized') {
             $timeout(() => {

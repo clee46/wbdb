@@ -1,11 +1,12 @@
 <div>
-  
-  <h1>Welcome Admin!</h1>
 
+  <h1>Welcome Admin!</h1>
   <div class="row">
     <div class="twelve columns" data-ng-init="getChallengesQueue()">
 
-      <h2>Pending Challenges</h2>
+      <h2 data-ng-if="challengesQueue.length !== 0">Pending Challenges</h2>
+      <h2 data-ng-if="challengesQueue.length === 0">There are no pending challenges!</h2>
+
       <section class="searchChal" data-ng-repeat="challenge in challengesQueue">
         <h2>{{challenge.title}}</h2>
 
@@ -24,7 +25,9 @@
   <div class="row">
     <div class="twelve columns" data-ng-init="getSolutionsQueue()">
 
-      <h2>Pending Solutions</h2>
+      <h2 data-ng-if="solutionsQueue.length !== 0">Pending Solutions</h2>
+      <h2 data-ng-if="solutionsQueue.length === 0">There are no pending solutions!</h2>
+
       <section class="searchChal" data-ng-repeat="single in solutionsQueue track by $index">
 
         <div hljs source='single.solution' language='javascript' style="overflow: visible"></div>
@@ -37,5 +40,4 @@
 
     </div>
   </div>
-
 </div>
