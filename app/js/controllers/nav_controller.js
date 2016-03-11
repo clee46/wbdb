@@ -16,7 +16,7 @@ module.exports = function(app) {
       }
 
       $rootScope.loggedIn = !!auth.token;
-      
+
       $scope.logout = auth.logout.bind(auth, () => {
         $rootScope.loggedIn = false;
         $rootScope.loginPage = false;

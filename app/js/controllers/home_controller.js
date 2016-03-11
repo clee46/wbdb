@@ -21,7 +21,6 @@ module.exports = function(app) {
       $scope.getPublished = function() {
         $http.get(__BASEURL__ + '/api/published')
           .then((res) => {
-            console.log(res);
             $scope.published = res.data;
           }, (err) => {
             console.log(err);
