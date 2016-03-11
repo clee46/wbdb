@@ -36,7 +36,7 @@ describe('Admin Routes', () => {
     });
     it('should fail non-admin user to log in', (done) => {
       chai.request(baseUri)
-        .get('/api/admin')
+        .get('/api/admin/challenges')
         .set('authorization', 'Bearer ' + this.adminToken)
         .end((err, res) => {
           expect(res).to.have.status(401);
@@ -86,10 +86,9 @@ describe('Admin Routes', () => {
 
     it('should show Challenges with unpublished', (done) => {
       chai.request(baseUri)
-        .get('/api/admin')
+        .get('/api/admin/challenges')
         .set('authorization', 'Bearer ' + this.adminToken)
         .end((err, res) => {
-          expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(Array.isArray(res.body)).to.eql(true);
           done();
