@@ -1,7 +1,10 @@
 <div>
+  
   <h1>Welcome Admin!</h1>
+
   <div class="row">
     <div class="twelve columns" data-ng-init="getChallengesQueue()">
+
       <h2>Pending Challenges</h2>
       <section class="searchChal" data-ng-repeat="challenge in challengesQueue">
         <h2>{{challenge.title}}</h2>
@@ -14,11 +17,13 @@
         <p><strong>Submitted by:</strong> {{challenge.author}}</p>
         <p><strong>Tags:</strong> {{challenge.tags.join()}}</p>
       </section>
+
     </div>
   </div>
 
   <div class="row">
     <div class="twelve columns" data-ng-init="getSolutionsQueue()">
+
       <h2>Pending Solutions</h2>
       <section class="searchChal" data-ng-repeat="single in solutionsQueue track by $index">
 
@@ -29,8 +34,8 @@
           data-ng-click="publishSolution(single)">Publish</button>
 
       </section>
+
     </div>
   </div>
-
 
 </div>
