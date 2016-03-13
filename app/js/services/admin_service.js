@@ -26,8 +26,6 @@ module.exports = function(app) {
       }
 
       getSolutionChallenge(id, cb) {
-        console.log('called getSolutionChallenge');
-        console.log(id);
         $http.get(__BASEURL__ + `/api/solutions/${id}`)
           .then(handleSuccess(cb), handleFailure(cb));
       }

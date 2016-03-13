@@ -15,6 +15,9 @@
 .no-cssanimations .rw-wrapper .rw-sentence span:first-child{
   opacity: 1;
 }
+[data-ng-cloak] {
+  display: none;
+}
 input {
   font-size: 24px;
   font-family: 'Raleway', sans-serif;
@@ -32,15 +35,28 @@ button, button-primary{
   float: none;
 }
 
-.searchDB{
-  background-color: #6B969D;
-  color: white;
-  transition: all .25s ease-in;
+// .searchDB{
+//   background-color: #6B969D;
+//   color: white;
+//   transition: all .25s ease-in;
+// }
+// .searchDB:hover{
+//   background-color: #6B889D;
+//   border: 1px solid #6B889D;
+//   color: white;
+// }
+
+.header span{
+  background:none;
+  color:#333333;
+  font-weight: 200;
+  transition: .25s all ease-in;
+  cursor: pointer;
 }
-.searchDB:hover{
-  background-color: #6B889D;
-  border: 1px solid #6B889D;
-  color: white;
+.header span:hover{
+  color:#6B889D;
+  background: none;
+  border: none;
 }
 
 [class^="icon-"]{
@@ -55,8 +71,9 @@ button, button-primary{
 .search {
   margin: 40px 0 80px 10px;
 }
-.icon-search{
-  padding: 10px;
+
+.icon-searchMaster{
+  margin-left: -34px;
 }
 .inline{
   display: inline-block;
@@ -84,11 +101,16 @@ form input {
   font-weight: 700;
   margin-left: 10px;
 }
-
+.solutionMsg{
+	color: #D63284;
+  font-size: 18px;
+  font-weight: 700;
+	text-align: center;
+}
 .userBottom{
   margin-top: 20px;
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
+  border-top: 3px solid #434343;
+  border-bottom: 3px solid #434343;
   min-height: 200px;
 }
 
@@ -160,19 +182,14 @@ label{
   right: 20px;
   font-size: 12px;
 }
-.viewChal{
-  margin-right: 10px;
-}
-
-.viewChalSol{
-  margin-right: 60px;
-}
 
 .favBack, .mychalBack{
   background: #d3d3d3;
   padding: 10px;
 }
-
+.userBtmUser{
+  background: #d3d3d3;
+}
 p strong span{
   font-weight: 100;
 }

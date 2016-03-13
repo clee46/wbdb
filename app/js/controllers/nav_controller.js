@@ -10,7 +10,6 @@ module.exports = function(app) {
       if (auth.token) {
         user.getUser((err, res) => {
           if (err) return console.log(err);
-          console.log(res);
           if (res.authentication.isAdmin) $rootScope.isAdmin = true;
         });
       }

@@ -16,7 +16,6 @@ module.exports = function(app) {
       constructor() {}
 
       createUser(user, cb) {
-        console.log(user);
         $http.post(__BASEURL__ + '/api/signup', user)
           .then(handleSuccess(cb), handleFailure(cb));
       }

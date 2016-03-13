@@ -10,8 +10,7 @@ describe('admin service', () => {
     admin = _admin_;
     $httpBackend = _$httpBackend_;
   }));
-  it('should be a servie', () => {
-    console.log(admin);
+  it('should be a service', () => {
     expect(typeof admin).toBe('object');
   });
   it('getChallenges to get challenges', () => {

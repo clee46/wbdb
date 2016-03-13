@@ -15,7 +15,6 @@ describe('auth service', () => {
     auth = _auth_;
   }));
   it('should be a service', () => {
-    console.log(auth);
     expect(typeof auth).toBe('object');
   });
   it('the default token and username should be null', () => {
