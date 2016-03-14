@@ -148,8 +148,15 @@ label{
 .pullDown{
   margin-top: 40px;
 }
-
-
+.submitBtns{
+  input{
+    width: 150px;
+  }
+  button {
+    width: 150px;
+    // margin-top: -5px;
+  }
+}
 .searchChal{
   background: #fff;
   border: 2px dotted #ccc;
@@ -199,4 +206,10 @@ footer p{
 }
 .hljs {
   margin-left: 0px;
+}
+.submitBtns input{
+  color: #fff;
+  background-color: #6B969D;
+  border-color: #6B969D;
+  transition: .25s all ease-in;
 }

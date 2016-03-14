@@ -45,6 +45,25 @@
   input[type="submit"]{
     margin: 0 0 0 75px;
   }
+  input[type="submit"] .submitSol{
+    margin-bottom: 0;
+  }
+  .submitBtns{
+    input{
+      float: left;
+      color: #fff;
+      background-color: #6B969D;
+      border-color: #6B969D;
+      transition: .25s all ease-in;
+      margin-top: 5px;
+      margin-left: 15px;
+      margin-bottom: -45px;
+    }
+    button{
+      margin-top: 5px;
+      margin-right: 15px;
+    }
+  }
   .chalh1{
     margin-left: 10px;
   }
@@ -73,7 +92,9 @@
   .viewChalSol {
     margin-right: -21px;
   }
-
+  .searchChal{
+    margin-top: 40px;
+  }
 }
 
 /* Larger than phablet (also point when grid becomes active) */
@@ -97,7 +118,7 @@
     width: 222px;
   }
 }
-@media (max-width: 770px) {
+@media (max-width: 770) {
   .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"]{
     width:340px;
   }
@@ -143,9 +164,19 @@
     float: left;
     margin: -71px 714px 0 25px;
   }
-  // .icon-search{
-  //   padding-top: 4px;
-  // }
+  .submitBtns {
+    input{
+      margin: 25px 0 25px 0;
+    }
+    button{
+      margin-top: 5px;
+      margin-right: 60px;
+    }
+  }
+  .icon-search{
+    padding-top: 4px;
+  }
+
   .icon-search{
     padding: 4px 0 0 26px;
   }
