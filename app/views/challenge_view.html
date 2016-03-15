@@ -20,6 +20,9 @@
           <button type="button" name="button" class="viewChal" data-ng-if="!showAdd && !isAdmin && loggedIn" data-ng-click="removeFavorite()" >Remove From Favorites</button>
 
         </div>
+
+        <p data-ng-init="getFavoriteCount()"><strong>Favorited:</strong> {{favCount}} times</p>
+
       </section>
     </div>
   </div>
