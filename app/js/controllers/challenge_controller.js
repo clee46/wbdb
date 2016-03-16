@@ -4,8 +4,8 @@ module.exports = function(app) {
     $location, $http, Resource, $stateParams, auth, user) => {
 
       $scope.solutions = [];
-      $scope.hints = [];
-      $scope.tags = [];
+      // $scope.hints = [];
+      // $scope.tags = [];
       $scope.newSolution = {};
 
       $scope.showSolutions = false;
@@ -13,20 +13,12 @@ module.exports = function(app) {
       $scope.noSolutions = false;
 
       $scope.challengeService = new Resource('/challenges');
-      $scope.favoriteService = new Resource('/favorites');
-      $scope.hintService = new Resource('/hints');
-      $scope.tagService = new Resource('/tags');
       $scope.solutionService = new Resource('/solutions');
+      $scope.favoriteService = new Resource('/favorites');
+      // $scope.hintService = new Resource('/hints');
+      // $scope.tagService = new Resource('/tags');
 
       $scope.currId = auth.getUserId();
-
-      $scope.challenge = $stateParams.challengeData;
-      if (!$scope.challenge) {
-        $scope.challengeService.getOne($stateParams.id, (err, data) => {
-          if (err) return console.log(err);
-          $scope.challenge = data;
-        });
-      }
 
       $scope.checkFavoritedOrNot = (function() {
         if (!$scope.currId) return;
@@ -42,6 +34,19 @@ module.exports = function(app) {
           }
         });
       })();
+
+      $scope.getChallenge = function() {
+        console.log('inside get challenge');
+        $scope.challenge = $stateParams.challengeData;
+        if (!$scope.challenge) {
+          $scope.challengeService.getOne($stateParams.id, (err, data) => {
+            if (err) return console.log(err);
+            $scope.challenge = data;
+            console.log($scope.challenge);
+            $scope.getAllSolutions();
+          });
+        }
+      };
 
       $scope.getFavoriteCount = function() {
         var temp;
@@ -91,15 +96,22 @@ module.exports = function(app) {
           (err, res) => {
             if (err) return console.log(err);
             $scope.solutions = res;
-
+            var count = 1;
+            $scope.solutions.forEach((solution) => {
+              solution.count = count;
+              count++;
+            });
             if ($scope.solutions.length === 0) {
               $scope.noSolutions = true;
             } else {
               $scope.noSolutions = false;
-              $scope.showSolutions = true;
             }
           });
       };
+
+      $scope.showButton = function() {
+        $scope.showSolutions = true;
+      }
 
       $scope.hideButton = function() {
         $scope.showSolutions = false;
