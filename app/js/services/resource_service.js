@@ -18,15 +18,18 @@ module.exports = function(app) {
       }
 
       getOne(id, cb) {
+        cb = cb || function() {};
         $http.get(__BASEURL__ + `/api${this.resourceName}/${id}`)
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       getAllWithId(data, cb) {
+        cb = cb || function() {};
         this.getOne(data, cb);
       }
 
       getAll(cb) {
+        cb = cb || function() {};
         $http.get(__BASEURL__ + `/api${this.resourceName}`)
           .then(handleSuccess(cb), handleFailure(cb));
       }

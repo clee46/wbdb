@@ -20,7 +20,20 @@ module.exports = function(app) {
 
       $scope.currId = auth.getUserId();
 
-      $scope.checkFavoritedOrNot = (function() {
+      $scope.getChallenge = function() {
+        $scope.challenge = $stateParams.challengeData;
+        if (!$scope.challenge) {
+          $scope.challengeService.getOne($stateParams.id, (err, data) => {
+            if (err) return console.log(err);
+            $scope.challenge = data;
+            $scope.checkFavoritedOrNot();
+            $scope.getFavoriteCount();
+            $scope.getAllSolutions();
+          });
+        }
+      };
+
+      $scope.checkFavoritedOrNot = function() {
         if (!$scope.currId) return;
         $scope.showAdd = true;
         $scope.favoriteService.getAll((err, res) => {
@@ -33,40 +46,15 @@ module.exports = function(app) {
             }
           }
         });
-      })();
-
-      $scope.getChallenge = function() {
-        console.log('inside get challenge');
-        $scope.challenge = $stateParams.challengeData;
-        if (!$scope.challenge) {
-          $scope.challengeService.getOne($stateParams.id, (err, data) => {
-            if (err) return console.log(err);
-            $scope.challenge = data;
-            console.log($scope.challenge);
-            $scope.getAllSolutions();
-          });
-        }
       };
 
       $scope.getFavoriteCount = function() {
         var temp;
         if (!$scope.challenge) temp = $stateParams.id;
         else temp = $scope.challenge._id;
-        console.log(temp);
         $scope.favoriteService.getOne(temp, (err, res) => {
           if (err) return console.log(err);
-          console.log(res);
           $scope.favCount = res;
-        });
-      };
-
-      $scope.publish = function() {
-        $scope.challengeService.update({
-          _id: $scope.challenge._id,
-          published: true
-        }, (err) => {
-          if (err) return console.log(err);
-          $location.path('/admin');
         });
       };
 
@@ -91,6 +79,22 @@ module.exports = function(app) {
         });
       };
 
+      $scope.showButton = function() {
+        $scope.showSolutions = true;
+      };
+
+      $scope.hideButton = function() {
+        $scope.showSolutions = false;
+      };
+
+      $scope.showForm = function() {
+        $scope.showSubmitForm = true;
+      };
+
+      $scope.hideForm = function() {
+        $scope.showSubmitForm = false;
+      };
+
       $scope.getAllSolutions = function() {
         $scope.solutionService.getAllWithId($scope.challenge._id,
           (err, res) => {
@@ -109,14 +113,6 @@ module.exports = function(app) {
           });
       };
 
-      $scope.showButton = function() {
-        $scope.showSolutions = true;
-      }
-
-      $scope.hideButton = function() {
-        $scope.showSolutions = false;
-      };
-
       $scope.getAllHints = function() {
         $scope.hintService.getAllWithId($scope.challenge._id,
           (err, res) => {
@@ -133,12 +129,14 @@ module.exports = function(app) {
           });
       };
 
-      $scope.showForm = function() {
-        $scope.showSubmitForm = true;
-      };
-
-      $scope.hideForm = function() {
-        $scope.showSubmitForm = false;
+      $scope.publish = function() {
+        $scope.challengeService.update({
+          _id: $scope.challenge._id,
+          published: true
+        }, (err) => {
+          if (err) return console.log(err);
+          $location.path('/admin');
+        });
       };
 
       $scope.submitSolution = function() {

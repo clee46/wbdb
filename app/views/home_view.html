@@ -25,8 +25,10 @@
       data-ng-repeat="challenge in published | filter:search">
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
-        <button type="button" name="button" class="viewChal"
-          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View</button>
+        <!-- <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View</button> -->
+          <button type="button" name="button" class="viewChal viewChalChal"
+  data-ng-click="redirect(challenge._id)">Select</button>
         <p>{{challenge.question}}</p>
         <p>{{challenge.author}}</p>
         <p>Tags: {{challenge.tags.join()}}</p>
