@@ -22,6 +22,10 @@ module.exports = function(app) {
         $location.path('/challenge/' + id);
       };
 
+      $scope.searchAuthor = function(username) {
+        $location.path('/search/' + username);
+      }
+
       $scope.submitChallenge = function() {
         var currentDate = new Date();
         var options = {

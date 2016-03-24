@@ -28,7 +28,7 @@
           <button type="button" name="button" class="viewChal viewChalChal"
   data-ng-click="redirect(challenge._id)">Select</button>
         <p>{{challenge.question}}</p>
-        <p><strong>Submitted by:</strong> <a href="#">{{challenge.author}}</a></p>
+        <p><strong>Submitted by:</strong> <a data-ng-click="searchAuthor(challenge.author)">{{challenge.author}}</a></p>
         <p>Tags: {{challenge.tags.join()}}</p>
       </section>
     </div>

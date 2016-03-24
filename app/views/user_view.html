@@ -54,7 +54,7 @@
         <button type="button" name="button" class="viewChal viewChalChal"
   data-ng-click="redirect(favorite._id)">Select</button>
         <p>{{favorite.question}}</p>
-        <p><strong>Submitted by:</strong> <a href="#">{{favorite.author}}</a></p>
+        <p><strong>Submitted by:</strong> <a data-ng-click="searchAuthor(favorite.author)">{{favorite.author}}</a></p>
         <p style="margin-bottom:20px;"><strong>Created on:</strong> {{favorite.createdOn}}</p>
         <p><strong>Tags:</strong> {{favorite.tags.join()}}</p>
       </section>

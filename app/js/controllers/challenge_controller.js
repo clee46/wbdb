@@ -20,6 +20,11 @@ module.exports = function(app) {
 
       $scope.currId = auth.getUserId();
 
+      $scope.searchAuthor = function(username) {
+        $location.path('/search/' + username);
+      }
+
+
       $scope.getChallenge = function() {
         $scope.challenge = $stateParams.challengeData;
         if (!$scope.challenge) {

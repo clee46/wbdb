@@ -1,0 +1,16 @@
+<h1>{{username}}'s Challenges</h1>
+
+<div class="row">
+  <div class="twelve columns" data-ng-init="getUserChallenges()">
+    <section class="searchChal"  onclick="this.style.height = '100%'"
+    data-ng-repeat="challenge in searchResults">
+      <h2>{{challenge.title}}</h2>
+
+        <button type="button" name="button" class="viewChal viewChalChal"
+        data-ng-click="redirect(challenge._id)">Select</button>
+      <p>{{challenge.question}}</p>
+      <!-- <p><strong>Submitted by:</strong> <a href="#">{{challenge.author}}</a></p> -->
+      <p>Tags: {{challenge.tags.join()}}</p>
+    </section>
+  </div>
+</div>

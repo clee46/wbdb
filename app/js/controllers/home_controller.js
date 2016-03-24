@@ -9,6 +9,10 @@ module.exports = function(app) {
         $location.path('/challenge/' + id);
       };
 
+      $scope.searchAuthor = function(username) {
+        $location.path('/search/' + username);
+      }
+
       $scope.getPublished = function() {
         $http.get(__BASEURL__ + '/api/published')
           .then((res) => {
