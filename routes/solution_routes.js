@@ -20,6 +20,13 @@ solutionRouter.get('/solutions/:id', (req, res) => {
     .catch((err) => handleDBError(err, res));
 });
 
+solutionRouter.get('/usersolutions/:id', (req, res) => {
+  Solution.find({ author: req.params.id, published: true }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
 solutionRouter.post('/solutions', jwtAuth, jsonParser, (req, res) => {
   var newSolution = new Solution(req.body);
   newSolution.save((err, data) => {

@@ -2,7 +2,9 @@ module.exports = function(app) {
   app.controller('SearchController', ['$scope', '$location', '$http',
     '$stateParams', ($scope, $location, $http, $stateParams) => {
 
-      $scope.searchResults = [];
+      $scope.solutions = [];
+      $scope.challenges = [];
+
       $scope.username = $stateParams.id;
 
       $scope.redirect = function(id) {
@@ -16,13 +18,29 @@ module.exports = function(app) {
         else {
           $http.get(__BASEURL__ + '/api/userchallenges/' + $scope.username)
             .then((res) => {
-              $scope.searchResults = res.data;
+              $scope.challenges = res.data;
             }, (err) => {
               if (err) return console.log(err);
             });
         }
 
       };
+
+      $scope.getUserSolutions = function() {
+
+        if (!$scope.username) $scope.username = $stateParams.id;
+
+        else {
+          $http.get(__BASEURL__ + '/api/usersolutions/' + $scope.username)
+            .then((res) => {
+              $scope.solutions = res.data;
+            }, (err) => {
+              if (err) return console.log(err);
+            });
+        }
+
+      };
+
 
   }]);
 };

@@ -56,7 +56,7 @@
     <section data-ng-if="showSolutions" class="searchChal" data-ng-repeat="solution in solutions">
       <h2>Solution #{{solution.count}}</h2>
       <div hljs source='solution.solution' language='javascript'></div>
-      <p><strong>Submitted by:</strong> {{solution.author}} on {{solution.createdOn}}</p>
+      <p><strong>Submitted by:</strong> <a data-ng-click="searchAuthor(solution.author)">{{solution.author}}</a> on {{solution.createdOn}}</p>
     </section>
   </div>
 
