@@ -8,8 +8,6 @@
         <span>strings?</span>
         <span>linked list?</span>
         <span>trees?</span>
-        <span>saalmons?</span>
-        <span>bears?</span>
       </div>
     </h2>
 
@@ -25,10 +23,12 @@
       data-ng-repeat="challenge in published | filter:search">
         <h2>{{challenge.title}}</h2><span>{{challenge.difficulty}}</span>
 
-        <button type="button" name="button" class="viewChal"
-          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View Full Challenge</button>
+        <!-- <button type="button" name="button" class="viewChal"
+          data-ui-sref="challenge({challengeData:challenge, id:challenge._id})">View</button> -->
+          <button type="button" name="button" class="viewChal viewChalChal"
+  data-ng-click="redirect(challenge._id)">Select</button>
         <p>{{challenge.question}}</p>
-        <p>{{challenge.author}}</p>
+        <p><strong>Submitted by:</strong> <a data-ng-click="searchAuthor(challenge.author)">{{challenge.author}}</a></p>
         <p>Tags: {{challenge.tags.join()}}</p>
       </section>
     </div>

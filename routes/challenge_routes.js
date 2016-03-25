@@ -46,6 +46,13 @@ challengeRouter.get('/published', (req, res) => {
   });
 });
 
+challengeRouter.get('/userchallenges/:id', (req, res) => {
+  Challenge.find({ author: req.params.id, published: true }, (err, data) => {
+    if (err) return handleDBError(err, res);
+    res.status(200).json(data);
+  });
+});
+
 challengeRouter.get('/challenges/:id', (req, res) => {
   Challenge.findOne({ _id: req.params.id }).exec()
     .then((challenge) => {

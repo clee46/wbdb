@@ -19,6 +19,13 @@ wbdbApp.config(['$stateProvider', '$urlRouterProvider',
         controller: 'HomeController',
         authenticate: false
       })
+      .state('search', {
+        url: '/search/:id',
+        templateUrl: 'views/search_view.html',
+        controller: 'SearchController',
+        params: { id: { value: null, squash: false } },
+        authenticate: false
+      })
       .state('challenge', {
         url: '/challenge/:id',
         templateUrl: 'views/challenge_view.html',
