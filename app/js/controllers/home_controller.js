@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.controller('HomeController', ['$rootScope', '$scope', '$http', '$location',
-    function($rootScope, $scope, $http, $location) {
+  app.controller('HomeController', ['$rootScope', '$scope', '$http',
+    '$location', ($rootScope, $scope, $http, $location) => {
       $scope.search = '';
       $scope.published = [];
       $rootScope.loginPage = false;
@@ -11,7 +11,7 @@ module.exports = function(app) {
 
       $scope.searchAuthor = function(username) {
         $location.path('/search/' + username);
-      }
+      };
 
       $scope.getPublished = function() {
         $http.get(__BASEURL__ + '/api/published')

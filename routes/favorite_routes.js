@@ -54,8 +54,9 @@ favoriteRouter.get('/favorites/:id', jsonParser, (req, res) => {
 });
 
 favoriteRouter.delete('/favorites/:id', jwtAuth, jsonParser, (req, res) => {
-  Favorite.remove({ challengeId: req.params.id, userId: req.user._id }, (err) => {
-    if (err) return handleDBError(err, res);
-    res.status(200).json({ msg: 'Successfully Deleted Challenge' });
+  Favorite.remove({ challengeId: req.params.id, userId: req.user._id },
+    (err) => {
+      if (err) return handleDBError(err, res);
+      res.status(200).json({ msg: 'Successfully Deleted Challenge' });
   });
 });

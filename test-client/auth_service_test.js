@@ -1,4 +1,5 @@
 /* eslint-env jasmine */
+/* eslint-disable no-undefined */
 var angular = require('angular');
 
 describe('auth service', () => {
@@ -7,7 +8,9 @@ describe('auth service', () => {
   var rootScope;
   var window;
   var auth;
-  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2ZTA5M2ZhMjdkMTVlNjQwYjI2NjJkNyIsImlhdCI6MTQ1NzYyMDkwM30.34v0dcujjK4Ill6Meu20QtmPZ2m0OYAEhIk4WL44RAA';
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2ZTA5M2ZhMjd' +
+  'kMTVlNjQwYjI2NjJkNyIsImlhdCI6MTQ1NzYyMDkwM30.34v0dcujjK4Ill6Meu20QtmPZ2m' +
+  '0OYAEhIk4WL44RAA';
 
   beforeEach(angular.mock.inject((_$rootScope_, _$window_, _auth_) => {
     rootScope = _$rootScope_;

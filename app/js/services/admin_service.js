@@ -16,12 +16,12 @@ module.exports = function(app) {
       constructor() {}
 
       getChallenges(cb) {
-        $http.get(__BASEURL__ + `/api/admin/challenges`)
+        $http.get(__BASEURL__ + '/api/admin/challenges')
           .then(handleSuccess(cb), handleFailure(cb));
       }
 
       getSolutions(cb) {
-        $http.get(__BASEURL__ + `/api/admin/solutions`)
+        $http.get(__BASEURL__ + '/api/admin/solutions')
           .then(handleSuccess(cb), handleFailure(cb));
       }
 

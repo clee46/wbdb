@@ -32,6 +32,7 @@ describe('the authorization route', () => {
         'confirmpassword': 'password'
       })
       .end((err, res) => {
+        expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
         expect(res.body).to.have.property('msg');
@@ -49,6 +50,7 @@ describe('the authorization route', () => {
       .post('/api/signup')
       .send(invalidUser)
       .end((err, res) => {
+        expect(err).to.not.eql(null);
         expect(res).to.have.status(400);
         expect(res.body.msg).to.eql('Please Enter an Email');
         done();
@@ -65,6 +67,7 @@ describe('the authorization route', () => {
         .post('/api/signup')
         .send(invalidUser)
         .end((err, res) => {
+          expect(err).to.not.eql(null);
           expect(res).to.have.status(400);
           expect(res.body.msg).to.eql('Please Enter a Valid Email');
           done();
@@ -81,6 +84,7 @@ describe('the authorization route', () => {
         .post('/api/signup')
         .send(invalidUser)
         .end((err, res) => {
+          expect(err).to.not.eql(null);
           expect(res).to.have.status(400);
           expect(res.body.msg).to.eql('Please Enter a User Name');
           done();
@@ -98,6 +102,7 @@ describe('the authorization route', () => {
            .post('/api/signup')
            .send(invalidUser)
            .end((err, res) => {
+             expect(err).to.not.eql(null);
              expect(res).to.have.status(400);
              expect(res.body.msg).to
                .eql('Please Enter a Password Longer Than 7 Characters');
@@ -116,6 +121,7 @@ describe('the authorization route', () => {
              .post('/api/signup')
              .send(invalidUser)
              .end((err, res) => {
+               expect(err).to.not.eql(null);
                expect(res).to.have.status(400);
                expect(res.body.msg).to
                  .eql('Passwords Are Not the Same');
@@ -134,6 +140,7 @@ describe('the authorization route', () => {
               .post('/api/signup')
               .send(sameUser)
               .end((err, res) => {
+                expect(err).to.not.eql(null);
                 expect(res).to.have.status(400);
                 expect(res.body.msg).to
                   .eql('User Already Exists! Please Use a Different Username');
@@ -173,6 +180,7 @@ describe('the authorization route', () => {
           .get('/api/signin')
           .auth('nouser@gmail.com', '12345678')
           .end((err, res) => {
+            expect(err).to.not.eql(null);
             expect(res).to.have.status(401);
             expect(res.body.msg).to.eql('No User Exists');
             done();
@@ -185,6 +193,7 @@ describe('the authorization route', () => {
             .get('/api/signin')
             .auth('chris@gmail.com', '12345679')
             .end((err, res) => {
+              expect(err).to.not.eql(null);
               expect(res).to.have.status(401);
               expect(res.body.msg).to.eql('Incorrect Password');
               done();
