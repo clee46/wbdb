@@ -23,8 +23,12 @@ module.exports = function(app) {
       };
 
       $scope.searchAuthor = function(username) {
-        $location.path('/search/' + username);
-      }
+        $location.path('/search/user/' + username);
+      };
+
+      $scope.searchTag = function(tag) {
+        $location.path('/search/tag/' + tag);
+      };
 
       $scope.submitChallenge = function() {
         var currentDate = new Date();
