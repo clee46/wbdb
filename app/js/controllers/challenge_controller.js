@@ -22,8 +22,7 @@ module.exports = function(app) {
 
       $scope.searchAuthor = function(username) {
         $location.path('/search/' + username);
-      }
-
+      };
 
       $scope.getChallenge = function() {
         $scope.challenge = $stateParams.challengeData;

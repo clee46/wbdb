@@ -39,6 +39,7 @@ describe('Admin Routes', () => {
         .get('/api/admin/challenges')
         .set('authorization', 'Bearer ' + this.adminToken)
         .end((err, res) => {
+          expect(err).to.not.eql(null);
           expect(res).to.have.status(401);
           expect(res.body.msg).to.eql('Only admins are allows to do this!');
           done();
@@ -89,6 +90,7 @@ describe('Admin Routes', () => {
         .get('/api/admin/challenges')
         .set('authorization', 'Bearer ' + this.adminToken)
         .end((err, res) => {
+          expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(Array.isArray(res.body)).to.eql(true);
           done();

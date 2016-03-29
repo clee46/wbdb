@@ -1,6 +1,7 @@
 module.exports = function(app) {
   app.controller('AdminController', ['$scope', '$http', 'Resource', '$location',
-    '$timeout', 'admin', ($scope, $http, Resource, $location, $timeout, admin) => {
+    '$timeout', 'admin',
+    ($scope, $http, Resource, $location, $timeout, admin) => {
       $scope.challengesQueue = [];
       $scope.solutionsQueue = [];
       $scope.solutionService = new Resource('/solutions');

@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "node_modules/eslint/bin/eslint.js --ext=.js app/ lib/ models/ routes/ test-client/ test-server/ index.js server.js",
+    "postinstall": "gulp build:prod",
+    "pretest": "npm run lint && node_modules/gulp/bin/gulp.js webpack:test",
     "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp build:prod"
+    "test": "node_modules/mocha/bin/mocha test-server && node_modules/karma/bin/karma start"
   },
   "repository": {
     "type": "git",
