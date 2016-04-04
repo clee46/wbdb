@@ -40,11 +40,42 @@ challengeRouter.get('/challenges', (req, res) => {
 });
 
 challengeRouter.get('/published', (req, res) => {
-  Challenge.find({ published: true }, (err, data) => {
-    if (err) return handleDBError(err, res);
-    res.status(200).json(data);
-  });
+  Challenge.find({ published: true }).exec()
+    .then((challenges) => {
+      const challengePromises = challenges.map((challenge) => {
+        const challengeId = challenge._id;
+        const solutionProm = Solution.find({ challengeId }).exec();
+        const hintProm = Hint.find({ challengeId }).exec();
+        const tagProm = Tag.find({ challengeId }).exec();
+
+        return Promise.all([solutionProm, hintProm, tagProm])
+          .then((resolutions) => {
+            const solutions = resolutions[0]
+              .map((solution) => solution.solution);
+            const hints = resolutions[1]
+              .map((hint) => hint.hint);
+            const tags = resolutions[2]
+              .map((tag) => tag.tag);
+
+            return Object.assign(challenge.toObject(),
+              { solutions, hints, tags });
+          });
+      });
+
+      return Promise.all(challengePromises);
+    })
+    .then((challengesComposed) => {
+      res.status(200).json(challengesComposed);
+    })
+    .catch((err) => handleDBError(err, res));
 });
+
+// challengeRouter.get('/published', (req, res) => {
+//   Challenge.find({ published: true }, (err, data) => {
+//     if (err) return handleDBError(err, res);
+//     res.status(200).json(data);
+//   });
+// });
 
 challengeRouter.get('/userchallenges/:id', (req, res) => {
   Challenge.find({ author: req.params.id, published: true }, (err, data) => {

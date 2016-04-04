@@ -92,6 +92,19 @@ module.exports = function(app) {
       $scope.getEverything = function() {
         $scope.getUserChallenges();
         $scope.getUserSolutions();
+        $scope.getTags();
+      };
+
+      $scope.getTags = function() {
+        $scope.tagService.getAll((err, res) => {
+          if (err) return console.log(err);
+          var dbTags = res;
+          dbTags.forEach((tag) => {
+            if ($scope.tags.map((x) => x.tag).indexOf(tag.tag) === -1) {
+              $scope.tags.push({ tag: tag.tag });
+            }
+          });
+        });
       };
 
       $scope.getUserChallenges = function() {

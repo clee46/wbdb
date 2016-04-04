@@ -5,12 +5,13 @@ module.exports = function(app) {
 
       $scope.solutions = [];
       // $scope.hints = [];
-      // $scope.tags = [];
       $scope.tags = [{ tag: 'Arrays' }, { tag: 'Strings' }, { tag: 'Trees' },
         { tag: 'Queues' }, { tag: 'Hash Tables' }, { tag: 'Recursion' },
         { tag: 'Stacks' }, { tag: 'Binary Trees' }, { tag: 'Linked Lists' },
         { tag: 'Graphs' }, { tag: 'Heaps' }, { tag: 'Sort' }, { tag: 'Search' }];
+
       $scope.newSolution = {};
+      $scope.newTag = {};
 
       $scope.showSolutions = false;
       $scope.showSubmitForm = false;
@@ -42,6 +43,7 @@ module.exports = function(app) {
             $scope.checkFavoritedOrNot();
             $scope.getFavoriteCount();
             $scope.getAllSolutions();
+            $scope.getTags();
           });
         }
       };
@@ -181,6 +183,43 @@ module.exports = function(app) {
               $scope.showSubmitForm = false;
           });
         });
+      };
+
+
+      $scope.getTags = function() {
+        $scope.tagService.getAll((err, res) => {
+          if (err) return console.log(err);
+          var dbTags = res;
+          dbTags.forEach((tag) => {
+            if ($scope.tags.map((x) => x.tag).indexOf(tag.tag) === -1) {
+              $scope.tags.push({ tag: tag.tag });
+            }
+          });
+        });
+      };
+
+      $scope.updateTag = function() {
+        if (!$scope.newTag.tags) {
+          $scope.newTag.tags = [];
+        }
+        if ($scope.newTag.tag) {
+          $scope.newTag.tags.push({ tag: $scope.newTag.tag });
+        }
+        if ($scope.newTag.tags.length > 0) {
+          $scope.newTag.tags.forEach((tag) => {
+            $scope.tagService.create({
+              tag: tag.tag,
+              challengeId: $scope.challenge._id
+            }, (err) => {
+              if (err) return console.log(err);
+              $scope.newTag = {};
+              $scope.showTagForm = false;
+              $scope.getChallenge();
+              $scope.getTags();
+            });
+          });
+        }
+
       };
 
   }]);
