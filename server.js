@@ -23,6 +23,10 @@ app.use('/api', solutionRouter);
 app.use('/api', hintRouter);
 app.use('/api', tagRouter);
 app.use(express.static(__dirname + '/build'));
+// app.use((req, res, next) => {
+//   res.redirect('/#', req.url);
+//   next();
+// });
 
 
 const PORT = process.env.PORT || 3000;
