@@ -87,9 +87,12 @@ gulp.task('webpack:prod', () => {
           }
         ]
       },
+      // plugins: [
+      //   new webpack.optimize.DedupePlugin()
+      // ],
       plugins: [
         new webpack.DefinePlugin({
-          __BASEURL__: JSON.stringify('https://wbdb.herokuapp.com')
+          __BASEURL__: JSON.stringify('https://wbdbapp.herokuapp.com')
         })
       ],
       devtool: 'source-map'
