@@ -16,7 +16,6 @@ app.use('/api', userRouter);
 app.use('/api', adminRouter);
 app.use('/api', favoriteRouter);
 app.use(express.static(__dirname + '/build'));
-app.use(express.static(__dirname + '../images'));
 // app.use((req, res, next) => {
 //   res.redirect('/#', req.url);
 //   next();
