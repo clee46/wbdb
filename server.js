@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/app_dev');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/app_dev');
 
 const challengeRouter = require(__dirname + '/routes/challenge_routes');
 const authRouter = require(__dirname + '/routes/auth_routes');
@@ -23,10 +23,10 @@ app.use('/api', solutionRouter);
 app.use('/api', hintRouter);
 app.use('/api', tagRouter);
 app.use(express.static(__dirname + '/build'));
-app.use((req, res, next) => {
-  res.redirect('/#', req.url);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.redirect('/#', req.url);
+//   next();
+// });
 
 
 const PORT = process.env.PORT || 3000;
